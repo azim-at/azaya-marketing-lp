@@ -3868,6 +3868,10 @@ form textarea:required:valid {
     font-size: 2.4rem;
   }
 }
+
+.mxd-logo img {
+   width: 160px
+}
 .mxd-section-title {
   display: -webkit-box;
   display: -moz-box;
