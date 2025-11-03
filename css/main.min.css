@@ -2370,6 +2370,9 @@ p.t-semibold {
   .inner-headline__title {
     font-size: 4rem!important;
   }
+  .mxd-hero-03__headline {
+    top: 20rem!important;
+  }
 }
 
 @media only screen and (min-width: 1200px) {
