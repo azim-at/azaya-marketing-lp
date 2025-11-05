@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Azaya Marketing </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Template Favicon & Icons -->
+    <link rel="icon" href="img/favicon/favicon.ico" sizes="any">
+    <link rel="icon" href="img/favicon/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
+
+    <!-- Template Styles -->
+    <link rel="stylesheet" type="text/css" href="css/loaders/loader.min.css">
+    <link rel="stylesheet" type="text/css" href="css/plugins.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.min.css">
+
+    <style>
+        .loading-state {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .error-message {
+            padding: 2rem;
+            text-align: center;
+            color: #e74c3c;
+        }
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .mxd-article-navigation__navitem.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+        .mxd-article-navigation__navitem.disabled .btn {
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loader -->
+    <div id="loader" class="loader" style="display: none;">
+        <div class="loader__wrapper">
+            <div class="loader__content">
+                <div class="loader__count">
+                    <span class="count__text">0</span>
+                    <span class="count__percent">%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Menu & Menu Hamburger Start -->
+    <nav class="mxd-nav__wrap" data-lenis-prevent="">
+
+      <!-- Hamburger Start -->
+      <div class="mxd-nav__contain loading__fade">
+        <a href="#0" class="mxd-nav__hamburger">
+          <!-- flip element -->
+          <div class="hamburger__base"></div>
+          <div class="hamburger__line"></div>
+          <div class="hamburger__line"></div>
+        </a>
+      </div>
+      <!-- Hamburger End -->
+
+      <!-- Main Navigation Start -->
+      <div class="mxd-menu__wrapper">
+        <!-- background active layer -->
+        <div class="mxd-menu__base"></div>
+        <!-- menu container -->
+        <div class="mxd-menu__contain">
+          <div class="mxd-menu__inner">
+            <!-- left side -->
+            <div class="mxd-menu__left">
+              <p class="mxd-menu__caption menu-fade-in">Azaya Marketing</p>
+              <div class="main-menu">
+                <nav class="main-menu__content">
+                  <ul id="main-menu" class="main-menu__accordion">
+                    <li class="main-menu__item">
+                      <div class="main-menu__toggle">
+                        <span class="main-menu__link btn btn-anim">
+                           <a class="main-menu__link btn btn-anim" href="./index.html">
+                          <span class="btn-caption">Home</span>
+                          </a>
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" version="1.1" viewBox="0 0 20 20">
+                          <path d="M19.6,9.6h-3.9c-.4,0-1.8-.2-1.8-.2-.6,0-1.1-.2-1.6-.6-.5-.3-.9-.8-1.2-1.2-.3-.4-.4-.9-.5-1.4,0,0,0-1.1-.2-1.5V.4c0-.2-.2-.4-.4-.4s-.4.2-.4.4v4.4c0,.4-.2,1.5-.2,1.5,0,.5-.2,1-.5,1.4-.3.5-.7.9-1.2,1.2s-1,.5-1.6.6c0,0-1.2,0-1.7.2H.4c-.2,0-.4.2-.4.4s.2.4.4.4h4.1c.4,0,1.7.2,1.7.2.6,0,1.1.2,1.6.6.4.3.8.7,1.1,1.1.3.5.5,1,.6,1.6,0,0,0,1.3.2,1.7v4.1c0,.2.2.4.4.4s.4-.2.4-.4v-4.1c0-.4.2-1.7.2-1.7,0-.6.2-1.1.6-1.6.3-.4.7-.8,1.1-1.1.5-.3,1-.5,1.6-.6,0,0,1.3,0,1.8-.2h3.9c.2,0,.4-.2.4-.4s-.2-.4-.4-.4h0Z"/>
+                        </svg>
+                      </div>
+                    </li>
+                    <li class="main-menu__item">
+                      <div class="main-menu__toggle">
+                        <span class="main-menu__link btn btn-anim">
+                          <a class="main-menu__link btn btn-anim" href="./contact.html">
+                          <span class="btn-caption">About us</span>
+                          </a>
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" version="1.1" viewBox="0 0 20 20">
+                          <path d="M19.6,9.6h-3.9c-.4,0-1.8-.2-1.8-.2-.6,0-1.1-.2-1.6-.6-.5-.3-.9-.8-1.2-1.2-.3-.4-.4-.9-.5-1.4,0,0,0-1.1-.2-1.5V.4c0-.2-.2-.4-.4-.4s-.4.2-.4.4v4.4c0,.4-.2,1.5-.2,1.5,0,.5-.2,1-.5,1.4-.3.5-.7.9-1.2,1.2s-1,.5-1.6.6c0,0-1.2,0-1.7.2H.4c-.2,0-.4.2-.4.4s.2.4.4.4h4.1c.4,0,1.7.2,1.7.2.6,0,1.1.2,1.6.6.4.3.8.7,1.1,1.1.3.5.5,1,.6,1.6,0,0,0,1.3.2,1.7v4.1c0,.2.2.4.4.4s.4-.2.4-.4v-4.1c0-.4.2-1.7.2-1.7,0-.6.2-1.1.6-1.6.3-.4.7-.8,1.1-1.1.5-.3,1-.5,1.6-.6,0,0,1.3,0,1.8-.2h3.9c.2,0,.4-.2.4-.4s-.2-.4-.4-.4h0Z"/>
+                        </svg>
+                      </div>
+                    </li>
+                    <li class="main-menu__item">
+                      <div class="main-menu__toggle">
+                        <span class="main-menu__link btn btn-anim">
+                           <a class="main-menu__link btn btn-anim" href="./blog-standard.html">
+                          <span class="btn-caption">Blog</span>
+                          </a>
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" version="1.1" viewBox="0 0 20 20">
+                          <path d="M19.6,9.6h-3.9c-.4,0-1.8-.2-1.8-.2-.6,0-1.1-.2-1.6-.6-.5-.3-.9-.8-1.2-1.2-.3-.4-.4-.9-.5-1.4,0,0,0-1.1-.2-1.5V.4c0-.2-.2-.4-.4-.4s-.4.2-.4.4v4.4c0,.4-.2,1.5-.2,1.5,0,.5-.2,1-.5,1.4-.3.5-.7.9-1.2,1.2s-1,.5-1.6.6c0,0-1.2,0-1.7.2H.4c-.2,0-.4.2-.4.4s.2.4.4.4h4.1c.4,0,1.7.2,1.7.2.6,0,1.1.2,1.6.6.4.3.8.7,1.1,1.1.3.5.5,1,.6,1.6,0,0,0,1.3.2,1.7v4.1c0,.2.2.4.4.4s.4-.2.4-.4v-4.1c0-.4.2-1.7.2-1.7,0-.6.2-1.1.6-1.6.3-.4.7-.8,1.1-1.1.5-.3,1-.5,1.6-.6,0,0,1.3,0,1.8-.2h3.9c.2,0,.4-.2.4-.4s-.2-.4-.4-.4h0Z"/>
+                        </svg>
+                      </div>
+                    </li>
+                    <li class="main-menu__item">
+                      <a class="main-menu__link btn btn-anim" href="./contact.html">
+                        <span class="btn-caption">Contact</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <!-- right side -->
+            <div class="mxd-menu__right">
+              <div class="menu-promo">
+                <div class="menu-promo__content">
+                  <p class="menu-promo__caption menu-fade-in">Heloooooooooooooooo</p>
+                  <div class="menu-promo__video">
+                    <video class="menu-video" id="inner-video" preload="auto" autoplay="autoplay" loop="loop" muted="muted" poster="video/540x310_video-01.webp">
+                      <source type="video/mp4" src="video/540x310_video-01.mp4">
+                      <source type="video/webm" src="video/540x310_video-01.webm">
+                      <source type="video/ogv" src="video/540x310_video-01.ogv">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- data bottom line -->
+          </div>
+        </div>
+      </div>
+      <!-- Main Navigation End -->
+
+    </nav>
+    <!-- Menu & Menu Hamburger End -->
+
+    <!-- Header Start -->
+    <header id="header" class="mxd-header">
+      <!-- header logo -->
+       <div class="mxd-header__logo loading__fade">
+        <a href="./index.html" class="mxd-logo">
+          <!-- logo icon -->
+           <img src="./img/icons/azaya.png" alt="logo">
+          <!-- logo text -->
+          <!-- <span class="mxd-logo__text" style="color: #C6A94D;">Azaya<br>Marketing</span> -->
+        </a>
+      </div>
+      <!-- header controls -->
+      <div class="mxd-header__controls loading__fade">
+        <a href="./contact.html" class="btn btn-anim btn-default btn-mobile-icon btn-outline slide-right-up" href="#!" style="background-color: #C6A94D;border-color: #C6A94D; color: #fff;">
+          <span class="btn-caption">Book a call</span>
+          <i class="ph-bold ph-arrow-up-right"></i>
+        </a>
+      </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Page Content -->
+    <main id="mxd-page-content" class="mxd-page-content inner-page-content">
+        <!-- Section - Blog Article -->
+        <div class="mxd-section padding-pre-title">
+            <div class="mxd-container grid-container">
+                <div class="mxd-article-area loading-wrap">
+                    <!-- Article Container -->
+                    <div class="mxd-article-container mxd-grid-item no-margin">
+                        <!-- Article -->
+                        <article class="mxd-article">
+                            <!-- Article Headline -->
+                            <div class="mxd-article__headline">
+                                <div class="mxd-article__meta">
+                                    <div class="mxd-article__breadcrumbs loading__item">
+                                        <span><a href="index-main.html">Home</a></span>
+                                        <span><a href="blog-standard.html">Blogs</a></span>
+                                        <span class="current-item" id="blog-title-breadcrumb">Loading...</span>
+                                    </div>
+                                    <div class="mxd-article__data loading__item">
+                                        <span class="meta-date" id="blog-date">
+                                            Loading...
+                                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 20 20">
+                                                <path d="M19.6,9.6h-3.9c-.4,0-1.8-.2-1.8-.2-.6,0-1.1-.2-1.6-.6-.5-.3-.9-.8-1.2-1.2-.3-.4-.4-.9-.5-1.4,0,0,0-1.1-.2-1.5V.4c0-.2-.2-.4-.4-.4s-.4.2-.4.4v4.4c0,.4-.2,1.5-.2,1.5,0,.5-.2,1-.5,1.4-.3.5-.7.9-1.2,1.2s-1,.5-1.6.6c0,0-1.2,0-1.7.2H.4c-.2,0-.4.2-.4.4s.2.4.4.4h4.1c.4,0,1.7.2,1.7.2.6,0,1.1.2,1.6.6.4.3.8.7,1.1,1.1.3.5.5,1,.6,1.6,0,0,0,1.3.2,1.7v4.1c0,.2.2.4.4.4s.4-.2.4-.4v-4.1c0-.4.2-1.7.2-1.7,0-.6.2-1.1.6-1.6.3-.4.7-.8,1.1-1.1.5-.3,1-.5,1.6-.6,0,0,1.3,0,1.8-.2h3.9c.2,0,.4-.2.4-.4s-.2-.4-.4-.4h0Z"/>
+                                            </svg>
+                                        </span>
+                                        <span class="meta-time" id="blog-read-time">Loading...</span>
+                                    </div>
+                                </div>
+                                <div class="mxd-article__title loading__item">
+                                    <h1 class="h1-small" id="blog-title">Loading...</h1>
+                                </div>
+                            </div>
+
+                            <!-- Article Thumbnail -->
+                            <div class="mxd-article__thumb loading__fade" id="blog-thumbnail">
+                                <div class="skeleton" style="width: 100%; height: 400px;"></div>
+                            </div>
+
+                            <!-- Article Content -->
+                            <div class="mxd-article__content" id="blog-content" style="margin-top: 100px;">
+                                <div class="mxd-article__block">
+                                    <p>Loading content...</p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Article Author -->
+                        <div class="mxd-article-author" id="blog-author">
+                            <div class="mxd-article-author__data">
+                                <a class="mxd-article-author__avatar" href="#0">
+                                    <img id="author-avatar" src="" alt="Avatar" src="./img/icons/azaya.png">
+                                </a>
+                                <div class="mxd-article-author__info">
+                                    <h5 class="mxd-article-author__name">
+                                        <a href="#0" id="author-name">Azaya Marketing </a>
+                                        <small class="mxd-article-author__position" id="author-position">Content Writers</small>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="mxd-article-author__quote">
+                                <p id="author-bio" style="padding: 2rem 0 1rem 0rem;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam odio illum sed deserunt, culpa sapiente assumenda beatae voluptatem mollitia distinctio.</p>
+                            </div>
+                        </div>
+
+                        <!-- Article Navigation -->
+                        <div class="mxd-article-navigation" id="blog-navigation" style="display: none;">
+                            <div class="container-fluid p-0">
+                                <div class="row g-0">
+                                    <div class="col-6 mxd-article-navigation__navitem left" id="prev-article"></div>
+                                    <div class="col-6 mxd-article-navigation__navitem right" id="next-article"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+       <!-- Footer Start -->
+    <footer id="mxd-footer" class="mxd-footer">
+
+      <!-- Footer Block - Info Columns Start -->
+      <div class="mxd-footer__footer-blocks">
+        <!-- single column -->
+        <div class="footer-blocks__column animate-card-3">
+          <!-- inner card -->
+          <div class="footer-blocks__card fullheight-card">
+            <!-- footer navigation -->
+            <div class="footer-blocks__nav">
+              <ul class="footer-nav">
+                <li class="footer-nav__item anim-uni-in-up">
+                  <a href="./index.html" class="footer-nav__link btn-anim">
+                    <span class="btn-caption">Home</span>
+                  </a>
+                </li>
+                <li class="footer-nav__item anim-uni-in-up">
+                  <a href="./about-us.html" class="footer-nav__link btn-anim">
+                    <span class="btn-caption">About us</span>
+                  </a>
+                </li>
+                <li class="footer-nav__item anim-uni-in-up">
+                  <a href="#!" class="footer-nav__link btn-anim" href="./blog-standard.html">
+                    <span class="btn-caption">Blogs</span>
+                  </a>
+                </li>
+                <li class="footer-nav__item anim-uni-in-up">
+                  <a href="#mxd-page-content" class="footer-nav__link btn-anim">
+                    <span class="btn-caption">Contact</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <!-- links -->
+            <div class="footer-blocks__links anim-uni-in-up">
+              <a class="btn btn-line-xsmall btn-muted slide-right anim-no-delay" href="#0">
+                <span class="btn-caption">Privacy Policy</span>
+                <i class="ph ph-arrow-right"></i>
+              </a>
+              <a class="btn btn-line-xsmall btn-muted slide-right anim-no-delay" href="#0">
+                <span class="btn-caption">Terms & conditions</span>
+                <i class="ph ph-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- single column -->
+        <div class="footer-blocks__column animate-card-3">
+          <!-- inner card -->
+          <div class="footer-blocks__card">
+            <p class="mxd-point-subtitle anim-uni-in-up">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 20 20" fill="currentColor">
+                <path fill="currentColor" d="M19.6,9.6c0,0-3,0-4,0c-0.4,0-1.8-0.2-1.8-0.2c-0.6-0.1-1.1-0.2-1.6-0.6c-0.5-0.3-0.9-0.8-1.2-1.2
+                  c-0.3-0.4-0.4-0.9-0.5-1.4c0,0-0.1-1.1-0.2-1.5c-0.1-1.1,0-4.4,0-4.4C10.4,0.2,10.2,0,10,0S9.6,0.2,9.6,0.4c0,0,0.1,3.3,0,4.4
+                  c0,0.4-0.2,1.5-0.2,1.5C9.4,6.7,9.2,7.2,9,7.6C8.7,8.1,8.2,8.5,7.8,8.9c-0.5,0.3-1,0.5-1.6,0.6c0,0-1.2,0.1-1.7,0.2
+                  c-1,0.1-4.2,0-4.2,0C0.2,9.6,0,9.8,0,10c0,0.2,0.2,0.4,0.4,0.4c0,0,3.1-0.1,4.2,0c0.4,0,1.7,0.2,1.7,0.2c0.6,0.1,1.1,0.2,1.6,0.6
+                  c0.4,0.3,0.8,0.7,1.1,1.1c0.3,0.5,0.5,1,0.6,1.6c0,0,0.1,1.3,0.2,1.7c0,1,0,4.1,0,4.1c0,0.2,0.2,0.4,0.4,0.4s0.4-0.2,0.4-0.4
+                  c0,0,0-3.1,0-4.1c0-0.4,0.2-1.7,0.2-1.7c0.1-0.6,0.2-1.1,0.6-1.6c0.3-0.4,0.7-0.8,1.1-1.1c0.5-0.3,1-0.5,1.6-0.6
+                  c0,0,1.3-0.1,1.8-0.2c1,0,4,0,4,0c0.2,0,0.4-0.2,0.4-0.4C20,9.8,19.8,9.6,19.6,9.6L19.6,9.6z"></path>
+              </svg>
+              <a href="mailto:azayamarketing@gmail.com">azayamarketing@gmail.com</a>
+            </p>
+          </div>
+          <!-- inner card -->
+          <div class="footer-blocks__card">
+            <p class="mxd-point-subtitle anim-uni-in-up">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 20 20" fill="currentColor">
+                <path fill="currentColor" d="M19.6,9.6c0,0-3,0-4,0c-0.4,0-1.8-0.2-1.8-0.2c-0.6-0.1-1.1-0.2-1.6-0.6c-0.5-0.3-0.9-0.8-1.2-1.2
+                  c-0.3-0.4-0.4-0.9-0.5-1.4c0,0-0.1-1.1-0.2-1.5c-0.1-1.1,0-4.4,0-4.4C10.4,0.2,10.2,0,10,0S9.6,0.2,9.6,0.4c0,0,0.1,3.3,0,4.4
+                  c0,0.4-0.2,1.5-0.2,1.5C9.4,6.7,9.2,7.2,9,7.6C8.7,8.1,8.2,8.5,7.8,8.9c-0.5,0.3-1,0.5-1.6,0.6c0,0-1.2,0.1-1.7,0.2
+                  c-1,0.1-4.2,0-4.2,0C0.2,9.6,0,9.8,0,10c0,0.2,0.2,0.4,0.4,0.4c0,0,3.1-0.1,4.2,0c0.4,0,1.7,0.2,1.7,0.2c0.6,0.1,1.1,0.2,1.6,0.6
+                  c0.4,0.3,0.8,0.7,1.1,1.1c0.3,0.5,0.5,1,0.6,1.6c0,0,0.1,1.3,0.2,1.7c0,1,0,4.1,0,4.1c0,0.2,0.2,0.4,0.4,0.4s0.4-0.2,0.4-0.4
+                  c0,0,0-3.1,0-4.1c0-0.4,0.2-1.7,0.2-1.7c0.1-0.6,0.2-1.1,0.6-1.6c0.3-0.4,0.7-0.8,1.1-1.1c0.5-0.3,1-0.5,1.6-0.6
+                  c0,0,1.3-0.1,1.8-0.2c1,0,4,0,4,0c0.2,0,0.4-0.2,0.4-0.4C20,9.8,19.8,9.6,19.6,9.6L19.6,9.6z"></path>
+              </svg>
+              <a href="tel:+12127089400">+1 212-708-9400</a>
+            </p>
+          </div>
+          <!-- inner card -->
+          <div class="footer-blocks__card fill-card notify">
+            <!-- card title -->
+            <div class="footer-blocks__title anim-uni-in-up">
+              <p class="footer-blocks__title-m">Subscribe to our blogs:</p>
+            </div>
+            <!-- subscribe form container -->
+            <div class="form-container anim-uni-in-up">
+              <!-- reply messages -->
+              <div class="form__reply subscription-ok">
+                <span class="reply__text">Done! Thanks for subscribing.</span>
+              </div>
+              <div class="form__reply subscription-error">
+                <span class="reply__text">Ooops! Something went wrong. Please try again later.</span>
+              </div>
+              <!-- subscribe form -->
+              <form class="form notify-form form-light">
+                <input type="email" placeholder="Your Email" required>
+                <button class="btn btn-form btn-absolute-right btn-muted slide-right-up anim-no-delay" type="submit">
+                  <i class="ph ph-arrow-up-right"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- single column -->
+        <div class="footer-blocks__column animate-card-3">
+          <!-- inner card -->
+          <div class="footer-blocks__card fullheight-card">
+            <!-- nav block -->
+            <div class="footer-blocks__block">
+              <!-- card title -->
+              <div class="footer-blocks__title anim-uni-in-up">
+                <p class="footer-blocks__title-l">Ecosystem</p>
+              </div>
+              <!-- footer socials -->
+              <div class="footer-blocks__socials">
+                <ul class="footer-socials">
+                  <li class="footer-socials__item anim-uni-in-up"><a href="https://dribbble.com/" class="footer-socials__link" target="_blank">Dribbble</a></li>
+                  <li class="footer-socials__item anim-uni-in-up"><a href="https://www.behance.net/" class="footer-socials__link" target="_blank">Behance</a></li>
+                  <li class="footer-socials__item anim-uni-in-up"><a href="https://www.instagram.com/" class="footer-socials__link" target="_blank">Instagram</a></li>
+                  <li class="footer-socials__item anim-uni-in-up"><a href="https://github.com/" class="footer-socials__link" target="_blank">Github</a></li>
+                  <li class="footer-socials__item anim-uni-in-up"><a href="https://codepen.io/" class="footer-socials__link" target="_blank">Codepen</a></li>
+                  <li class="footer-socials__item anim-uni-in-up"><a href="https://www.figma.com/community" class="footer-socials__link" target="_blank">Figma Community</a></li>
+                </ul>
+              </div>
+            </div>
+            <!-- links -->
+            <div class="footer-blocks__links anim-uni-in-up">
+              <p class="t-xsmall t-muted">
+                <a class="no-effect" href="#" target="_blank">Azaya Marketing</a>
+                <i class="ph-bold ph-copyright"></i>
+                <span id="currentYear" class="fw-normal"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer Block - Info Columns End -->
+
+    </footer>
+    <!-- Footer End -->
+
+    <!-- To Top Button -->
+    <a href="#0" id="to-top" class="btn btn-to-top slide-up anim-no-delay">
+        <i class="ph ph-arrow-up"></i>
+    </a>
+
+    <!-- Load Scripts -->
+    <script src="js/libs.min.js"></script>
+    <script src="js/app.min.js"></script>
+
+    <script>
+        // Configuration
+        const API_BASE_URL = 'http://localhost:5000/api';
+        
+        // Utility Functions
+        const formatDate = (dateString) => {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        };
+
+        const calculateReadTime = (content) => {
+            const wordsPerMinute = 200;
+            const textContent = content.replace(/<[^>]*>/g, '');
+            const wordCount = textContent.trim().split(/\s+/).length;
+            const minutes = Math.ceil(wordCount / wordsPerMinute);
+            return `${minutes} min. read`;
+        };
+
+        const showError = (message) => {
+            const content = document.getElementById('blog-content');
+            content.innerHTML = `<div class="error-message"><h3>Error</h3><p>${message}</p></div>`;
+        };
+
+        // Populate Blog Data
+        const populateBlogData = (blog) => {
+            try {
+                // Update page title
+                document.title = blog.title || 'Blog Article';
+
+                // Title
+                document.getElementById('blog-title').textContent = blog.title || 'Untitled';
+                document.getElementById('blog-title-breadcrumb').textContent = blog.title || 'Untitled';
+
+                // Date and read time
+                if (blog.date || blog.publishedDate || blog.createdAt) {
+                    const dateStr = blog.date || blog.publishedDate || blog.createdAt;
+                    document.getElementById('blog-date').innerHTML = `
+                        ${formatDate(dateStr)}
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 20 20">
+                            <path d="M19.6,9.6h-3.9c-.4,0-1.8-.2-1.8-.2-.6,0-1.1-.2-1.6-.6-.5-.3-.9-.8-1.2-1.2-.3-.4-.4-.9-.5-1.4,0,0,0-1.1-.2-1.5V.4c0-.2-.2-.4-.4-.4s-.4.2-.4.4v4.4c0,.4-.2,1.5-.2,1.5,0,.5-.2,1-.5,1.4-.3.5-.7.9-1.2,1.2s-1,.5-1.6.6c0,0-1.2,0-1.7.2H.4c-.2,0-.4.2-.4.4s.2.4.4.4h4.1c.4,0,1.7.2,1.7.2.6,0,1.1.2,1.6.6.4.3.8.7,1.1,1.1.3.5.5,1,.6,1.6,0,0,0,1.3.2,1.7v4.1c0,.2.2.4.4.4s.4-.2.4-.4v-4.1c0-.4.2-1.7.2-1.7,0-.6.2-1.1.6-1.6.3-.4.7-.8,1.1-1.1.5-.3,1-.5,1.6-.6,0,0,1.3,0,1.8-.2h3.9c.2,0,.4-.2.4-.4s-.2-.4-.4-.4h0Z"/>
+                        </svg>
+                    `;
+                }
+
+                // Read time
+                const readTime = blog.readTime || calculateReadTime(blog.content || '');
+                document.getElementById('blog-read-time').textContent = readTime;
+
+                // Thumbnail
+                const thumbnailContainer = document.getElementById('blog-thumbnail');
+                if (blog.thumbnail || (blog.images && blog.images.length > 0)) {
+                    const imgSrc = blog.thumbnail || blog.images[0];
+                    thumbnailContainer.innerHTML = `<img src="${imgSrc}" alt="${blog.title || 'Blog thumbnail'}">`;
+                } else {
+                    thumbnailContainer.innerHTML = `<img src="img/blog/article/1920x1280_tm-01.webp" alt="Default thumbnail">`;
+                }
+
+                // Content
+                const contentContainer = document.getElementById('blog-content');
+                if (blog.content) {
+                    contentContainer.innerHTML = blog.content;
+                } else {
+                    contentContainer.innerHTML = '<div class="mxd-article__block"><p>No content available.</p></div>';
+                }
+
+                // Author information
+                if (blog.author) {
+                    const authorSection = document.getElementById('blog-author');
+                    authorSection.style.display = 'block';
+
+                    document.getElementById('author-avatar').src = blog.author.avatar || 'img/avatars/300x300_ava-07.webp';
+                    document.getElementById('author-name').textContent = blog.author.name || 'Anonymous';
+                    document.getElementById('author-position').textContent = blog.author.position || '';
+                    document.getElementById('author-bio').textContent = blog.author.bio || '';
+
+                    // Social links
+                    const socialsContainer = document.getElementById('author-socials');
+                    if (blog.author.socials && blog.author.socials.length > 0) {
+                        socialsContainer.innerHTML = blog.author.socials.map(social => `
+                            <span class="tag tag-default tag-opposite tag-link-opposite">
+                                <a href="${social.url}" target="_blank">${social.platform}</a>
+                            </span>
+                        `).join('');
+                    }
+                }
+
+                // Navigation (Previous/Next articles)
+                if (blog.prevArticle || blog.nextArticle) {
+                    const navSection = document.getElementById('blog-navigation');
+                    navSection.style.display = 'block';
+
+                    if (blog.prevArticle) {
+                        document.getElementById('prev-article').innerHTML = `
+                           
+                            <a class="mxd-article-navigation__link" href="blog-article.html?id=${blog.prevArticle.id}">
+                                <span>${blog.prevArticle.title}</span>
+                            </a>
+                        `;
+                    }
+
+                    if (blog.nextArticle) {
+                        document.getElementById('next-article').innerHTML = `
+                         
+                            <a class="mxd-article-navigation__link" href="blog-article.html?id=${blog.nextArticle.id}">
+                                <span>${blog.nextArticle.title}</span>
+                            </a>
+                        `;
+                    }
+                }
+
+            } catch (error) {
+                console.error('Error populating blog data:', error);
+                showError('Failed to display blog content.');
+            }
+        };
+
+        // Fetch all blogs to determine prev/next
+        const fetchAllBlogs = async () => {
+            try {
+                const response = await fetch(`${API_BASE_URL}/blogs`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return await response.json();
+            } catch (error) {
+                console.error('Error fetching blog list:', error);
+                return [];
+            }
+        };
+
+        // Find prev and next blogs from the list
+        const findAdjacentBlogs = (blogs, currentBlogId) => {
+            const currentIndex = blogs.findIndex(blog => blog.id === currentBlogId || blog._id === currentBlogId);
+            
+            if (currentIndex === -1) {
+                return { prevBlog: null, nextBlog: null };
+            }
+
+            const prevBlog = currentIndex > 0 ? blogs[currentIndex - 1] : null;
+            const nextBlog = currentIndex < blogs.length - 1 ? blogs[currentIndex + 1] : null;
+
+            return { prevBlog, nextBlog };
+        };
+
+        // Fetch Blog Data
+        const fetchBlogData = async (blogId) => {
+            try {
+                const response = await fetch(`${API_BASE_URL}/blogs/${blogId}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const blog = await response.json();
+                
+                // Fetch all blogs to determine prev/next
+                const allBlogs = await fetchAllBlogs();
+                const { prevBlog, nextBlog } = findAdjacentBlogs(allBlogs, blogId);
+                
+                // Add prev/next to blog object
+                if (prevBlog) {
+                    blog.prevArticle = {
+                        id: prevBlog.id || prevBlog._id,
+                        title: prevBlog.title
+                    };
+                }
+                if (nextBlog) {
+                    blog.nextArticle = {
+                        id: nextBlog.id || nextBlog._id,
+                        title: nextBlog.title
+                    };
+                }
+                
+                populateBlogData(blog);
+                
+            } catch (error) {
+                console.error('Error fetching blog:', error);
+                showError('Blog not found or failed to load. Please try again later.');
+            }
+        };
+
+        // Initialize
+        const init = () => {
+            const params = new URLSearchParams(window.location.search);
+            const blogId = params.get('id');
+
+            if (!blogId) {
+                showError('No blog ID provided in URL.');
+                return;
+            }
+
+            fetchBlogData(blogId);
+        };
+
+        // Run on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>

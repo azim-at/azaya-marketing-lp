@@ -21,6 +21,14 @@
     <link rel="stylesheet" type="text/css" href="css/plugins.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.min.css">
     <!-- Template Styles End -->
+
+    <!-- <style>
+      #status {
+        margin: 20px 0 10px 0;
+        color: #C6A94D;
+        font-size: 20px;
+      }
+    </style> -->
     
   </head>
 
@@ -93,7 +101,7 @@
                     <li class="main-menu__item">
                       <div class="main-menu__toggle">
                         <span class="main-menu__link btn btn-anim">
-                           <a class="main-menu__link btn btn-anim" href="#!">
+                           <a class="main-menu__link btn btn-anim" href="./blog-standard.html">
                           <span class="btn-caption">Blog</span>
                           </a>
                         </span>
@@ -264,7 +272,7 @@
                               </div>
                               <div class="col-12 mxd-grid-item anim-uni-in-up">
                                 <button class="btn btn-anim btn-default btn-large btn-opposite slide-right-up" type="submit">
-                                  <span class="btn-caption">Submit</span>
+                                  <span class="btn-caption" id="status">Submit</span>
                                   <i class="ph-bold ph-arrow-up-right"></i>
                                 </button>
                               </div>
@@ -273,7 +281,7 @@
                         </form>
                         <!-- Contact Form End -->
 
-                        <p id="status"></p>
+                        <!-- <p id="status">sdasda</p> -->
           
                       </div>
                     </div>
@@ -363,11 +371,11 @@
                     <span class="mxd-promo__icon">
                       <img src="img/icons/300x300_obj-cta-01.webp" alt="Icon">
                     </span>
-                    <span class="mxd-promo__caption reveal-type">Let's talk about your project!</span>
+                    <span class="mxd-promo__caption reveal-type">Get a free consultation today and discover how Azaya Marketing can take your business to the next level.</span>
                   </p>
                   <div class="mxd-promo__controls anim-uni-in-up">
                     <a class="btn btn-anim btn-default btn-large btn-additional slide-right-up" href="#contactForm">
-                      <span class="btn-caption">Say Hello</span>
+                      <span class="btn-caption">Book a call</span>
                       <i class="ph-bold ph-arrow-up-right"></i>
                     </a>
                   </div>
@@ -426,7 +434,7 @@
                   </a>
                 </li>
                 <li class="footer-nav__item anim-uni-in-up">
-                  <a href="#!" class="footer-nav__link btn-anim">
+                  <a href="#!" class="footer-nav__link btn-anim" href="./blog-standard.html">
                     <span class="btn-caption">Blogs</span>
                   </a>
                 </li>
@@ -633,14 +641,14 @@
 
       const result = await res.json();
       if (result.success) {
-        status.textContent = '✅ Message sent. Thank you!';
+        status.textContent = 'Message sent. Thank you!';
         form.reset();
       } else {
-        status.textContent = '❌ Could not send message. Try again later.';
+        status.textContent = 'Could not send message. Try again later.';
       }
     } catch (err) {
       console.error(err);
-      status.textContent = '❌ Error sending message.';
+      status.textContent = 'Error sending message.';
     }
   });
 </script>

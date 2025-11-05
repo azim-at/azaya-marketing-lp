@@ -35,10 +35,10 @@
   --fw-bold--light: 800;
   --fw-regular-opp--light: 300;
   --fw-medium-opp--light: 500;
-  --t-bright--light: #161616;
+  --t-bright--light: #645317;
   --t-medium--light: #303030;
   --t-muted--light: #585858;
-  --t-muted-extra--light: #b2aead;
+  --t-muted-extra--light: rgb(198, 169, 77);
   --t-opp-bright--light: #ffffff;
   --t-opp-medium--light: #acacac;
   --t-opp-muted--light: #838383;
@@ -52,7 +52,7 @@
   --bg-demo-screen-08--light: url(../img/demo/screens/08.webp);
   --bg-demo-screen-09--light: url(../img/demo/screens/09.webp);
   --pt-base: #ffffff;
-  --pt-t-light-bright: #ffffff;
+  --pt-t-light-bright: #fff;
   --pt-st-light-bright: #ffffff;
   --pt-purple-rgb: 159, 139, 231;
   --nl-white: #ffffff;
@@ -1895,6 +1895,7 @@ p.t-semibold {
   gap: 1rem;
   font: normal var(--fw-regular) 2.2rem/1.2 var(--_font-accent);
   color: var(--t-bright);
+  word-break: break-word;
 }
 .mxd-point-subtitle svg {
   width: 1.9rem;
@@ -11966,35 +11967,40 @@ form textarea:required:valid {
 }
 .mxd-article__thumb {
   position: relative;
-  height: 460px;
-  -moz-border-radius: var(--_radius-l);
   border-radius: var(--_radius-l);
   overflow: hidden;
-  margin-bottom: 5.4rem;
+  margin-bottom: 3rem; /* reduced from 5.4rem */
 }
+
 .mxd-article__thumb img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
   object-fit: cover;
 }
+
+/* Tablet */
 @media only screen and (min-width: 768px) {
   .mxd-article__thumb {
-    height: 600px;
+    height: 400px; /* reduced from 600px */
   }
 }
+
+/* Desktop */
 @media only screen and (min-width: 1200px) {
   .mxd-article__thumb {
-    height: 760px;
-    margin-bottom: 8.3rem;
+    height: 500px; /* reduced from 760px */
+    margin-bottom: 4rem; /* reduced from 8.3rem */
   }
 }
+
+/* Large screens */
 @media only screen and (min-width: 1600px) {
   .mxd-article__thumb {
-    height: 930px;
-    margin-bottom: 8rem;
+    height: 600px; /* reduced from 930px */
+    margin-bottom: 4rem; /* reduced from 8rem */
   }
 }
+
 .mxd-article__content {
   position: relative;
   display: -webkit-box;
@@ -12007,13 +12013,13 @@ form textarea:required:valid {
   -moz-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  gap: 6rem;
+  gap: 4rem;
   width: 100%;
   text-align: left;
 }
 @media only screen and (min-width: 768px) {
   .mxd-article__content {
-    gap: 7rem;
+    gap: 6rem;
   }
 }
 @media only screen and (min-width: 1200px) {
@@ -12284,13 +12290,13 @@ form textarea:required:valid {
 @media only screen and (min-width: 768px) {
   .mxd-article-author {
     padding: 4rem;
-    margin-top: 7rem;
+    margin-top: 10rem;
   }
 }
 @media only screen and (min-width: 1200px) {
   .mxd-article-author {
     max-width: 870px;
-    margin: 7rem auto 0;
+    margin: 10rem auto 0;
   }
 }
 @media only screen and (min-width: 1600px) {

@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Blogs - Azaya Marketing</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Template Favicon & Icons -->
+
+    <!-- Template Styles -->
+    <link rel="stylesheet" type="text/css" href="css/loaders/loader.min.css">
+    <link rel="stylesheet" type="text/css" href="css/plugins.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.min.css">
+
+    <style>
+        .loading-state {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .error-message {
+            padding: 2rem;
+            text-align: center;
+            color: #e74c3c;
+        }
+        .no-blogs {
+            padding: 3rem 2rem;
+            text-align: center;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+        .no-blogs h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        .no-blogs p {
+            color: #7f8c8d;
+        }
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .post-featured__content {
+          background: rgba(0, 0, 0, 0.703);
+          backdrop-filter: blur(4px);
+          border-bottom-left-radius: var(--_radius-m);
+          border-bottom-right-radius: var(--_radius-m);
+          padding: 10px;
+          border-radius: 20px;
+        }
+        .featured-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ffc107;
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .featured-badge i {
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+      <!-- Loader Start -->
+    <div id="loader" class="loader" style="display: none;">
+      <div class="loader__wrapper">
+        <div class="loader__content">
+          <div class="loader__count">
+            <span class="count__text">0</span>
+            <span class="count__percent">%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Loader End -->
+
+    <!-- Menu & Menu Hamburger Start -->
+    <nav class="mxd-nav__wrap" data-lenis-prevent="">
+      <div class="mxd-nav__contain loading__fade">
+        <a href="#0" class="mxd-nav__hamburger">
+          <div class="hamburger__base"></div>
+          <div class="hamburger__line"></div>
+          <div class="hamburger__line"></div>
+        </a>
+      </div>
+
+      <div class="mxd-menu__wrapper">
+        <div class="mxd-menu__base"></div>
+        <div class="mxd-menu__contain">
+          <div class="mxd-menu__inner">
+            <div class="mxd-menu__left">
+              <p class="mxd-menu__caption menu-fade-in">Azaya Marketing</p>
+              <div class="main-menu">
+                <nav class="main-menu__content">
+                  <ul id="main-menu" class="main-menu__accordion">
+                    <li class="main-menu__item">
+                      <div class="main-menu__toggle">
+                        <span class="main-menu__link btn btn-anim">
+                          <a class="main-menu__link btn btn-anim" href="./index.html">
+                          <span class="btn-caption">Home</span>
+                          </a>
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" version="1.1" viewBox="0 0 20 20">
+                          <path d="M19.6,9.6h-3.9c-.4,0-1.8-.2-1.8-.2-.6,0-1.1-.2-1.6-.6-.5-.3-.9-.8-1.2-1.2-.3-.4-.4-.9-.5-1.4,0,0,0-1.1-.2-1.5V.4c0-.2-.2-.4-.4-.4s-.4.2-.4.4v4.4c0,.4-.2,1.5-.2,1.5,0,.5-.2,1-.5,1.4-.3.5-.7.9-1.2,1.2s-1,.5-1.6.6c0,0-1.2,0-1.7.2H.4c-.2,0-.4.2-.4.4s.2.4.4.4h4.1c.4,0,1.7.2,1.7.2.6,0,1.1.2,1.6.6.4.3.8.7,1.1,1.1.3.5.5,1,.6,1.6,0,0,0,1.3.2,1.7v4.1c0,.2.2.4.4.4s.4-.2.4-.4v-4.1c0-.4.2-1.7.2-1.7,0-.6.2-1.1.6-1.6.3-.4.7-.8,1.1-1.1.5-.3,1-.5,1.6-.6,0,0,1.3,0,1.8-.2h3.9c.2,0,.4-.2.4-.4s-.2-.4-.4-.4h0Z"/>
+                        </svg>
+                      </div>
+                    </li>
+                    <li class="main-menu__item">
+                      <div class="main-menu__toggle">
+                        <span class="main-menu__link btn btn-anim">
+                          <a class="main-menu__link btn btn-anim" href="./contact.html">
+                          <span class="btn-caption">About us</span>
+                          </a>
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" version="1.1" viewBox="0 0 20 20">
+                          <path d="M19.6,9.6h-3.9c-.4,0-1.8-.2-1.8-.2-.6,0-1.1-.2-1.6-.6-.5-.3-.9-.8-1.2-1.2-.3-.4-.4-.9-.5-1.4,0,0,0-1.1-.2-1.5V.4c0-.2-.2-.4-.4-.4s-.4.2-.4.4v4.4c0,.4-.2,1.5-.2,1.5,0,.5-.2,1-.5,1.4-.3.5-.7.9-1.2,1.2s-1,.5-1.6.6c0,0-1.2,0-1.7.2H.4c-.2,0-.4.2-.4.4s.2.4.4.4h4.1c.4,0,1.7.2,1.7.2.6,0,1.1.2,1.6.6.4.3.8.7,1.1,1.1.3.5.5,1,.6,1.6,0,0,0,1.3.2,1.7v4.1c0,.2.2.4.4.4s.4-.2.4-.4v-4.1c0-.4.2-1.7.2-1.7,0-.6.2-1.1.6-1.6.3-.4.7-.8,1.1-1.1.5-.3,1-.5,1.6-.6,0,0,1.3,0,1.8-.2h3.9c.2,0,.4-.2.4-.4s-.2-.4-.4-.4h0Z"/>
+                        </svg>
+                      </div>
+                    </li>
+                    <li class="main-menu__item">
+                      <div class="main-menu__toggle">
+                        <span class="main-menu__link btn btn-anim">
+                          <span class="btn-caption">Blog</span>
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" version="1.1" viewBox="0 0 20 20">
+                          <path d="M19.6,9.6h-3.9c-.4,0-1.8-.2-1.8-.2-.6,0-1.1-.2-1.6-.6-.5-.3-.9-.8-1.2-1.2-.3-.4-.4-.9-.5-1.4,0,0,0-1.1-.2-1.5V.4c0-.2-.2-.4-.4-.4s-.4.2-.4.4v4.4c0,.4-.2,1.5-.2,1.5,0,.5-.2,1-.5,1.4-.3.5-.7.9-1.2,1.2s-1,.5-1.6.6c0,0-1.2,0-1.7.2H.4c-.2,0-.4.2-.4.4s.2.4.4.4h4.1c.4,0,1.7.2,1.7.2.6,0,1.1.2,1.6.6.4.3.8.7,1.1,1.1.3.5.5,1,.6,1.6,0,0,0,1.3.2,1.7v4.1c0,.2.2.4.4.4s.4-.2.4-.4v-4.1c0-.4.2-1.7.2-1.7,0-.6.2-1.1.6-1.6.3-.4.7-.8,1.1-1.1.5-.3,1-.5,1.6-.6,0,0,1.3,0,1.8-.2h3.9c.2,0,.4-.2.4-.4s-.2-.4-.4-.4h0Z"/>
+                        </svg>
+                      </div>
+                    </li>
+                    <li class="main-menu__item">
+                      <a class="main-menu__link btn btn-anim" href="./contact.html">
+                        <span class="btn-caption">Contact</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <div class="mxd-menu__right">
+              <div class="menu-promo">
+                <div class="menu-promo__content">
+                  <p class="menu-promo__caption menu-fade-in">Heloooooooooooooooo</p>
+                  <div class="menu-promo__video">
+                    <video class="menu-video" id="inner-video" preload="auto" autoplay="autoplay" loop="loop" muted="muted" poster="video/540x310_video-01.webp">
+                      <source type="video/mp4" src="video/540x310_video-01.mp4">
+                      <source type="video/webm" src="video/540x310_video-01.webm">
+                      <source type="video/ogv" src="video/540x310_video-01.ogv">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Menu & Menu Hamburger End -->
+
+    <!-- Header Start -->
+    <header id="header" class="mxd-header">
+      <div class="mxd-header__logo loading__fade">
+        <a href="./index.html" class="mxd-logo">
+           <img src="./img/icons/azaya.png" alt="logo">
+        </a>
+      </div>
+      <div class="mxd-header__controls loading__fade">
+        <a href="./contact.html" class="btn btn-anim btn-default btn-mobile-icon btn-outline slide-right-up" style="background-color: #C6A94D;border-color: #C6A94D; color: #fff;">
+          <span class="btn-caption">Book a call</span>
+          <i class="ph-bold ph-arrow-up-right"></i>
+        </a>
+      </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Page Content Start -->
+    <main id="mxd-page-content" class="mxd-page-content inner-page-content">
+
+      <!-- Section - Inner Page Headline Start -->
+      <div class="mxd-section mxd-section-inner-headline padding-blog-default-pre-grid" style="padding: 5rem 0 5rem 0;">
+        <div class="mxd-container grid-container">
+          <div class="mxd-block loading-wrap">
+            <div class="container-fluid px-0">
+              <div class="row gx-0">
+                <div class="col-12"></div>
+                <div class="col-12 col-xl-10 mxd-grid-item no-margin">
+                  <div class="mxd-block__content">
+                    <div class="mxd-block__inner-headline loading__item">
+                      <h1 class="inner-headline__title  headline-img-06">Blogs</h1>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12"></div>
+              </div>
+              <div class="row g-0">
+                <div class="col-12"></div>
+                <div class="col-12 col-xl-8 mxd-grid-item no-margin">
+                  <div class="inner-headline__blogtags loading__item" id="categoriesList">
+                    <span class="tag tag-default tag-outline tag-link-outline"><a href="#" onclick="filterByCategory('all'); return false;">All</a></span>
+                  </div>
+                </div>
+                <div class="col-12 col-xl-4 mxd-grid-item no-margin">
+                  <div class="inner-headline__breadcrumbs loading__fade">
+                    <div class="breadcrumbs__nav">
+                      <span><a href="./index.html">Home</a></span>
+                      <span class="current-item">Blogs</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Section - Inner Page Headline End -->
+
+      <!-- Section - Blog Start -->
+      <div class="mxd-section padding-default">
+        <div class="mxd-container grid-container">
+          <div class="mxd-posts-area loading__fade">
+
+            <!-- Posts Container Start -->
+            <div class="mxd-posts-container mxd-grid-item">
+              
+              <!-- Featured Post -->
+              <div id="featuredPost"></div>
+
+              <!-- Regular Posts -->
+              <div id="regularPosts"></div>
+
+              <!-- Pagination -->
+              <div class="mxd-blog-pagination" id="paginationContainer" style="display: none;">
+                <div class="mxd-blog-pagination__inner">
+                  <nav class="mxd-blog-pagination__items" id="paginationItems"></nav>
+                </div>
+              </div>
+
+            </div>
+            <!-- Posts Container End -->
+
+            <!-- Sidebar Start -->
+            <div class="mxd-sidebar mxd-grid-item">
+              <!-- Search Widget -->
+              <div class="mxd-sidebar__widget bg-base-tint radius-m widget-search">
+                <div class="widget-search__form">
+                  <form class="form search-form" onsubmit="searchBlogs(event)">
+                    <input id="searchInput" type="search" name="search" placeholder="Search blogs...">
+                    <button class="btn btn-form no-scale btn-absolute-right btn-muted" type="submit">
+                      <i class="ph ph-magnifying-glass"></i>
+                    </button>
+                  </form>
+                </div>
+              </div>
+
+              <!-- Categories Widget -->
+              <div class="mxd-sidebar__widget bg-base-tint radius-m">
+                <div class="widget__title">
+                  <p>Categories</p>
+                </div>
+                <ul class="widget__categories" id="sidebarCategories">
+                  <li class="categories__item"><a href="#" onclick="filterByCategory('all'); return false;" class="categories__link">All Posts</a></li>
+                </ul>
+              </div>
+
+              <!-- Recent Posts Widget -->
+              <div class="mxd-sidebar__widget bg-base-tint radius-m">
+                <div class="widget__title">
+                  <p>Latest posts</p>
+                </div>
+                <ul class="widget__recent-posts" id="recentPosts"></ul>
+              </div>
+
+              <!-- About Widget -->
+              <div class="mxd-sidebar__widget bg-base-tint radius-m widget-about">
+                <div class="widget__title">
+                  <p>About</p>
+                </div>
+                <div class="widget__descr">
+                  <p class="t-small">Dive into the latest trends, uncover valuable industry blogs, and explore practical advice.</p>
+                </div>
+              </div>
+            </div>
+            <!-- Sidebar End -->
+
+          </div>
+        </div>
+      </div>
+      <!-- Section - Blog End -->
+
+    </main>
+    <!-- Page Content End -->
+
+   <!-- Footer Start -->
+    <footer id="mxd-footer" class="mxd-footer">
+      <div class="mxd-footer__footer-blocks">
+        <div class="footer-blocks__column animate-card-3">
+          <div class="footer-blocks__card fullheight-card">
+            <div class="footer-blocks__nav">
+              <ul class="footer-nav">
+                <li class="footer-nav__item anim-uni-in-up">
+                  <a href="./index.html" class="footer-nav__link btn-anim">
+                    <span class="btn-caption">Home</span>
+                  </a>
+                </li>
+                <li class="footer-nav__item anim-uni-in-up">
+                  <a href="./about-us.html" class="footer-nav__link btn-anim">
+                    <span class="btn-caption">About us</span>
+                  </a>
+                </li>
+                <li class="footer-nav__item anim-uni-in-up">
+                  <a href="./blog-standard.html" class="footer-nav__link btn-anim">
+                    <span class="btn-caption">Blogs</span>
+                  </a>
+                </li>
+                <li class="footer-nav__item anim-uni-in-up">
+                  <a href="./contact.html" class="footer-nav__link btn-anim">
+                    <span class="btn-caption">Contact</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="footer-blocks__links anim-uni-in-up">
+              <a class="btn btn-line-xsmall btn-muted slide-right anim-no-delay" href="#0">
+                <span class="btn-caption">Privacy Policy</span>
+                <i class="ph ph-arrow-right"></i>
+              </a>
+              <a class="btn btn-line-xsmall btn-muted slide-right anim-no-delay" href="#0">
+                <span class="btn-caption">Terms & conditions</span>
+                <i class="ph ph-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-blocks__column animate-card-3">
+          <div class="footer-blocks__card">
+            <p class="mxd-point-subtitle anim-uni-in-up">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 20 20" fill="currentColor">
+                <path fill="currentColor" d="M19.6,9.6c0,0-3,0-4,0c-0.4,0-1.8-0.2-1.8-0.2c-0.6-0.1-1.1-0.2-1.6-0.6c-0.5-0.3-0.9-0.8-1.2-1.2
+                  c-0.3-0.4-0.4-0.9-0.5-1.4c0,0-0.1-1.1-0.2-1.5c-0.1-1.1,0-4.4,0-4.4C10.4,0.2,10.2,0,10,0S9.6,0.2,9.6,0.4c0,0,0.1,3.3,0,4.4
+                  c0,0.4-0.2,1.5-0.2,1.5C9.4,6.7,9.2,7.2,9,7.6C8.7,8.1,8.2,8.5,7.8,8.9c-0.5,0.3-1,0.5-1.6,0.6c0,0-1.2,0.1-1.7,0.2
+                  c-1,0.1-4.2,0-4.2,0C0.2,9.6,0,9.8,0,10c0,0.2,0.2,0.4,0.4,0.4c0,0,3.1-0.1,4.2,0c0.4,0,1.7,0.2,1.7,0.2c0.6,0.1,1.1,0.2,1.6,0.6
+                  c0.4,0.3,0.8,0.7,1.1,1.1c0.3,0.5,0.5,1,0.6,1.6c0,0,0.1,1.3,0.2,1.7c0,1,0,4.1,0,4.1c0,0.2,0.2,0.4,0.4,0.4s0.4-0.2,0.4-0.4
+                  c0,0,0-3.1,0-4.1c0-0.4,0.2-1.7,0.2-1.7c0.1-0.6,0.2-1.1,0.6-1.6c0.3-0.4,0.7-0.8,1.1-1.1c0.5-0.3,1-0.5,1.6-0.6
+                  c0,0,1.3-0.1,1.8-0.2c1,0,4,0,4,0c0.2,0,0.4-0.2,0.4-0.4C20,9.8,19.8,9.6,19.6,9.6L19.6,9.6z"></path>
+              </svg>
+              <a href="mailto:azayamarketing@gmail.com">azayamarketing@gmail.com</a>
+            </p>
+          </div>
+          <div class="footer-blocks__card">
+            <p class="mxd-point-subtitle anim-uni-in-up">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 20 20" fill="currentColor">
+                <path fill="currentColor" d="M19.6,9.6c0,0-3,0-4,0c-0.4,0-1.8-0.2-1.8-0.2c-0.6-0.1-1.1-0.2-1.6-0.6c-0.5-0.3-0.9-0.8-1.2-1.2
+                  c-0.3-0.4-0.4-0.9-0.5-1.4c0,0-0.1-1.1-0.2-1.5c-0.1-1.1,0-4.4,0-4.4C10.4,0.2,10.2,0,10,0S9.6,0.2,9.6,0.4c0,0,0.1,3.3,0,4.4
+                  c0,0.4-0.2,1.5-0.2,1.5C9.4,6.7,9.2,7.2,9,7.6C8.7,8.1,8.2,8.5,7.8,8.9c-0.5,0.3-1,0.5-1.6,0.6c0,0-1.2,0.1-1.7,0.2
+                  c-1,0.1-4.2,0-4.2,0C0.2,9.6,0,9.8,0,10c0,0.2,0.2,0.4,0.4,0.4c0,0,3.1-0.1,4.2,0c0.4,0,1.7,0.2,1.7,0.2c0.6,0.1,1.1,0.2,1.6,0.6
+                  c0.4,0.3,0.8,0.7,1.1,1.1c0.3,0.5,0.5,1,0.6,1.6c0,0,0.1,1.3,0.2,1.7c0,1,0,4.1,0,4.1c0,0.2,0.2,0.4,0.4,0.4s0.4-0.2,0.4-0.4
+                  c0,0,0-3.1,0-4.1c0-0.4,0.2-1.7,0.2-1.7c0.1-0.6,0.2-1.1,0.6-1.6c0.3-0.4,0.7-0.8,1.1-1.1c0.5-0.3,1-0.5,1.6-0.6
+                  c0,0,1.3-0.1,1.8-0.2c1,0,4,0,4,0c0.2,0,0.4-0.2,0.4-0.4C20,9.8,19.8,9.6,19.6,9.6L19.6,9.6z"></path>
+              </svg>
+              <a href="tel:+12127089400">+1 212-708-9400</a>
+            </p>
+          </div>
+          <div class="footer-blocks__card fill-card notify">
+            <div class="footer-blocks__title anim-uni-in-up">
+              <p class="footer-blocks__title-m">Subscribe to our blogs:</p>
+            </div>
+            <div class="form-container anim-uni-in-up">
+              <div class="form__reply subscription-ok">
+                <span class="reply__text">Done! Thanks for subscribing.</span>
+              </div>
+              <div class="form__reply subscription-error">
+                <span class="reply__text">Ooops! Something went wrong. Please try again later.</span>
+              </div>
+              <form class="form notify-form form-light">
+                <input type="email" placeholder="Your Email" required>
+                <button class="btn btn-form btn-absolute-right btn-muted slide-right-up anim-no-delay" type="submit">
+                  <i class="ph ph-arrow-up-right"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="footer-blocks__column animate-card-3">
+          <div class="footer-blocks__card fullheight-card">
+            <div class="footer-blocks__block">
+              <div class="footer-blocks__title anim-uni-in-up">
+                <p class="footer-blocks__title-l">Ecosystem</p>
+              </div>
+              <div class="footer-blocks__socials">
+                <ul class="footer-socials">
+                  <li class="footer-socials__item anim-uni-in-up"><a href="https://dribbble.com/" class="footer-socials__link" target="_blank">Dribbble</a></li>
+                  <li class="footer-socials__item anim-uni-in-up"><a href="https://www.behance.net/" class="footer-socials__link" target="_blank">Behance</a></li>
+                  <li class="footer-socials__item anim-uni-in-up"><a href="https://www.instagram.com/" class="footer-socials__link" target="_blank">Instagram</a></li>
+                  <li class="footer-socials__item anim-uni-in-up"><a href="https://github.com/" class="footer-socials__link" target="_blank">Github</a></li>
+                  <li class="footer-socials__item anim-uni-in-up"><a href="https://codepen.io/" class="footer-socials__link" target="_blank">Codepen</a></li>
+                  <li class="footer-socials__item anim-uni-in-up"><a href="https://www.figma.com/community" class="footer-socials__link" target="_blank">Figma Community</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="footer-blocks__links anim-uni-in-up">
+              <p class="t-xsmall t-muted">
+                <a class="no-effect" href="#" target="_blank">Azaya Marketing</a>
+                <i class="ph-bold ph-copyright"></i>
+                <span id="currentYear" class="fw-normal"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- Load Scripts Start -->
+    <script src="js/libs.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:5000/api';
+        let allBlogs = [];
+        let filteredBlogs = [];
+        let currentPage = 1;
+        const blogsPerPage = 7; // 1 featured + 6 regular per page
+        let currentCategory = 'all';
+
+        // Utility functions
+        const formatDate = (dateString) => {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        };
+
+        const truncateText = (text, maxLength) => {
+            if (text.length <= maxLength) return text;
+            return text.substr(0, maxLength) + '...';
+        };
+
+        const stripHtml = (html) => {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || '';
+        };
+
+        const getExcerpt = (content, maxLength = 150) => {
+            const text = stripHtml(content);
+            return truncateText(text, maxLength);
+        };
+
+        // Fetch all published blogs
+        async function fetchBlogs() {
+            try {
+                // Fetch only published blogs from the public API
+                const response = await fetch(`${API_BASE_URL}/blogs`);
+                if (!response.ok) throw new Error('Failed to fetch blogs');
+                
+                allBlogs = await response.json();
+                
+                // Sort blogs: featured first, then by date (newest first)
+                allBlogs.sort((a, b) => {
+                    // Featured blogs come first
+                    if (a.featured === true && b.featured !== true) return -1;
+                    if (a.featured !== true && b.featured === true) return 1;
+                    // Then sort by date (newest first)
+                    return new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt);
+                });
+                
+                filteredBlogs = [...allBlogs];
+                
+                renderCategories();
+                renderBlogs();
+                renderRecentPosts();
+            } catch (error) {
+                console.error('Error fetching blogs:', error);
+                document.getElementById('featuredPost').innerHTML = `
+                    <div class="error-message">
+                        <h3>Error loading blogs</h3>
+                        <p>${error.message}</p>
+                        <button onclick="fetchBlogs()" class="btn btn-primary">Retry</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Render categories
+        function renderCategories() {
+            const categoriesSet = new Set();
+            allBlogs.forEach(blog => {
+                if (blog.categories && Array.isArray(blog.categories)) {
+                    blog.categories.forEach(cat => categoriesSet.add(cat));
+                }
+            });
+
+            const categories = Array.from(categoriesSet);
+            
+            // Top categories list
+            const categoriesList = document.getElementById('categoriesList');
+            categoriesList.innerHTML = `
+                <span class="tag tag-default tag-outline tag-link-outline">
+                    <a href="#" onclick="filterByCategory('all'); return false;">All</a>
+                </span>
+                ${categories.map(cat => `
+                    <span class="tag tag-default tag-outline tag-link-outline">
+                        <a href="#" onclick="filterByCategory('${cat}'); return false;">${cat}</a>
+                    </span>
+                `).join('')}
+            `;
+
+            // Sidebar categories
+            const sidebarCategories = document.getElementById('sidebarCategories');
+            sidebarCategories.innerHTML = `
+                <li class="categories__item">
+                    <a href="#" onclick="filterByCategory('all'); return false;" class="categories__link">All Posts</a>
+                </li>
+                ${categories.map(cat => `
+                    <li class="categories__item">
+                        <a href="#" onclick="filterByCategory('${cat}'); return false;" class="categories__link">${cat}</a>
+                    </li>
+                `).join('')}
+            `;
+        }
+
+        // Filter by category
+        function filterByCategory(category) {
+            currentCategory = category;
+            currentPage = 1;
+            
+            if (category === 'all') {
+                filteredBlogs = [...allBlogs];
+            } else {
+                filteredBlogs = allBlogs.filter(blog => 
+                    blog.categories && blog.categories.includes(category)
+                );
+            }
+            
+            renderBlogs();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Search blogs
+        async function searchBlogs(event) {
+            event.preventDefault();
+            const searchTerm = document.getElementById('searchInput').value.trim();
+
+            if (!searchTerm) {
+                filteredBlogs = [...allBlogs];
+                renderBlogs();
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/blogs/search/${encodeURIComponent(searchTerm)}`);
+                
+                if (!response.ok) throw new Error('Failed to fetch search results');
+
+                const blogs = await response.json();
+                filteredBlogs = blogs;
+                currentPage = 1;
+                renderBlogs();
+            } catch (error) {
+                console.error('Search error:', error);
+            }
+        }
+
+        // Render blogs
+        function renderBlogs() {
+            if (filteredBlogs.length === 0) {
+                document.getElementById('featuredPost').innerHTML = `
+                    <div class="no-blogs">
+                        <h3>No blogs found</h3>
+                        <p>Try adjusting your search or filter criteria.</p>
+                    </div>
+                `;
+                document.getElementById('regularPosts').innerHTML = '';
+                document.getElementById('paginationContainer').style.display = 'none';
+                return;
+            }
+
+            const startIndex = (currentPage - 1) * blogsPerPage;
+            const endIndex = startIndex + blogsPerPage;
+            const pageBlogs = filteredBlogs.slice(startIndex, endIndex);
+
+            // Featured post (first blog on page)
+            const featured = pageBlogs[0];
+            document.getElementById('featuredPost').innerHTML = renderFeaturedPost(featured);
+
+            // Regular posts (remaining blogs)
+            const regular = pageBlogs.slice(1);
+            document.getElementById('regularPosts').innerHTML = regular.map(blog => renderRegularPost(blog)).join('');
+
+            // Pagination
+            renderPagination();
+        }
+
+        // Render featured post
+        function renderFeaturedPost(blog) {
+            const blogId = blog._id || blog.id;
+            const categories = blog.categories || [];
+            const firstThreeCategories = categories.slice(0, 3);
+            const isFeatured = blog.featured === true;
+
+            return `
+                <article class="mxd-post post-featured radius-m" style="position: relative;">
+                    ${isFeatured ? `
+                        <div class="featured-badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                            </svg>
+                            Featured
+                        </div>
+                    ` : ''}
+                    <a class="post-featured__thumb" href="blog-article.html?id=${blogId}">
+                        <img src="${blog.thumbnail || 'img/blog/1400x900_pf-01.webp'}" alt="${blog.title}" onerror="this.src='img/blog/1400x900_pf-01.webp'">
+                    </a>
+                    <div class="post-featured__categories">
+                        ${firstThreeCategories.map(cat => `
+                            <span class="tag tag-default tag-outline-permanent tag-link-outline-premanent">
+                                <a href="#" onclick="filterByCategory('${cat}'); return false;">${cat}</a>
+                            </span>
+                        `).join('')}
+                    </div>
+                    <div class="post-featured__content">
+                        <div class="post-featured__meta">
+                            ${firstThreeCategories.map((cat, index) => `
+                                <span class="meta-tag">
+                                    <a href="#" onclick="filterByCategory('${cat}'); return false;">${cat}</a>
+                                    ${index < firstThreeCategories.length - 1 ? `
+                                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 20 20">
+                                            <path d="M19.6,9.6h-3.9c-.4,0-1.8-.2-1.8-.2-.6,0-1.1-.2-1.6-.6-.5-.3-.9-.8-1.2-1.2-.3-.4-.4-.9-.5-1.4,0,0,0-1.1-.2-1.5V.4c0-.2-.2-.4-.4-.4s-.4.2-.4.4v4.4c0,.4-.2,1.5-.2,1.5,0,.5-.2,1-.5,1.4-.3.5-.7.9-1.2,1.2s-1,.5-1.6.6c0,0-1.2,0-1.7.2H.4c-.2,0-.4.2-.4.4s.2.4.4.4h4.1c.4,0,1.7.2,1.7.2.6,0,1.1.2,1.6.6.4.3.8.7,1.1,1.1.3.5.5,1,.6,1.6,0,0,0,1.3.2,1.7v4.1c0,.2.2.4.4.4s.4-.2.4-.4v-4.1c0-.4.2-1.7.2-1.7,0-.6.2-1.1.6-1.6.3-.4.7-.8,1.1-1.1.5-.3,1-.5,1.6-.6,0,0,1.3,0,1.8-.2h3.9c.2,0,.4-.2.4-.4s-.2-.4-.4-.4h0Z"/>
+                                        </svg>
+                                    ` : ''}
+                                </span>
+                            `).join('')}
+                            <span class="meta-date">${formatDate(blog.date || blog.createdAt)}</span>
+                        </div>
+                        <h3 class="post-featured__title">
+                            <a href="blog-article.html?id=${blogId}">${blog.title}</a>
+                        </h3>
+                        <div class="post-featured__excerpt">
+                            <p>${getExcerpt(blog.content, 200)}</p>
+                        </div>
+                    </div>
+                </article>
+            `;
+        }
+
+        // Render regular post
+        function renderRegularPost(blog) {
+            const blogId = blog._id || blog.id;
+            const categories = blog.categories || [];
+            const firstTwoCategories = categories.slice(0, 2);
+
+            return `
+                <article class="mxd-post post-simple">
+                    <a class="post-simple__thumb radius-m" href="blog-article.html?id=${blogId}">
+                        <img src="${blog.thumbnail || 'img/blog/800x680_ps-01.webp'}" alt="${blog.title}" onerror="this.src='img/blog/800x680_ps-01.webp'">
+                        <div class="mxd-preview-hover">
+                            <i class="mxd-preview-hover__icon icon-small">
+                                <img src="img/icons/icon-eye.svg" alt="Eye Icon">
+                            </i>
+                        </div>
+                    </a>
+                    <div class="post-simple__content">
+                        <div class="post-simple__descr">
+                            <div class="post-simple__meta">
+                                ${firstTwoCategories.map((cat, index) => `
+                                    <span class="meta-tag">
+                                        <a href="#" onclick="filterByCategory('${cat}'); return false;">${cat}</a>
+                                        ${index < firstTwoCategories.length - 1 ? `
+                                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 20 20">
+                                                <path d="M19.6,9.6h-3.9c-.4,0-1.8-.2-1.8-.2-.6,0-1.1-.2-1.6-.6-.5-.3-.9-.8-1.2-1.2-.3-.4-.4-.9-.5-1.4,0,0,0-1.1-.2-1.5V.4c0-.2-.2-.4-.4-.4s-.4.2-.4.4v4.4c0,.4-.2,1.5-.2,1.5,0,.5-.2,1-.5,1.4-.3.5-.7.9-1.2,1.2s-1,.5-1.6.6c0,0-1.2,0-1.7.2H.4c-.2,0-.4.2-.4.4s.2.4.4.4h4.1c.4,0,1.7.2,1.7.2.6,0,1.1.2,1.6.6.4.3.8.7,1.1,1.1.3.5.5,1,.6,1.6,0,0,0,1.3.2,1.7v4.1c0,.2.2.4.4.4s.4-.2.4-.4v-4.1c0-.4.2-1.7.2-1.7,0-.6.2-1.1.6-1.6.3-.4.7-.8,1.1-1.1.5-.3,1-.5,1.6-.6,0,0,1.3,0,1.8-.2h3.9c.2,0,.4-.2.4-.4s-.2-.4-.4-.4h0Z"/>
+                                            </svg>
+                                        ` : ''}
+                                    </span>
+                                `).join('')}
+                                <span class="meta-date">${formatDate(blog.date || blog.createdAt)}</span>
+                            </div>
+                            <div class="post-simple__title">
+                                <h5><a href="blog-article.html?id=${blogId}">${blog.title}</a></h5>
+                                <div class="post-featured__excerpt">
+                                    <p style="color:#000;padding-top:20px;">${getExcerpt(blog.content, 300)}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-simple__btn">
+                            <a class="btn btn-anim btn-default btn-outline slide-right-up" href="blog-article.html?id=${blogId}">
+                                <span class="btn-caption">Read More</span>
+                                <i class="ph ph-arrow-up-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            `;
+        }
+
+        // Render recent posts
+        function renderRecentPosts() {
+            const recent = allBlogs.slice(0, 3);
+            const recentPostsContainer = document.getElementById('recentPosts');
+            
+            recentPostsContainer.innerHTML = recent.map(blog => {
+                const blogId = blog._id || blog.id;
+                const firstCategory = blog.categories?.[0] || 'Uncategorized';
+                
+                return `
+                    <li class="recent-post__item">
+                        <div class="recent-post__thumb">
+                            <a href="blog-article.html?id=${blogId}">
+                                <img src="${blog.thumbnail || 'img/blog/300x300_rp-01.webp'}" alt="${blog.title}" onerror="this.src='img/blog/300x300_rp-01.webp'">
+                            </a>
+                        </div>
+                        <div class="recent-post__content">
+                            <div class="recent-post__meta">
+                                <span class="meta-tag">
+                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 20 20">
+                                        <path d="M19.6,9.6h-3.9c-.4,0-1.8-.2-1.8-.2-.6,0-1.1-.2-1.6-.6-.5-.3-.9-.8-1.2-1.2-.3-.4-.4-.9-.5-1.4,0,0,0-1.1-.2-1.5V.4c0-.2-.2-.4-.4-.4s-.4.2-.4.4v4.4c0,.4-.2,1.5-.2,1.5,0,.5-.2,1-.5,1.4-.3.5-.7.9-1.2,1.2s-1,.5-1.6.6c0,0-1.2,0-1.7.2H.4c-.2,0-.4.2-.4.4s.2.4.4.4h4.1c.4,0,1.7.2,1.7.2.6,0,1.1.2,1.6.6.4.3.8.7,1.1,1.1.3.5.5,1,.6,1.6,0,0,0,1.3.2,1.7v4.1c0,.2.2.4.4.4s.4-.2.4-.4v-4.1c0-.4.2-1.7.2-1.7,0-.6.2-1.1.6-1.6.3-.4.7-.8,1.1-1.1.5-.3,1-.5,1.6-.6,0,0,1.3,0,1.8-.2h3.9c.2,0,.4-.2.4-.4s-.2-.4-.4-.4h0Z"/>
+                                    </svg>
+                                    <a href="#" onclick="filterByCategory('${firstCategory}'); return false;">${firstCategory}</a>
+                                </span>
+                            </div>
+                            <div class="recent-post__title">
+                                <a href="blog-article.html?id=${blogId}">${truncateText(blog.title, 60)}</a>
+                            </div>
+                        </div>
+                    </li>
+                `;
+            }).join('');
+        }
+
+        // Render pagination
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
+            
+            if (totalPages <= 1) {
+                document.getElementById('paginationContainer').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('paginationContainer').style.display = 'block';
+            const paginationItems = document.getElementById('paginationItems');
+            
+            let html = '';
+
+            // Previous button
+            if (currentPage > 1) {
+                html += `
+                    <a href="#" onclick="changePage(${currentPage - 1}); return false;" class="mxd-blog-pagination__item blog-pagination-control prev btn btn-anim btn-line-small btn-bright anim-no-delay slide-left">
+                        <i class="ph ph-arrow-left"></i>
+                        <span class="btn-caption">Prev</span>
+                    </a>
+                `;
+            }
+
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                    html += `
+                        <a href="#" onclick="changePage(${i}); return false;" class="mxd-blog-pagination__item blog-pagination-number btn btn-anim ${i === currentPage ? 'active' : ''}">
+                            <span class="btn-caption">${i}</span>
+                        </a>
+                    `;
+                } else if (i === currentPage - 2 || i === currentPage + 2) {
+                    html += `<span class="mxd-blog-pagination__item">...</span>`;
+                }
+            }
+
+            // Next button
+            if (currentPage < totalPages) {
+                html += `
+                    <a href="#" onclick="changePage(${currentPage + 1}); return false;" class="mxd-blog-pagination__item blog-pagination-control next btn btn-anim btn-line-small btn-bright anim-no-delay slide-right">
+                        <span class="btn-caption">Next</span>
+                        <i class="ph ph-arrow-right"></i>
+                    </a>
+                `;
+            }
+
+            paginationItems.innerHTML = html;
+        }
+
+        // Change page
+        function changePage(page) {
+            currentPage = page;
+            renderBlogs();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Initialize
+        fetchBlogs();
+    </script>
+</body>
+</html>
