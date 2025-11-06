@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Admin Dashboard - Azaya Marketing</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary-color: #c89f40;
+            --primary-gradient: linear-gradient(135deg, #c89f40 0%, #dabb72 100%);
+            --dark-bg: #1a1d29;
+            --card-bg: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --border-color: #e9ecef;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.16);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f8f9fa;
+            color: var(--text-primary);
+        }
+
+        /* Admin Panel Styles */
+        .admin-header {
+            background: white;
+            box-shadow: var(--shadow-sm);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .admin-logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-pills .nav-link {
+            color: var(--text-secondary);
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-pills .nav-link:hover {
+            background: #f8f9fa;
+            color: var(--primary-color);
+        }
+
+        .nav-pills .nav-link.active {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .content-wrapper {
+            padding: 30px 0;
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 24px;
+        }
+
+        .card-header {
+            background: white;
+            border-bottom: 2px solid #f8f9fa;
+            padding: 20px 24px;
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--text-primary);
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        /* Form Controls */
+        .form-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(200, 159, 64, 0.15);
+        }
+
+        .form-text {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 6px;
+        }
+
+        /* Buttons */
+        .btn {
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline-primary {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline-primary:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        /* Filter Buttons */
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 2px solid var(--border-color);
+            background: white;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .filter-btn.active {
+            background: var(--primary-gradient);
+            border-color: transparent;
+            color: white;
+        }
+
+        /* Rich Text Editor */
+        .editor-toolbar {
+            background: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+            padding: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .editor-btn {
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            color: var(--text-secondary);
+        }
+
+        .editor-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        #contentEditor {
+            min-height: 400px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 0 0 8px 8px;
+            background: white;
+            overflow-y: auto;
+            line-height: 1.8;
+        }
+
+        #contentEditor:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        #contentEditor img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        /* Image Upload Area */
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+
+        .upload-area:hover, .upload-area.dragover {
+            border-color: var(--primary-color);
+            background: #fff9f0;
+        }
+
+        .upload-preview {
+            position: relative;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        .upload-preview img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .remove-image {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 1;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Blog Cards */
+        .blog-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 20px;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .blog-thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-card-body {
+            padding: 20px;
+        }
+
+        .blog-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .blog-meta {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .badge {
+            font-weight: 500;
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 6px;
+        }
+
+        /* Featured Star */
+        .featured-star {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ffc107;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Status badges */
+        .status-published {
+            background: #28a745;
+            color: white;
+        }
+
+        .status-draft {
+            background: #6c757d;
+            color: white;
+        }
+
+        .status-private {
+            background: #ffc107;
+            color: #000;
+        }
+
+        /* Toggle Switch for Featured */
+        .form-switch .form-check-input {
+            width: 50px;
+            height: 26px;
+            cursor: pointer;
+        }
+
+        .form-switch .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--text-secondary);
+        }
+
+        .empty-state i {
+            font-size: 64px;
+            margin-bottom: 20px;
+            color: var(--border-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admin-header {
+                padding: 12px 0;
+            }
+
+            .content-wrapper {
+                padding: 20px 0;
+            }
+
+            .card-body {
+                padding: 20px;
+            }
+
+            .editor-toolbar {
+                padding: 8px;
+                gap: 4px;
+            }
+
+            .editor-btn {
+                padding: 6px 10px;
+                font-size: 13px;
+            }
+
+            #contentEditor {
+                min-height: 300px;
+                padding: 15px;
+            }
+
+            .filter-buttons {
+                gap: 8px;
+            }
+
+            .filter-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Panel -->
+    <div id="adminContainer">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="admin-logo">
+                        <a href="./index.html">
+                            <img src="./img/icons/azaya.png" alt="logo" width="150">
+                        </a>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="d-none d-md-inline text-muted" id="adminEmail"></span>
+                        <button class="btn btn-sm btn-outline-danger" onclick="logout()">
+                            <i class="bi bi-box-arrow-right me-1"></i>Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <div class="bg-white border-bottom">
+            <div class="container">
+                <ul class="nav nav-pills py-3" id="adminNav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="switchPanel('list'); return false;">
+                            <i class="bi bi-list-ul me-2"></i>All Blogs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="switchPanel('add'); return false;">
+                            <i class="bi bi-plus-circle me-2 fs-6"></i>Add New Blog
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content-wrapper">
+            <div class="container">
+                <!-- Blog List Panel -->
+                <div id="listPanel">
+                    <div id="alertList"></div>
+
+                    <!-- Filter Buttons -->
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" onclick="filterBlogs('all')">
+                            <i class="bi bi-grid-3x3-gap me-1"></i>All Blogs
+                        </button>
+                        <button class="filter-btn" onclick="filterBlogs('published')">
+                            <i class="bi bi-check-circle me-1"></i>Published
+                        </button>
+                        <button class="filter-btn" onclick="filterBlogs('draft')">
+                            <i class="bi bi-file-earmark me-1"></i>Drafts
+                        </button>
+                        <button class="filter-btn" onclick="filterBlogs('private')">
+                            <i class="bi bi-lock me-1"></i>Private
+                        </button>
+                        <button class="filter-btn" onclick="filterBlogs('featured')">
+                            <i class="bi bi-star-fill me-1"></i>Featured
+                        </button>
+                    </div>
+
+                    <div id="blogListContainer">
+                        <div class="text-center py-5">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add/Edit Blog Panel -->
+                <div id="addPanel" style="display: none;">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span id="formTitle">Add New Blog</span>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="cancelEdit()">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div id="alertForm"></div>
+
+                            <form id="blogForm">
+                                <input type="hidden" id="blogId">
+
+                                <!-- Basic Information -->
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="mb-3">
+                                            <label for="title" class="form-label">Blog Title <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="title" placeholder="Enter an engaging blog title" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="date" class="form-label">Published Date</label>
+                                            <input type="date" class="form-control" id="date">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Category and Status Row -->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="categorySelect" class="form-label">Category <span class="text-danger">*</span></label>
+                                            <select class="form-select" id="categorySelect" required>
+                                                <option value="">Select Category</option>
+                                                <option value="Technology">Technology</option>
+                                                <option value="Design">Design</option>
+                                                <option value="Marketing">Marketing</option>
+                                                <option value="Business">Business</option>
+                                                <option value="Lifestyle">Lifestyle</option>
+                                                <option value="Travel">Travel</option>
+                                                <option value="Food">Food</option>
+                                                <option value="Health">Health</option>
+                                                <option value="__new__">+ Add New Category</option>
+                                            </select>
+                                            <input type="text" class="form-control mt-2" id="newCategory" placeholder="Enter new category name" style="display: none;">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
+                                            <select class="form-select" id="status" required>
+                                                <option value="draft">Draft</option>
+                                                <option value="published">Publish</option>
+                                                <option value="private">Private</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label d-block">Featured Blog</label>
+                                            <div class="form-check form-switch" style="padding-top: 8px;">
+                                                <input class="form-check-input" type="checkbox" id="featured" role="switch">
+                                                <label class="form-check-label" for="featured">
+                                                    Mark as Featured
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Featured Image Upload -->
+                                <div class="mb-4">
+                                    <label class="form-label">Featured Image</label>
+                                    <input type="file" id="featuredImageInput" accept="image/*" style="display: none;">
+                                    <div class="upload-area" id="featuredUploadArea" onclick="document.getElementById('featuredImageInput').click()">
+                                        <i class="bi bi-cloud-upload fs-1 text-muted"></i>
+                                        <p class="mt-2 mb-0 fw-semibold">Click to upload or drag & drop</p>
+                                        <p class="small text-muted mb-0">PNG, JPG, GIF, WebP (Max 5MB)</p>
+                                    </div>
+                                    <div id="featuredImagePreview" style="display: none;"></div>
+                                </div>
+
+                                <!-- Content Editor -->
+                                <div class="mb-4">
+                                    <label class="form-label">Blog Content <span class="text-danger">*</span></label>
+                                    <div class="editor-toolbar">
+                                        <button type="button" class="editor-btn" onclick="formatText('bold')" title="Bold"><i class="bi bi-type-bold"></i></button>
+                                        <button type="button" class="editor-btn" onclick="formatText('italic')" title="Italic"><i class="bi bi-type-italic"></i></button>
+                                        <button type="button" class="editor-btn" onclick="formatText('underline')" title="Underline"><i class="bi bi-type-underline"></i></button>
+                                        <button type="button" class="editor-btn" onclick="formatText('strikeThrough')" title="Strikethrough"><i class="bi bi-type-strikethrough"></i></button>
+                                        <span class="vr mx-1"></span>
+                                        <button type="button" class="editor-btn" onclick="formatText('formatBlock', 'h1')" title="Heading 1">H1</button>
+                                        <button type="button" class="editor-btn" onclick="formatText('formatBlock', 'h2')" title="Heading 2">H2</button>
+                                        <button type="button" class="editor-btn" onclick="formatText('formatBlock', 'h3')" title="Heading 3">H3</button>
+                                        <button type="button" class="editor-btn" onclick="formatText('formatBlock', 'p')" title="Paragraph">P</button>
+                                        <span class="vr mx-1"></span>
+                                        <button type="button" class="editor-btn" onclick="formatText('insertUnorderedList')" title="Bullet List"><i class="bi bi-list-ul"></i></button>
+                                        <button type="button" class="editor-btn" onclick="formatText('insertOrderedList')" title="Numbered List"><i class="bi bi-list-ol"></i></button>
+                                        <button type="button" class="editor-btn" onclick="formatText('formatBlock', 'blockquote')" title="Quote"><i class="bi bi-quote"></i></button>
+                                        <span class="vr mx-1"></span>
+                                        <button type="button" class="editor-btn" onclick="insertLink()" title="Insert Link"><i class="bi bi-link-45deg"></i></button>
+                                        <button type="button" class="editor-btn" onclick="openImageModal()" title="Insert Image"><i class="bi bi-image"></i></button>
+                                        <button type="button" class="editor-btn" onclick="formatText('removeFormat')" title="Clear Formatting"><i class="bi bi-eraser"></i></button>
+                                    </div>
+                                    <div id="contentEditor" contenteditable="true">
+                                        <p>Start typing your blog content here...</p>
+                                    </div>
+                                </div>
+
+                                <!-- SEO Information -->
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="bi bi-search me-2"></i>SEO Settings
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label for="metaTitle" class="form-label">Meta Title</label>
+                                            <input type="text" class="form-control" id="metaTitle" maxlength="60" placeholder="SEO optimized title (max 60 characters)">
+                                            <div class="form-text text-end">
+                                                <span id="metaTitleCount">0</span> / 60 characters
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="metaDescription" class="form-label">Meta Description</label>
+                                            <textarea class="form-control" id="metaDescription" rows="3" maxlength="160" placeholder="Brief description for search engines (max 160 characters)"></textarea>
+                                            <div class="form-text text-end">
+                                                <span id="metaDescCount">0</span> / 160 characters
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="keywords" class="form-label">Keywords</label>
+                                            <input type="text" class="form-control" id="keywords" placeholder="keyword1, keyword2, keyword3">
+                                            <div class="form-text">Separate keywords with commas</div>
+                                        </div>
+                                        <div class="row" style="display: none;">
+                                            <div class="col-md-6">
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" type="checkbox" id="robotsIndex" checked>
+                                                    <label class="form-check-label" for="robotsIndex">
+                                                        Allow search engines to index
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" type="checkbox" id="robotsFollow" checked>
+                                                    <label class="form-check-label" for="robotsFollow">
+                                                        Allow search engines to follow links
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Form Actions -->
+                                <div class="d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                                        <i class="bi bi-check-circle me-2"></i><span id="submitBtnText">Save Blog</span>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary" onclick="cancelEdit()">
+                                        <i class="bi bi-x-circle me-2"></i>Cancel
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Insert Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Insert Image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Image URL</label>
+                        <input type="url" class="form-control" id="imageUrlInput" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="text-center text-muted my-3">OR</div>
+                    <div class="mb-3">
+                        <label class="form-label">Upload Image</label>
+                        <input type="file" id="imageFileInput" accept="image/*" style="display: none;">
+                        <div class="upload-area" id="uploadArea" onclick="document.getElementById('imageFileInput').click()">
+                            <i class="bi bi-cloud-upload fs-1 text-muted"></i>
+                            <p class="mt-2 mb-0">Click to upload or drag & drop</p>
+                        </div>
+                        <div id="imagePreview" style="display: none;"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="insertImage()">Insert Image</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="./js/admin-dashboard.js"></script>
+</body>
+</html>
