@@ -707,15 +707,6 @@
                                             <input type="text" class="form-control" id="keywords" placeholder="keyword1, keyword2, keyword3">
                                             <div class="form-text">Separate keywords with commas</div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="canonicalUrl" class="form-label">Canonical URL</label>
-                                            <input type="url" class="form-control" id="canonicalUrl" placeholder="https://example.com/blog-post">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="ogImage" class="form-label">Open Graph Image URL</label>
-                                            <input type="url" class="form-control" id="ogImage" placeholder="https://example.com/og-image.jpg">
-                                            <div class="form-text">Image for social media sharing (1200x630px recommended)</div>
-                                        </div>
                                         <div class="row" style="display: none;">
                                             <div class="col-md-6">
                                                 <div class="form-check mb-3">
@@ -1296,8 +1287,6 @@
                     document.getElementById('metaTitle').value = blog.seo.metaTitle || '';
                     document.getElementById('metaDescription').value = blog.seo.metaDescription || '';
                     document.getElementById('keywords').value = (blog.seo.keywords || []).join(', ');
-                    document.getElementById('canonicalUrl').value = blog.seo.canonicalUrl || '';
-                    document.getElementById('ogImage').value = blog.seo.ogImage || '';
                     document.getElementById('robotsIndex').checked = blog.seo.robotsIndex !== false;
                     document.getElementById('robotsFollow').checked = blog.seo.robotsFollow !== false;
                     
@@ -1411,8 +1400,6 @@
                         .split(",")
                         .map(k => k.trim())
                         .filter(k => k),
-                    canonicalUrl: document.getElementById("canonicalUrl").value,
-                    ogImage: document.getElementById("ogImage").value,
                     robotsIndex: document.getElementById("robotsIndex").checked,
                     robotsFollow: document.getElementById("robotsFollow").checked
                 }

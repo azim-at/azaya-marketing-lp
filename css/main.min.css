@@ -19885,3 +19885,8 @@ form textarea:required:valid {
     font-size: 3.4rem;
   }
 }
+
+.google-maps {
+  border-color: #E0C97A;
+  border-radius: 2px;
+}
