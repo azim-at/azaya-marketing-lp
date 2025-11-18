@@ -249,6 +249,88 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Comments Section -->
+                        <div class="mxd-comments-section" id="comments-section" style="margin-top: 60px; padding: 40px 20px; border-top: 1px solid #e0e0e0;">
+                            <!-- Comments Display -->
+                            <div class="mxd-comments-display" id="comments-display" style="max-width: 900px; margin: 0 auto;">
+                                <h3 style="font-size: clamp(22px, 5vw, 28px); margin-bottom: 30px; font-weight: 600; text-align: center;">Comments</h3>
+                                <div id="comments-list" style="margin-bottom: 30px;">
+                                    <p style="color: #888; text-align: center;">Loading comments...</p>
+                                </div>
+
+                                <!-- Pagination Controls -->
+                                <div id="pagination-controls" style="display: none; margin-top: 30px;">
+                                    <div style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                                        <button id="prev-comments-btn"
+                                            style="background: #fff; border: 2px solid #c89f40; color: #c89f40; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 6px;"
+                                            onmouseover="this.style.background='#c89f40'; this.style.color='white';"
+                                            onmouseout="this.style.background='#fff'; this.style.color='#c89f40';">
+                                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                            </svg>
+                                            <span class="btn-text">Prev</span>
+                                        </button>
+
+                                        <span id="page-info" style="font-weight: 500; color: #555; font-size: 14px; white-space: nowrap;">
+                                            <span id="current-page">1</span> / <span id="total-pages">1</span>
+                                        </span>
+
+                                        <button id="next-comments-btn"
+                                            style="background: #fff; border: 2px solid #c89f40; color: #c89f40; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 6px;"
+                                            onmouseover="this.style.background='#c89f40'; this.style.color='white';"
+                                            onmouseout="this.style.background='#fff'; this.style.color='#c89f40';">
+                                            <span class="btn-text">Next</span>
+                                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Comment Form -->
+                            <div class="mxd-comment-form" id="comment-form-section" style="max-width: 700px; margin: 60px auto 0; padding: 0 20px;">
+                                <h4 style="font-size: clamp(20px, 4vw, 24px); margin-bottom: 20px; font-weight: 600; text-align: center;">Leave a Comment</h4>
+                                <div id="comment-message" style="margin-bottom: 20px;"></div>
+                                <form id="comment-form">
+                                    <div style="margin-bottom: 20px;">
+                                        <label for="comment-name" style="display: block; margin-bottom: 8px; font-weight: 500; color: #333; font-size: 14px;">Name *</label>
+                                        <input type="text" id="comment-name" name="name" required maxlength="100"
+                                            style="width: 100%; padding: 12px 16px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; transition: all 0.3s; box-sizing: border-box;"
+                                            placeholder="Your name"
+                                            onfocus="this.style.borderColor='#c89f40'; this.style.boxShadow='0 0 0 3px rgba(200, 159, 64, 0.1)';"
+                                            onblur="this.style.borderColor='#ddd'; this.style.boxShadow='none';">
+                                    </div>
+                                    <div style="margin-bottom: 20px;">
+                                        <label for="comment-email" style="display: block; margin-bottom: 8px; font-weight: 500; color: #333; font-size: 14px;">Email *</label>
+                                        <input type="email" id="comment-email" name="email" required
+                                            style="width: 100%; padding: 12px 16px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; transition: all 0.3s; box-sizing: border-box;"
+                                            placeholder="your.email@example.com"
+                                            onfocus="this.style.borderColor='#c89f40'; this.style.boxShadow='0 0 0 3px rgba(200, 159, 64, 0.1)';"
+                                            onblur="this.style.borderColor='#ddd'; this.style.boxShadow='none';">
+                                    </div>
+                                    <div style="margin-bottom: 20px;">
+                                        <label for="comment-text" style="display: block; margin-bottom: 8px; font-weight: 500; color: #333; font-size: 14px;">Comment *</label>
+                                        <textarea id="comment-text" name="comment" required maxlength="2000" rows="5"
+                                            style="width: 100%; padding: 12px 16px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; resize: vertical; transition: all 0.3s; box-sizing: border-box; font-family: inherit; min-height: 120px;"
+                                            placeholder="Share your thoughts..."
+                                            onfocus="this.style.borderColor='#c89f40'; this.style.boxShadow='0 0 0 3px rgba(200, 159, 64, 0.1)';"
+                                            onblur="this.style.borderColor='#ddd'; this.style.boxShadow='none';"></textarea>
+                                        <small style="display: block; margin-top: 6px; color: #888; font-size: 13px;">Maximum 2000 characters</small>
+                                    </div>
+                                    <div style="text-align: center;">
+                                   
+                                         <div class="mxd-btngroup centered">
+                          <button class="btn btn-anim btn-default btn-accent slide-right-up" type="submit" id="comment-submit-btn">
+                            <span class="btn-caption">Submit</span>
+                            <i class="ph-bold ph-arrow-up-right"></i>
+                          </button>
+                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -596,6 +678,285 @@
         } else {
             init();
         }
+
+        // ==============================
+        // COMMENTS FUNCTIONALITY
+        // ==============================
+
+        let currentBlogId = null;
+        let allCommentsData = [];
+        let currentPage = 1;
+        const commentsPerPage = 3;
+
+        // Fetch and display approved comments
+        const fetchComments = async (blogId) => {
+            try {
+                const response = await fetch(`${API_BASE_URL}/comments/blog/${blogId}`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                allCommentsData = data.comments || [];
+                currentPage = 1;
+                displayComments();
+            } catch (error) {
+                console.error('Error fetching comments:', error);
+                document.getElementById('comments-list').innerHTML = '<p style="color: #888; text-align: center;">Failed to load comments.</p>';
+            }
+        };
+
+        // Display comments with pagination
+        const displayComments = () => {
+            const commentsList = document.getElementById('comments-list');
+            const paginationControls = document.getElementById('pagination-controls');
+
+            if (!allCommentsData || allCommentsData.length === 0) {
+                commentsList.innerHTML = '<p style="color: #888; font-style: italic; text-align: center;">No comments yet. Be the first to comment!</p>';
+                paginationControls.style.display = 'none';
+                return;
+            }
+
+            // Calculate pagination
+            const totalPages = Math.ceil(allCommentsData.length / commentsPerPage);
+            const startIndex = (currentPage - 1) * commentsPerPage;
+            const endIndex = startIndex + commentsPerPage;
+            const commentsToDisplay = allCommentsData.slice(startIndex, endIndex);
+
+            // Update pagination info
+            document.getElementById('current-page').textContent = currentPage;
+            document.getElementById('total-pages').textContent = totalPages;
+
+            // Enable/disable buttons
+            const prevBtn = document.getElementById('prev-comments-btn');
+            const nextBtn = document.getElementById('next-comments-btn');
+
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
+
+            prevBtn.style.opacity = currentPage === 1 ? '0.5' : '1';
+            prevBtn.style.cursor = currentPage === 1 ? 'not-allowed' : 'pointer';
+            nextBtn.style.opacity = currentPage === totalPages ? '0.5' : '1';
+            nextBtn.style.cursor = currentPage === totalPages ? 'not-allowed' : 'pointer';
+
+            // Show pagination controls if more than commentsPerPage
+            paginationControls.style.display = allCommentsData.length > commentsPerPage ? 'block' : 'none';
+
+            // Render comments
+            commentsList.innerHTML = commentsToDisplay.map(comment => {
+                const commentDate = comment.approvedAt || comment.submittedAt;
+                const formattedDate = new Date(commentDate).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                return `
+                    <div style="background: #f9f9f9; padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #c89f40; animation: fadeIn 0.3s ease-in;">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+                            <div>
+                                <h5 style="font-size: 16px; font-weight: 600; margin: 0 0 4px 0; color: #333;">${escapeHtml(comment.name)}</h5>
+                                <small style="color: #888; font-size: 13px;">${formattedDate}</small>
+                            </div>
+                        </div>
+                        <p style="margin: 0; color: #555; line-height: 1.6; white-space: pre-wrap; word-wrap: break-word;">${escapeHtml(comment.comment)}</p>
+                    </div>
+                `;
+            }).join('');
+
+            // Scroll to comments section smoothly
+            if (currentPage > 1) {
+                document.getElementById('comments-display').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        };
+
+        // Next page
+        const nextPage = () => {
+            const totalPages = Math.ceil(allCommentsData.length / commentsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayComments();
+            }
+        };
+
+        // Previous page
+        const prevPage = () => {
+            if (currentPage > 1) {
+                currentPage--;
+                displayComments();
+            }
+        };
+
+        // Escape HTML to prevent XSS
+        const escapeHtml = (text) => {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        };
+
+        // Show message
+        const showCommentMessage = (message, type = 'success') => {
+            const messageContainer = document.getElementById('comment-message');
+            const bgColor = type === 'success' ? '#d4edda' : '#f8d7da';
+            const textColor = type === 'success' ? '#155724' : '#721c24';
+            const borderColor = type === 'success' ? '#c3e6cb' : '#f5c6cb';
+
+            messageContainer.innerHTML = `
+                <div style="background: ${bgColor}; color: ${textColor}; border: 1px solid ${borderColor}; padding: 15px 20px; border-radius: 8px; font-size: 14px;">
+                    ${message}
+                </div>
+            `;
+
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                messageContainer.innerHTML = '';
+            }, 5000);
+        };
+
+        // Handle comment form submission
+        const handleCommentSubmit = async (e) => {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('comment-submit-btn');
+            const form = document.getElementById('comment-form');
+
+            // Get form values
+            const name = document.getElementById('comment-name').value.trim();
+            const email = document.getElementById('comment-email').value.trim();
+            const comment = document.getElementById('comment-text').value.trim();
+
+            // Validation
+            if (!name || !email || !comment) {
+                showCommentMessage('Please fill in all fields.', 'error');
+                return;
+            }
+
+            if (!currentBlogId) {
+                showCommentMessage('Blog ID not found. Please refresh the page.', 'error');
+                return;
+            }
+
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/comments`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        blogId: currentBlogId,
+                        name,
+                        email,
+                        comment
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message || 'Failed to submit comment');
+                }
+
+                // Success
+                showCommentMessage('Your comment has been submitted and is awaiting approval.', 'success');
+                form.reset();
+
+            } catch (error) {
+                console.error('Error submitting comment:', error);
+                showCommentMessage(error.message || 'Failed to submit comment. Please try again.', 'error');
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Comment';
+            }
+        };
+
+        // Initialize comments functionality
+        const initComments = () => {
+            const params = new URLSearchParams(window.location.search);
+            const blogId = params.get('id');
+
+            if (blogId) {
+                currentBlogId = blogId;
+                fetchComments(blogId);
+
+                // Attach form submit handler
+                const commentForm = document.getElementById('comment-form');
+                if (commentForm) {
+                    commentForm.addEventListener('submit', handleCommentSubmit);
+                }
+
+                // Attach pagination button handlers
+                const prevBtn = document.getElementById('prev-comments-btn');
+                const nextBtn = document.getElementById('next-comments-btn');
+
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', prevPage);
+                }
+
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', nextPage);
+                }
+            }
+        };
+
+        // Run comments initialization
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initComments);
+        } else {
+            initComments();
+        }
     </script>
+
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive adjustments for mobile */
+        @media (max-width: 768px) {
+            .mxd-comments-section {
+                padding: 30px 15px !important;
+            }
+
+            #comment-form-section {
+                padding: 0 10px !important;
+            }
+
+            #prev-comments-btn,
+            #next-comments-btn {
+                padding: 8px 16px !important;
+                font-size: 13px !important;
+            }
+
+            #page-info {
+                font-size: 13px !important;
+            }
+
+            .btn-text {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #prev-comments-btn,
+            #next-comments-btn {
+                padding: 8px 12px !important;
+            }
+        }
+    </style>
 </body>
 </html>

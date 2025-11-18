@@ -270,17 +270,25 @@ function switchPanel(panel) {
     const navLinks = document.querySelectorAll('#adminNav .nav-link');
     navLinks.forEach(link => link.classList.remove('active'));
 
+    // Hide all panels
+    document.getElementById('listPanel').style.display = 'none';
+    document.getElementById('addPanel').style.display = 'none';
+    document.getElementById('commentsPanel').style.display = 'none';
+
     if (panel === 'list') {
         document.getElementById('listPanel').style.display = 'block';
-        document.getElementById('addPanel').style.display = 'none';
         navLinks[0].classList.add('active');
         loadBlogs();
-    } else {
+    } else if (panel === 'add') {
         // Reset form completely when switching to add panel
         resetForm();
-        document.getElementById('listPanel').style.display = 'none';
         document.getElementById('addPanel').style.display = 'block';
         navLinks[1].classList.add('active');
+    } else if (panel === 'comments') {
+        document.getElementById('commentsPanel').style.display = 'block';
+        navLinks[2].classList.add('active');
+        loadComments();
+        loadCommentStats();
     }
 }
 
@@ -697,3 +705,272 @@ document.getElementById("blogForm").addEventListener("submit", async (e) => {
         showAlert('alertForm', 'Failed to save blog. Please try again.', 'danger');
     }
 });
+
+// ========================================
+// COMMENTS MANAGEMENT
+// ========================================
+
+let currentCommentFilter = 'all';
+let allComments = [];
+
+// Load comment statistics
+async function loadCommentStats() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/comments/admin/stats`, {
+            headers: getAuthHeaders()
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch comment stats');
+        }
+
+        const data = await response.json();
+        const stats = data.stats;
+
+        // Update stats display
+        document.getElementById('commentStats').textContent =
+            `Total: ${stats.total} | Pending: ${stats.pending} | Approved: ${stats.approved} | Rejected: ${stats.rejected}`;
+
+        // Update pending badge in nav
+        const pendingBadge = document.getElementById('pendingCommentsCount');
+        if (stats.pending > 0) {
+            pendingBadge.textContent = stats.pending;
+            pendingBadge.style.display = 'inline';
+        } else {
+            pendingBadge.style.display = 'none';
+        }
+    } catch (error) {
+        console.error('Error loading comment stats:', error);
+    }
+}
+
+// Load all comments
+async function loadComments(filter = 'all') {
+    currentCommentFilter = filter;
+    const container = document.getElementById('commentsListContainer');
+
+    container.innerHTML = `
+        <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading comments...</span>
+            </div>
+        </div>
+    `;
+
+    try {
+        const queryParam = filter !== 'all' ? `?status=${filter}` : '';
+        const response = await fetch(`${API_BASE_URL}/comments/admin/all${queryParam}`, {
+            headers: getAuthHeaders()
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch comments');
+        }
+
+        const data = await response.json();
+        allComments = data.comments || [];
+        displayComments(allComments);
+    } catch (error) {
+        console.error('Error loading comments:', error);
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="bi bi-exclamation-triangle"></i>
+                <h4>Failed to load comments</h4>
+                <p>${error.message}</p>
+            </div>
+        `;
+    }
+}
+
+// Display comments
+function displayComments(comments) {
+    const container = document.getElementById('commentsListContainer');
+
+    if (!comments || comments.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="bi bi-chat-dots"></i>
+                <h4>No comments found</h4>
+                <p>There are no comments matching this filter.</p>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = comments.map(comment => {
+        const statusClass = comment.status === 'approved' ? 'success' :
+                           comment.status === 'rejected' ? 'danger' : 'warning';
+        const statusIcon = comment.status === 'approved' ? 'check-circle' :
+                          comment.status === 'rejected' ? 'x-circle' : 'clock';
+
+        const submittedDate = new Date(comment.submittedAt).toLocaleString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
+        const approvedDate = comment.approvedAt
+            ? new Date(comment.approvedAt).toLocaleString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })
+            : null;
+
+        return `
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h5 class="mb-1" style="color:#c89f40;">${escapeHtml(comment.name)}</h5>
+                            <small class="text-muted">
+                                <i class="bi bi-envelope me-1"></i>${escapeHtml(comment.email)}
+                            </small>
+                        </div>
+                        <span class="badge bg-${statusClass}">
+                            <i class="bi bi-${statusIcon} me-1"></i>${comment.status}
+                        </span>
+                    </div>
+
+                    <div class="mb-2">
+                        <strong style="color:#c89f40;">
+                            <i class="bi bi-file-text me-1"></i>${escapeHtml(comment.blogTitle)}
+                        </strong>
+                    </div>
+
+                    <p class="mb-3" style="line-height: 1.6;">
+                        ${escapeHtml(comment.comment)}
+                    </p>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">
+                            <i class="bi bi-calendar me-1"></i>Submitted: ${submittedDate}
+                            ${approvedDate ? `<br><i class="bi bi-check-circle me-1"></i>Approved: ${approvedDate}` : ''}
+                        </small>
+                        <div class="btn-group btn-group-sm">
+                            ${comment.status !== 'approved' ? `
+                                <button class="btn btn-success" onclick="approveComment('${comment._id}')" title="Approve">
+                                    <i class="bi bi-check-circle"></i> Approve
+                                </button>
+                            ` : ''}
+                            ${comment.status !== 'rejected' ? `
+                                <button class="btn btn-warning me-2" onclick="rejectComment('${comment._id}')" title="Reject">
+                                    <i class="bi bi-x-circle"></i> Reject
+                                </button>
+                            ` : ''}
+                            <button class="btn btn-danger" onclick="deleteComment('${comment._id}')" title="Delete">
+                                <i class="bi bi-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// Escape HTML to prevent XSS
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Filter comments
+function filterComments(filter) {
+    currentCommentFilter = filter;
+
+    // Update active button
+    const buttons = document.querySelectorAll('#commentsPanel .filter-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.closest('.filter-btn').classList.add('active');
+
+    loadComments(filter);
+}
+
+// Approve comment
+async function approveComment(commentId) {
+    if (!confirm('Approve this comment?')) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/comments/admin/${commentId}/approve`, {
+            method: 'PATCH',
+            headers: getAuthHeaders()
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to approve comment');
+        }
+
+        showAlert('alertComments', 'Comment approved successfully!', 'success');
+        loadComments(currentCommentFilter);
+        loadCommentStats();
+    } catch (error) {
+        console.error('Error approving comment:', error);
+        showAlert('alertComments', 'Failed to approve comment. Please try again.', 'danger');
+    }
+}
+
+// Reject comment
+async function rejectComment(commentId) {
+    if (!confirm('Reject this comment?')) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/comments/admin/${commentId}/reject`, {
+            method: 'PATCH',
+            headers: getAuthHeaders()
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to reject comment');
+        }
+
+        showAlert('alertComments', 'Comment rejected successfully!', 'success');
+        loadComments(currentCommentFilter);
+        loadCommentStats();
+    } catch (error) {
+        console.error('Error rejecting comment:', error);
+        showAlert('alertComments', 'Failed to reject comment. Please try again.', 'danger');
+    }
+}
+
+// Delete comment
+async function deleteComment(commentId) {
+    if (!confirm('Are you sure you want to permanently delete this comment? This action cannot be undone.')) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/comments/admin/${commentId}`, {
+            method: 'DELETE',
+            headers: getAuthHeaders()
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to delete comment');
+        }
+
+        showAlert('alertComments', 'Comment deleted successfully!', 'success');
+        loadComments(currentCommentFilter);
+        loadCommentStats();
+    } catch (error) {
+        console.error('Error deleting comment:', error);
+        showAlert('alertComments', 'Failed to delete comment. Please try again.', 'danger');
+    }
+}
+
+// Load comment stats on page load to show pending count in nav
+if (checkAuth()) {
+    loadCommentStats();
+
+    // Refresh comment stats every 30 seconds
+    setInterval(loadCommentStats, 30000);
+}
