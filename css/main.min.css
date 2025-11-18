@@ -4871,7 +4871,8 @@ form textarea:required:valid {
   }
 }
 .bg-accent {
-  background-color: var(--accent);
+  background-color: transparent;
+  border: 1px solid white;
 }
 .bg-additional {
   background-color: var(--additional);
@@ -4886,7 +4887,8 @@ form textarea:required:valid {
   background-color: var(--base-shade);
 }
 .bg-base-opp {
-  background-color: var(--base-opp);
+  background-color: transparent;
+  border: 1px solid white;
 }
 .st-accent {
   border: 1px solid var(--accent);
@@ -8051,7 +8053,6 @@ form textarea:required:valid {
 }
 .mxd-hero-03__headline {
   position: absolute;
-  bottom: 11rem;
   left: 50%;
   right: auto;
   -webkit-transform: translateX(-50%);
@@ -8062,7 +8063,6 @@ form textarea:required:valid {
   max-width: 1920px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  mix-blend-mode: difference;
 }
 .mxd-hero-03__headline svg {
   fill: #fff;
@@ -8071,11 +8071,6 @@ form textarea:required:valid {
 @media only screen and (min-width: 768px) {
   .mxd-hero-03__headline {
     padding: 0 4.5rem;
-  }
-}
-@media only screen and (min-width: 992px) {
-  .mxd-hero-03__headline {
-    bottom: 2rem;
   }
 }
 @media only screen and (min-width: 1600px) {

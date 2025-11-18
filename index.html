@@ -24,7 +24,20 @@
     
   </head>
 
-  <body>
+<body style="background-color: #0A0A1F; 
+    
+    /* The main gradient layer. 
+    It combines deep cyan, dark indigo, and bright magenta 
+    to mimic the lighting effect in the image.
+    */
+    background-image: 
+       radial-gradient(circle at 20% 20%, rgb(30 0 95 / 48%) 0%, rgb(10 10 31 / 77%) 70%), linear-gradient(134deg, rgb(0 240 255 / 87%) 0%, rgb(0 0 0) 50%
+50%
+, rgb(157 78 221) 100%);
+    
+    /* Ensure the background covers the whole area */
+    background-size: cover;
+    background-attachment: fixed;">
 
     <!-- Loader Start -->
     <div id="loader" class="loader">
@@ -166,66 +179,30 @@
               <!-- marquee -->
               <div class="mxd-hero-03__marquee loading__item">
                 <!-- Marquee Start -->
-                <div class="marquee marquee-right--gsap">
-                  <div class="marquee__toright">
-                    <!-- item -->
-                    <div class="marquee__item one-line">
-                      <div class="hero-03-marquee__video">
-                        <video preload="auto" autoplay="autoplay" loop="loop" muted="muted" poster="video/hero/hero-video-02.webp">
-                          <source type="video/mp4" src="video/hero/hero-video-02.mp4">
-                          <source type="video/webm" src="video/hero/hero-video-02.webm">
-                          <source type="video/ogv" src="video/hero/hero-video-02.ogv">
-                        </video>
-                      </div>
-                    </div>
-                    <!-- item -->
-                    <div class="marquee__item one-line">
-                      <div class="hero-03-marquee__image">
-                        <img class="mxd-move" src="img/hero/29_hero-img.webp" alt="Image">
-                      </div>
-                    </div>
-                    <!-- item -->
-                    <div class="marquee__item one-line">
-                      <div class="hero-03-marquee__video">
-                        <video preload="auto" autoplay="autoplay" loop="loop" muted="muted" poster="video/hero/hero-video-01.webp">
-                          <source type="video/mp4" src="video/hero/hero-video-01.mp4">
-                          <source type="video/webm" src="video/hero/hero-video-01.webm">
-                          <source type="video/ogv" src="video/hero/hero-video-01.ogv">
-                        </video>
-                      </div>
-                    </div>
-                    <div class="marquee__item one-line">
-                      <div class="hero-03-marquee__image">
-                        <img class="mxd-move" src="img/hero/30_hero-img.webp" alt="Image">
-                      </div>
-                    </div>
-                    <!-- item -->
-                    <div class="marquee__item one-line">
-                      <div class="hero-03-marquee__image">
-                        <img class="mxd-pulse-small" src="img/hero/24_hero-img.webp" alt="Image">
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
                 <!-- Marquee End -->
               </div>
               <!-- headline -->
               <div class="mxd-hero-03__headline">
-                <p class="hero-03-headline__caption loading__item">Cutting-edge<br>software development<br>company</p>
+                <p class="hero-03-headline__caption loading__item text-center fs-1">Turn Bold Ideas Into Measurable Growth  </p>
                 <h1 class="hero-03-headline__title loading__item">
-                  <span class="hero-03-headline__hidden">Azaya Marketing</span>
-                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80">
-                      <text x="10" y="50" font-size="50" font-family="Funnel Display" font-weight="600" fill="#fff" stroke="#fff" stroke-width="1">
-                        azaya marketing
-                      </text>
-                  </svg>
+                   <p class="hero-03-headline__caption loading__item text-center" style="font-size: 10rem;">Strategy. Creative. Performance. </p>
                 </h1>
+                <div class="mxd-header__controls loading__fade justify-content-around mt-5">
+        <a href="./contact.html" class="btn btn-anim btn-default btn-mobile-icon btn-outline slide-right-up" href="#!" style="Background: rgba(255, 255, 255, 0.15) (100% white opacity, dark backdrop); color: #fff;border: 1px solid #fff;">
+          <span class="btn-caption">Book a call</span>
+          <i class="ph-bold ph-arrow-up-right"></i>
+        </a>
+      </div>
               </div>
+              
             </div>
             <!-- bottom part -->
+             
          
           </div>
         </div>
+         
       </div>
       <!-- Hero Section End -->
 
