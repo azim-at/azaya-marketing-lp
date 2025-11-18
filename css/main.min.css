@@ -341,6 +341,9 @@ a {
   -moz-transition: all var(--_animspeed-medium) var(--_animbezier);
   transition: all var(--_animspeed-medium) var(--_animbezier);
 }
+p {
+  color: #fff!important;
+}
 img {
   display: block;
   width: 100%;
@@ -2930,8 +2933,8 @@ p.t-semibold {
 .tag-outline {
   background-color: transparent;
   border-style: solid;
-  border-color: var(--st-bright);
-  color: var(--t-bright);
+  border-color: #fff;
+  color: #fff;
 }
 .tag-link-outline {
   -webkit-transition: all var(--_animspeed-medium) var(--_animbezier);
@@ -4881,7 +4884,8 @@ form textarea:required:valid {
   background-color: var(--base);
 }
 .bg-base-tint {
-  background-color: var(--base-tint);
+  background-color: transparent;
+  border: 1px solid #fff;
 }
 .bg-base-shade {
   background-color: var(--base-shade);
@@ -16161,7 +16165,7 @@ form textarea:required:valid {
 .mxd-services-cards__title p {
   font: normal var(--fw-medium) 3.6rem/1.1 var(--_font-accent);
   letter-spacing: -0.06rem;
-  color: var(--t-bright);
+  color: #fff;
 }
 .mxd-services-cards__title p.opposite {
   color: var(--t-opp-bright);
