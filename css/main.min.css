@@ -16,11 +16,11 @@
   --_animbezier: cubic-bezier(0.23, 0.65, 0.74, 1.09);
   --base--light: #faf7f6;
   --base-rgb--light: 250, 247, 246;
-  --base-tint--light: #FFF8E7;
+  --base-tint--light: transparent;
   --base-shade--light: #e0dddb;
-  --base-opp--light: #C6A94D;
+  --base-opp--light: #1e1e1e8a;
   --base-opp-tint--light: #1c1c1c;
-  --accent--light: #E0C97A;
+  --accent--light: transparent;
   --accent-rgb--light: 159, 139, 231;
   --additional--light: #E0C97A;
   --additional-rgb--light: 221, 241, 96;
@@ -35,22 +35,13 @@
   --fw-bold--light: 800;
   --fw-regular-opp--light: 300;
   --fw-medium-opp--light: 500;
-  --t-bright--light: #645317;
+  --t-bright--light: #fff;
   --t-medium--light: #303030;
-  --t-muted--light: #585858;
+  --t-muted--light: #fff;
   --t-muted-extra--light: rgb(198, 169, 77);
   --t-opp-bright--light: #ffffff;
   --t-opp-medium--light: #acacac;
   --t-opp-muted--light: #838383;
-  --bg-demo-screen-01--light: url(../img/demo/screens/01.webp);
-  --bg-demo-screen-02--light: url(../img/demo/screens/02.webp);
-  --bg-demo-screen-03--light: url(../img/demo/screens/03.webp);
-  --bg-demo-screen-04--light: url(../img/demo/screens/04.webp);
-  --bg-demo-screen-05--light: url(../img/demo/screens/05.webp);
-  --bg-demo-screen-06--light: url(../img/demo/screens/06.webp);
-  --bg-demo-screen-07--light: url(../img/demo/screens/07.webp);
-  --bg-demo-screen-08--light: url(../img/demo/screens/08.webp);
-  --bg-demo-screen-09--light: url(../img/demo/screens/09.webp);
   --pt-base: #ffffff;
   --pt-t-light-bright: #fff;
   --pt-st-light-bright: #ffffff;
@@ -323,7 +314,16 @@ body {
   overflow-x: hidden!important;
   font: normal 400 var(--_size) / 1.6 var(--_font-default);
   text-rendering: optimizeLegibility;
-  background-color: var(--base);
+   background: radial-gradient(circle at -30% -10%, 
+    #1393A4 1%, 
+    #0F6A7A 0%, 
+    #0A0E27 51%, 
+    #311B4F 87%, 
+    #6932A8 102%, 
+    #8A3BCB 53%
+  );
+  background-attachment: fixed;
+  background-size: cover;
   color: var(--t-medium);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2592,8 +2592,7 @@ p.t-semibold {
 }
 .btn-outline {
   background-color: transparent;
-  border-style: solid;
-  border-color: var(--st-bright);
+ border: 1px solid #fff;;
   color: var(--t-bright);
 }
 .btn-outline.opposite {
@@ -2607,20 +2606,17 @@ p.t-semibold {
 .btn-accent {
   background-color: var(--accent);
   border-style: solid;
-  border-color: var(--accent);
+  border-color: solid 1px #fff;
   color: var(--t-opp-bright);
 }
 .btn-additional {
-  background-color: var(--additional);
-  border-style: solid;
-  border-color: var(--additional);
+  background-color: transparent;
+  border: 1px solid #ffffff20;;
   color: var(--t-bright);
 }
 .btn-opposite {
-  background-color: var(--base-opp);
-  border-style: solid;
-  border-color: var(--base-opp);
-  color: var(--t-opp-bright);
+  border: 1px solid #ffffff20;;
+  color: #fff;
 }
 .btn-base {
   background-color: var(--base);
@@ -4875,7 +4871,7 @@ form textarea:required:valid {
 }
 .bg-accent {
   background-color: transparent;
-  border: 1px solid white;
+  border: 1px solid #ffffff20;;
 }
 .bg-additional {
   background-color: var(--additional);
@@ -4885,14 +4881,14 @@ form textarea:required:valid {
 }
 .bg-base-tint {
   background-color: transparent;
-  border: 1px solid #fff;
+  border: 1px solid #ffffff20;;
 }
 .bg-base-shade {
   background-color: var(--base-shade);
 }
 .bg-base-opp {
   background-color: transparent;
-  border: 1px solid white;
+  border: 1px solid #ffffff20;;
 }
 .st-accent {
   border: 1px solid var(--accent);
@@ -5145,7 +5141,6 @@ form textarea:required:valid {
   inset: 0;
   -moz-border-radius: var(--_radius-l);
   border-radius: var(--_radius-l);
-  background-color: #C6A94D;
   z-index: 1;
 }
 .nav_hamburger_bg {
@@ -5827,7 +5822,7 @@ form textarea:required:valid {
 }
 @media only screen and (min-width: 768px) {
   .mxd-promo__caption {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 }
 @media only screen and (min-width: 1400px) {
@@ -6146,7 +6141,7 @@ form textarea:required:valid {
   gap: 3rem;
   width: 100%;
   padding: 3rem;
-  background-color: var(--base-tint);
+  background-color: #ffffff20;
   -moz-border-radius: var(--_radius-m);
   border-radius: var(--_radius-m);
 }
@@ -8087,11 +8082,37 @@ form textarea:required:valid {
   color: #fff;
   margin-bottom: 5.2rem;
 }
+
+.heading-title {
+  font-size: 10rem;
+  margin-bottom: 5.2rem;
+  font-weight: 500;
+  line-height: 120px;
+}
+
+@media screen and (max-width: 768px) {
+    .heading-title { 
+    font-size: 7rem;
+    line-height: 80px;
+  }
+  .btn-anim .btn-caption {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+    .heading-title { 
+    font-size: 5rem;
+    line-height: 60px;
+  }
+}
+
 @media only screen and (min-width: 768px) {
   .hero-03-headline__caption {
     font-size: 4.4rem;
     margin-bottom: 4.7rem;
   }
+
 }
 @media only screen and (min-width: 992px) {
   .hero-03-headline__caption {
@@ -14677,6 +14698,8 @@ form textarea:required:valid {
   -webkit-transition: opacity var(--_animspeed-medium);
   -moz-transition: opacity var(--_animspeed-medium);
   transition: opacity var(--_animspeed-medium);
+  background: #ffffff20;
+  border-radius: 30px;
 }
 .mxd-pinned__img-item.is-active {
   opacity: 1;
@@ -14762,6 +14785,8 @@ form textarea:required:valid {
   -moz-box-align: start;
   -ms-flex-align: start;
   align-items: flex-start;
+  padding: 3rem;
+  border-radius: 30px;
 }
 @media only screen and (min-width: 1200px) {
   .mxd-pinned__text-item {
@@ -17191,7 +17216,7 @@ form textarea:required:valid {
 }
 @media only screen and (min-width: 1200px) {
   .marquee__text {
-    font-size: 12rem;
+    font-size: 6rem;
   }
 }
 @media only screen and (min-width: 1400px) {
@@ -18574,7 +18599,9 @@ form textarea:required:valid {
   gap: 2.6rem;
   width: 100%;
   height: 100%;
-  padding: 3rem;
+  padding: 1rem;
+  border: 1px solid #ffffff2e;;
+  border-radius: 30px;
 }
 .mxd-tech-stack-cards__inner::before {
   content: "";
@@ -18952,7 +18979,7 @@ form textarea:required:valid {
   position: relative;
   width: 100%;
   height: 2px;
-  background-color: var(--st-bright);
+  background-color: #1e1e1e8a;
 }
 .mxd-accordion__content {
   position: relative;
