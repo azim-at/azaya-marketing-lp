@@ -1921,7 +1921,7 @@ p.t-semibold {
 }
 @media only screen and (min-width: 768px) {
   .mxd-manifest {
-    font-size: 4.4rem;
+    font-size: 3.4rem;
   }
 }
 @media only screen and (min-width: 1600px) {
@@ -6791,19 +6791,19 @@ form textarea:required:valid {
 }
 @media only screen and (min-width: 768px) {
   .hero-00-manifest .mxd-manifest {
-    font-size: 3rem;
+    font-size: 3.4rem;
     max-width: 780px;
   }
 }
 @media only screen and (min-width: 1200px) {
   .hero-00-manifest .mxd-manifest {
-    font-size: 3.8rem;
+    font-size: 3.4rem;
     max-width: 1000px;
   }
 }
 @media only screen and (min-width: 1600px) {
   .hero-00-manifest .mxd-manifest {
-    font-size: 4.4rem;
+    font-size: 3.4rem;
     max-width: 1150px;
   }
 }
@@ -7668,7 +7668,7 @@ form textarea:required:valid {
     gap: 4rem;
   }
   .mxd-hero-02-marquee .marquee__text {
-    font-size: 14rem;
+    font-size: 10rem;
   }
   .mxd-hero-02-marquee .marquee__image {
     width: 9.1rem;
