@@ -518,7 +518,7 @@ html.lenis body {
   padding-bottom: 11.3rem;
 }
 .mxd-section.padding-pinned-img-pre-mtext {
-  padding-bottom: 10.4rem;
+  padding-bottom: 5.4rem;
 }
 .mxd-section.padding-mtext {
   padding-bottom: 12.6rem;
@@ -7595,7 +7595,7 @@ form textarea:required:valid {
 }
 .mxd-hero-02-static__top {
   position: relative;
-  padding-top: 7.6rem;
+  padding-top: 3.6rem;
 }
 @media only screen and (min-width: 768px) {
   .mxd-hero-02-static__top {
