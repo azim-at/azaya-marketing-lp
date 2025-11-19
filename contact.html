@@ -128,10 +128,16 @@
     <div id="loader" class="loader">
       <div class="loader__wrapper">
         <div class="loader__content">
+          <div class="loader__spinner">
+            <div class="loader__spinner-circle"></div>
+            <div class="loader__spinner-circle"></div>
+            <div class="loader__spinner-circle"></div>
+          </div>
           <div class="loader__count">
             <span class="count__text">0</span>
             <span class="count__percent">%</span>
           </div>
+          <div class="loader__text">Loading</div>
         </div>
       </div>
     </div>
@@ -431,17 +437,11 @@
       <!-- Section - Text Block End -->
  
     <!-- Map integration for Azaya marketing Starts -->
-      <section class="mxd-section padding-default">
-        <div class="mxd-container grid-container">
+      <section class="mxd-section" style="padding-top: 4rem; padding-bottom: 8rem;">
+        <div class="mxd-container">
           <div class="mxd-block">
-            <div class="container-fluid px-0">
-              <div class="row gx-0">
-                <div class="col-12 mxd-grid-item">
-                  <div class="ratio ratio-21x9">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d45971.745041597744!2d55.17915671757414!3d25.15689944081647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6b000a9797df%3A0xf174f9e3356a8d5d!2sAzaya%20LLC!5e0!3m2!1sen!2sae!4v1762407675683!5m2!1sen!2sae" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                  </div>
-                </div>
-              </div>
+            <div class="map-wrapper">
+              <iframe class="contact-map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d57781.9589350171!2d55.1791567!3d25.1568994!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6b000a9797df%3A0xf174f9e3356a8d5d!2sAzaya%20LLC!5e0!3m2!1sen!2sae!4v1763548279953!5m2!1sen!2sae" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
         </div>
@@ -463,22 +463,22 @@
             <div class="footer-blocks__nav">
               <ul class="footer-nav">
                 <li class="footer-nav__item anim-uni-in-up">
-                  <a href="./index.html" class="footer-nav__link btn-anim">
+                  <a href="./index.html" class="footer-nav__link">
                     <span class="btn-caption">Home</span>
                   </a>
                 </li>
                 <li class="footer-nav__item anim-uni-in-up">
-                  <a href="#!" class="footer-nav__link btn-anim">
+                  <a href="#!" class="footer-nav__link">
                     <span class="btn-caption">About us</span>
                   </a>
                 </li>
                 <li class="footer-nav__item anim-uni-in-up">
-                  <a href="#!" class="footer-nav__link btn-anim">
+                  <a href="#!" class="footer-nav__link">
                     <span class="btn-caption">Blogs</span>
                   </a>
                 </li>
                 <li class="footer-nav__item anim-uni-in-up">
-                  <a href="./contact.html" class="footer-nav__link btn-anim">
+                  <a href="./contact.html" class="footer-nav__link">
                     <span class="btn-caption">Contact</span>
                   </a>
                 </li>
@@ -612,14 +612,46 @@
         onLeaveBack: () => gsap.to(toTop, { autoAlpha: 0, y: 50, duration: 0.4, ease: "power2.in" }),
       });
 
-      // Scroll smoothly to top on click
+      // Enhanced mobile and desktop scroll functionality
+      let touchStartY = 0;
+      let isTouchDevice = false;
+
+      // Detect touch start
+      toTop.addEventListener("touchstart", (e) => {
+        isTouchDevice = true;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      // Handle touch end for mobile
+      toTop.addEventListener("touchend", (e) => {
+        const touchEndY = e.changedTouches[0].clientY;
+        const touchDistance = Math.abs(touchEndY - touchStartY);
+
+        // Only trigger if it's a tap (not a scroll/swipe)
+        if (touchDistance < 10) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          gsap.to(window, {
+            scrollTo: { y: 0, autoKill: true },
+            duration: 1.3,
+            ease: "power4.inOut",
+          });
+        }
+      }, { passive: false });
+
+      // Handle click for desktop (only if not a touch device)
       toTop.addEventListener("click", (e) => {
-        e.preventDefault();
-        gsap.to(window, {
-          scrollTo: { y: 0, autoKill: true },
-          duration: 1.3,
-          ease: "power4.inOut",
-        });
+        if (!isTouchDevice) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          gsap.to(window, {
+            scrollTo: { y: 0, autoKill: true },
+            duration: 1.3,
+            ease: "power4.inOut",
+          });
+        }
       });
     }
 

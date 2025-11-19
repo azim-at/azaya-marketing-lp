@@ -20,6 +20,7 @@
     <link rel="stylesheet" type="text/css" href="css/loaders/loader.min.css">
     <link rel="stylesheet" type="text/css" href="css/plugins.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.min.css">
+    <link rel="stylesheet" type="text/css" href="css/hero-animations.css">
     <!-- Template Styles End -->
 
 
@@ -31,10 +32,16 @@
     <div id="loader" class="loader">
       <div class="loader__wrapper">
         <div class="loader__content">
+          <div class="loader__spinner">
+            <div class="loader__spinner-circle"></div>
+            <div class="loader__spinner-circle"></div>
+            <div class="loader__spinner-circle"></div>
+          </div>
           <div class="loader__count">
             <span class="count__text">0</span>
             <span class="count__percent">%</span>
           </div>
+          <div class="loader__text">Loading</div>
         </div>
       </div>
     </div>
@@ -147,23 +154,25 @@
     <main id="mxd-page-content" class="mxd-page-content">
 
       <!-- Hero Section Start -->
-      <div class="mxd-section mxd-hero-section padding-grid-pre-mtext">
+      <div class="mxd-section mxd-hero-section padding-grid-pre-mtext" id="hero-section">
+        <!-- Floating Particles -->
+        <div class="hero-particle hero-particle-1" data-speed="0.6"></div>
+        <div class="hero-particle hero-particle-2" data-speed="0.4"></div>
+        <div class="hero-particle hero-particle-3" data-speed="0.5"></div>
+        <div class="hero-particle hero-particle-4" data-speed="0.45"></div>
+        <div class="hero-particle hero-particle-5" data-speed="0.3"></div>
+        <div class="hero-particle hero-particle-6" data-speed="0.55"></div>
+
         <div class="mxd-hero-03">
           <div class="mxd-hero-03__wrap loading-wrap">
             <!-- top part -->
             <div class="mxd-hero-03__top">
-              <!-- marquee -->
-              <div class="mxd-hero-03__marquee loading__item">
-                <!-- Marquee Start -->
-                
-                <!-- Marquee End -->
-              </div>
               <!-- headline -->
               <div class="mxd-hero-03__headline">
                 <p class="hero-03-headline__caption loading__item text-center fs-1"><span style="background: linear-gradient(90deg,#36CFC9,#5B5BEA); -webkit-background-clip:text; color: transparent;">Turn Bold Ideas Into Measurable Growth 
 </span></p>
                 <h1 class="hero-03-headline__title loading__item">
-                   <p class="heading-title text-center">Strategy. Creative. <br> Performance. </p>
+                   <p class="heading-title text-center">Strategy. Creative. Performance. </p>
                 </h1>
                  <div class="mxd-manifest__controls anim-uni-in-up">
                         <div class="mxd-btngroup centered">
@@ -353,16 +362,12 @@ and traditional marketing channels.</p>
 </span>&<br> Design</p>
                       </div>
                       <div class="mxd-services-cards__info">
-                        <p class="t-opposite anim-uni-in-up mb-3"><span style="background: linear-gradient(90deg,#36CFC9,#5B5BEA); -webkit-background-clip:text; color: transparent;">Brand Identity & Design</span></p>
                         <div class="mxd-services-cards__tags">
                           <span class="tag tag-default tag-outline-opposite anim-uni-in-up">Brand Identification & Positioning</span>
                           <span class="tag tag-default tag-outline-opposite anim-uni-in-up">Brand Guidelines</span>
                           <span class="tag tag-default tag-outline-opposite anim-uni-in-up">Visual Identity & Graphic Design</span>
                           <span class="tag tag-default tag-outline-opposite anim-uni-in-up">Packaging & Print Design</span>
                           <span class="tag tag-default tag-outline-opposite anim-uni-in-up">Infographics</span>
-                        </div>
-                        <p class="t-opposite anim-uni-in-up mb-3"><span style="background: linear-gradient(90deg,#36CFC9,#5B5BEA); -webkit-background-clip:text; color: transparent;">Digital & Interactive Design</span></p>
-                        <div class="mxd-services-cards__tags">
                           <span class="tag tag-default tag-outline-opposite anim-uni-in-up">UI/UX</span>
                           <span class="tag tag-default tag-outline-opposite anim-uni-in-up">Video Marketing & Motion Graphics</span>
                           <span class="tag tag-default tag-outline-opposite anim-uni-in-up">Illustrations & Infographics</span>
@@ -1615,22 +1620,22 @@ impression.</p>
             <div class="footer-blocks__nav">
               <ul class="footer-nav">
                 <li class="footer-nav__item anim-uni-in-up">
-                  <a href="./index.html" class="footer-nav__link btn-anim">
+                  <a href="./index.html" class="footer-nav__link">
                     <span class="btn-caption">Home</span>
                   </a>
                 </li>
                 <li class="footer-nav__item anim-uni-in-up">
-                  <a href="#!" class="footer-nav__link btn-anim">
+                  <a href="#!" class="footer-nav__link">
                     <span class="btn-caption">About us</span>
                   </a>
                 </li>
                 <li class="footer-nav__item anim-uni-in-up">
-                  <a href="#!" class="footer-nav__link btn-anim">
+                  <a href="#!" class="footer-nav__link">
                     <span class="btn-caption">Blogs</span>
                   </a>
                 </li>
                 <li class="footer-nav__item anim-uni-in-up">
-                  <a href="./contact.html" class="footer-nav__link btn-anim">
+                  <a href="./contact.html" class="footer-nav__link">
                     <span class="btn-caption">Contact</span>
                   </a>
                 </li>
@@ -1744,6 +1749,7 @@ impression.</p>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    <script src="js/hero-parallax.js"></script>
     <!-- counters -->
     <script>
       const statsCounter1 = new countUp.CountUp("stats-counter-1", 50, optionsPlus);
@@ -1774,31 +1780,47 @@ impression.</p>
         onLeaveBack: () => gsap.to(toTop, { autoAlpha: 0, y: 50, duration: 0.4, ease: "power2.in" }),
       });
 
-      // Scroll smoothly to top on click - with better mobile support
-      toTop.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+      // Enhanced mobile and desktop scroll functionality
+      let touchStartY = 0;
+      let isTouchDevice = false;
 
-        // GSAP smooth scroll
-        gsap.to(window, {
-          scrollTo: { y: 0, autoKill: true },
-          duration: 1.3,
-          ease: "power4.inOut",
-        });
-      });
+      // Detect touch start
+      toTop.addEventListener("touchstart", (e) => {
+        isTouchDevice = true;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
 
-      // Add touch support for mobile
+      // Handle touch end for mobile
       toTop.addEventListener("touchend", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+        const touchEndY = e.changedTouches[0].clientY;
+        const touchDistance = Math.abs(touchEndY - touchStartY);
 
-        // GSAP smooth scroll
-        gsap.to(window, {
-          scrollTo: { y: 0, autoKill: true },
-          duration: 1.3,
-          ease: "power4.inOut",
-        });
+        // Only trigger if it's a tap (not a scroll/swipe)
+        if (touchDistance < 10) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          gsap.to(window, {
+            scrollTo: { y: 0, autoKill: true },
+            duration: 1.3,
+            ease: "power4.inOut",
+          });
+        }
       }, { passive: false });
+
+      // Handle click for desktop (only if not a touch device)
+      toTop.addEventListener("click", (e) => {
+        if (!isTouchDevice) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          gsap.to(window, {
+            scrollTo: { y: 0, autoKill: true },
+            duration: 1.3,
+            ease: "power4.inOut",
+          });
+        }
+      });
     }
 
     // Optional: parallax scrolling for elements with data-speed
