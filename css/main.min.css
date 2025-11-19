@@ -22,7 +22,7 @@
   --base-opp-tint--light: #1c1c1c;
   --accent--light: transparent;
   --accent-rgb--light: 159, 139, 231;
-  --additional--light: #E0C97A;
+  --additional--light: #fff;
   --additional-rgb--light: 221, 241, 96;
   --neutral-transparent--light: rgba(255, 255, 255, 0.3);
   --st-bright--light: #161616;
@@ -36,9 +36,9 @@
   --fw-regular-opp--light: 300;
   --fw-medium-opp--light: 500;
   --t-bright--light: #fff;
-  --t-medium--light: #303030;
+  --t-medium--light: #fff;
   --t-muted--light: #fff;
-  --t-muted-extra--light: rgb(198, 169, 77);
+  --t-muted-extra--light: #fff;
   --t-opp-bright--light: #ffffff;
   --t-opp-medium--light: #acacac;
   --t-opp-muted--light: #838383;
@@ -271,6 +271,11 @@ input,
 select,
 textarea {
   -webkit-tap-highlight-color: transparent;
+}
+
+
+strong {
+  font-weight: 600;
 }
 ::-moz-selection {
   background-color: var(--accent);
@@ -1630,7 +1635,7 @@ h4 {
 }
 @media only screen and (min-width: 1200px) {
   h4 {
-    font-size: 4.4rem;
+    font-size: 3rem;
   }
 }
 h5 {
@@ -14855,7 +14860,7 @@ form textarea:required:valid {
   }
 }
 .mxd-pinned__title {
-  margin-bottom: 3.4rem;
+  margin-bottom: 2.4rem;
 }
 .mxd-pinned__title.centered-mobile {
   text-align: center;
@@ -14878,7 +14883,7 @@ form textarea:required:valid {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-bottom: 3.2rem;
+  margin-bottom: 2.2rem;
 }
 .mxd-pinned__tags.centered-mobile {
   -webkit-box-pack: center;
@@ -17176,8 +17181,8 @@ form textarea:required:valid {
 }
 @media only screen and (min-width: 768px) {
   .marquee__image {
-    width: 8.1rem;
-    height: 8.1rem;
+    width: 5.1rem;
+    height: 5.1rem;
   }
   .marquee__image.image-xl {
     width: 14rem;
@@ -17198,7 +17203,7 @@ form textarea:required:valid {
   object-fit: cover;
 }
 .marquee__text {
-  font: normal var(--fw-regular) 6rem/1.2 var(--_font-accent);
+  font: normal var(--fw-regular) 4rem/1.2 var(--_font-accent);
   letter-spacing: -0.06rem;
 }
 .marquee__text.text-xl {
@@ -17216,7 +17221,7 @@ form textarea:required:valid {
 }
 @media only screen and (min-width: 1200px) {
   .marquee__text {
-    font-size: 6rem;
+    font-size: 4rem;
   }
 }
 @media only screen and (min-width: 1400px) {
@@ -19915,4 +19920,194 @@ form textarea:required:valid {
 .google-maps {
   border-color: #E0C97A;
   border-radius: 2px;
+}
+
+/* Fix for pinned section - ensure proper initial state */
+@media only screen and (min-width: 1200px) {
+  .mxd-pinned__text-item {
+    opacity: 0 !important;
+    pointer-events: none;
+    max-width: 580px;
+    gap: 0.8rem;
+    padding: 1.5rem 2.5rem;
+  }
+  .mxd-pinned__text-item.is-active {
+    opacity: 1 !important;
+    pointer-events: auto;
+  }
+
+  /* Optimize text item content spacing */
+  .mxd-pinned__text-item h4 {
+    margin-bottom: 1.2rem;
+    line-height: 1.25;
+    font-size: 2.7rem;
+  }
+
+  .mxd-pinned__text-item p {
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-size: 1.7rem;
+  }
+
+  .mxd-pinned__text-item .mxd-pinned__tags {
+    margin-bottom: 1.4rem;
+    gap: 0.8rem;
+  }
+
+  .mxd-pinned__text-item .tag {
+    font-size: 1.2rem;
+    padding: 0.4rem 1rem;
+  }
+
+  .mxd-pinned__text-item ol {
+    margin-top: 0.8rem;
+    padding-left: 0;
+    list-style: none;
+    line-height: 1.6;
+  }
+
+  .mxd-pinned__text-item ol li {
+    font-size: 1.7rem;
+    margin-bottom: 0.4rem;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .mxd-pinned__text-item {
+    max-width: 640px;
+    gap: 1rem;
+    padding: 2rem 3rem;
+  }
+
+  .mxd-pinned__text-item h4 {
+    margin-bottom: 1.5rem;
+    font-size: 4rem;
+  }
+
+  .mxd-pinned__text-item p {
+    font-size: 3rem;
+    line-height: 1.55;
+  }
+
+  .mxd-pinned__text-item .mxd-pinned__tags {
+    margin-bottom: 1.6rem;
+  }
+
+  .mxd-pinned__text-item .tag {
+    font-size: 2rem;
+    padding: 0.5rem 1.2rem;
+  }
+
+  .mxd-pinned__text-item ol li {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* FAQ Show More/Less functionality */
+.faq-hidden {
+  display: none;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.4s ease-in-out;
+}
+
+.faq-hidden.faq-visible {
+  display: block;
+  opacity: 1;
+  max-height: 1000px;
+  animation: fadeInUp 0.5s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.faq-show-more-wrapper {
+  margin-top: 3rem;
+}
+
+.faq-show-more-btn {
+  min-width: 200px;
+}
+
+/* Scroll to Top Button Fixes */
+.btn-to-top {
+  z-index: 9999 !important;
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: auto !important;
+}
+
+/* Mobile specific fixes */
+@media only screen and (max-width: 767px) {
+  .btn-to-top {
+    right: 2rem !important;
+    bottom: 2rem !important;
+    width: 5rem !important;
+    height: 5rem !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-to-top i {
+    font-size: 2.4rem !important;
+  }
+
+  /* Ensure button is always clickable on mobile */
+  .btn-to-top:active {
+    transform: scale(0.95);
+    background-color: rgba(255, 255, 255, 0.15) !important;
+  }
+}
+
+/* Tablet fixes */
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
+  .btn-to-top {
+    right: 3rem !important;
+    bottom: 3rem !important;
+  }
+}
+
+/* Hamburger Menu Background */
+.mxd-menu__base {
+  background: radial-gradient(circle at 70% 30%,
+    #1393A4 1%,
+    #0F6A7A 0%,
+    #0A0E27 51%,
+    #311B4F 87%,
+    #6932A8 102%,
+    #8A3BCB 53%
+  );
+  background-size: cover;
+  background-position: center;
+}
+
+/* Add subtle overlay for better text readability */
+.mxd-menu__base::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 14, 39, 0.3);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* Ensure menu content is above overlay */
+.mxd-menu__contain {
+  position: relative;
+  z-index: 2;
 }

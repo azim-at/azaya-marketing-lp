@@ -32,6 +32,92 @@
       .anim-uni-in-up {
         color: #fff!important;
       }
+
+      /* Contact Form Notification Popup */
+      .contact-notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(30, 30, 30, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 16px 24px;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        z-index: 10000;
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        max-width: 400px;
+        min-width: 280px;
+      }
+
+      .contact-notification.show {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      .notification-content {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .contact-notification i {
+        font-size: 24px;
+        flex-shrink: 0;
+      }
+
+      .contact-notification.loading i {
+        color: #36CFC9;
+        animation: spin 1s linear infinite;
+      }
+
+      .contact-notification.success {
+        background: rgba(40, 167, 69, 0.15);
+        border-color: rgba(40, 167, 69, 0.4);
+      }
+
+      .contact-notification.success i {
+        color: #28a745;
+      }
+
+      .contact-notification.error {
+        background: rgba(220, 53, 69, 0.15);
+        border-color: rgba(220, 53, 69, 0.4);
+      }
+
+      .contact-notification.error i {
+        color: #dc3545;
+      }
+
+      .notification-message {
+        color: #fff;
+        font-size: 15px;
+        line-height: 1.5;
+        font-weight: 500;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Mobile responsive */
+      @media (max-width: 768px) {
+        .contact-notification {
+          top: 10px;
+          right: 10px;
+          left: 10px;
+          max-width: none;
+          min-width: auto;
+        }
+      }
     </style>
     
   </head>
@@ -50,6 +136,87 @@
       </div>
     </div>
     <!-- Loader End -->
+
+ <!-- Menu & Menu Hamburger Start -->
+    <nav class="mxd-nav__wrap" data-lenis-prevent="">
+
+      <!-- Hamburger Start -->
+      <div class="mxd-nav__contain loading__fade">
+        <a href="#0" class="mxd-nav__hamburger">
+          <!-- flip element -->
+          <div class="hamburger__base"></div>
+          <div class="hamburger__line"></div>
+          <div class="hamburger__line"></div>
+        </a>
+      </div>
+      <!-- Hamburger End -->
+
+      <!-- Main Navigation Start -->
+      <div class="mxd-menu__wrapper">
+        <!-- background active layer -->
+        <div class="mxd-menu__base"></div>
+        <!-- menu container -->
+        <div class="mxd-menu__contain">
+          <div class="mxd-menu__inner">
+            <!-- left side -->
+            <div class="mxd-menu__left">
+              <p class="mxd-menu__caption menu-fade-in">Azaya Marketing</p>
+              <div class="main-menu">
+                <nav class="main-menu__content">
+                  <ul id="main-menu" class="main-menu__accordion">
+                    <li class="main-menu__item">
+                      <div class="main-menu__toggle">
+                        <span class="main-menu__link btn btn-anim">
+                           <a class="main-menu__link btn btn-anim" href="./index.html">
+                          <span class="btn-caption">Home</span>
+                          </a>
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" version="1.1" viewBox="0 0 20 20">
+                          <path d="M19.6,9.6h-3.9c-.4,0-1.8-.2-1.8-.2-.6,0-1.1-.2-1.6-.6-.5-.3-.9-.8-1.2-1.2-.3-.4-.4-.9-.5-1.4,0,0,0-1.1-.2-1.5V.4c0-.2-.2-.4-.4-.4s-.4.2-.4.4v4.4c0,.4-.2,1.5-.2,1.5,0,.5-.2,1-.5,1.4-.3.5-.7.9-1.2,1.2s-1,.5-1.6.6c0,0-1.2,0-1.7.2H.4c-.2,0-.4.2-.4.4s.2.4.4.4h4.1c.4,0,1.7.2,1.7.2.6,0,1.1.2,1.6.6.4.3.8.7,1.1,1.1.3.5.5,1,.6,1.6,0,0,0,1.3.2,1.7v4.1c0,.2.2.4.4.4s.4-.2.4-.4v-4.1c0-.4.2-1.7.2-1.7,0-.6.2-1.1.6-1.6.3-.4.7-.8,1.1-1.1.5-.3,1-.5,1.6-.6,0,0,1.3,0,1.8-.2h3.9c.2,0,.4-.2.4-.4s-.2-.4-.4-.4h0Z"/>
+                        </svg>
+                      </div>
+                    </li>
+                    <li class="main-menu__item">
+                      <div class="main-menu__toggle">
+                        <span class="main-menu__link btn btn-anim">
+                          <a class="main-menu__link btn btn-anim" href="#!">
+                          <span class="btn-caption">About us</span>
+                          </a>
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" version="1.1" viewBox="0 0 20 20">
+                          <path d="M19.6,9.6h-3.9c-.4,0-1.8-.2-1.8-.2-.6,0-1.1-.2-1.6-.6-.5-.3-.9-.8-1.2-1.2-.3-.4-.4-.9-.5-1.4,0,0,0-1.1-.2-1.5V.4c0-.2-.2-.4-.4-.4s-.4.2-.4.4v4.4c0,.4-.2,1.5-.2,1.5,0,.5-.2,1-.5,1.4-.3.5-.7.9-1.2,1.2s-1,.5-1.6.6c0,0-1.2,0-1.7.2H.4c-.2,0-.4.2-.4.4s.2.4.4.4h4.1c.4,0,1.7.2,1.7.2.6,0,1.1.2,1.6.6.4.3.8.7,1.1,1.1.3.5.5,1,.6,1.6,0,0,0,1.3.2,1.7v4.1c0,.2.2.4.4.4s.4-.2.4-.4v-4.1c0-.4.2-1.7.2-1.7,0-.6.2-1.1.6-1.6.3-.4.7-.8,1.1-1.1.5-.3,1-.5,1.6-.6,0,0,1.3,0,1.8-.2h3.9c.2,0,.4-.2.4-.4s-.2-.4-.4-.4h0Z"/>
+                        </svg>
+                      </div>
+                    </li>
+                    <li class="main-menu__item">
+                      <div class="main-menu__toggle">
+                        <span class="main-menu__link btn btn-anim">
+                           <a class="main-menu__link btn btn-anim" href="#!">
+                          <span class="btn-caption">Blog</span>
+                          </a>
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" version="1.1" viewBox="0 0 20 20">
+                          <path d="M19.6,9.6h-3.9c-.4,0-1.8-.2-1.8-.2-.6,0-1.1-.2-1.6-.6-.5-.3-.9-.8-1.2-1.2-.3-.4-.4-.9-.5-1.4,0,0,0-1.1-.2-1.5V.4c0-.2-.2-.4-.4-.4s-.4.2-.4.4v4.4c0,.4-.2,1.5-.2,1.5,0,.5-.2,1-.5,1.4-.3.5-.7.9-1.2,1.2s-1,.5-1.6.6c0,0-1.2,0-1.7.2H.4c-.2,0-.4.2-.4.4s.2.4.4.4h4.1c.4,0,1.7.2,1.7.2.6,0,1.1.2,1.6.6.4.3.8.7,1.1,1.1.3.5.5,1,.6,1.6,0,0,0,1.3.2,1.7v4.1c0,.2.2.4.4.4s.4-.2.4-.4v-4.1c0-.4.2-1.7.2-1.7,0-.6.2-1.1.6-1.6.3-.4.7-.8,1.1-1.1.5-.3,1-.5,1.6-.6,0,0,1.3,0,1.8-.2h3.9c.2,0,.4-.2.4-.4s-.2-.4-.4-.4h0Z"/>
+                        </svg>
+                      </div>
+                    </li>
+                    <li class="main-menu__item">
+                      <a class="main-menu__link btn btn-anim" href="./contact.html">
+                        <span class="btn-caption">Contact</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <!-- right side -->
+          </div>
+        </div>
+      </div>
+      <!-- Main Navigation End -->
+
+    </nav>
+    <!-- Menu & Menu Hamburger End -->
 
     <!-- Header Start -->
     <header id="header" class="mxd-header">
@@ -109,7 +276,7 @@
                   <div class="mxd-block__content">
                     <div class="mxd-block__inner-headline loading__item">
                       <h1 class="inner-headline__title">
-                        Let's talk<br>about your project!
+                        Let's talk<br><span style="background: linear-gradient(90deg,#36CFC9,#5B5BEA); -webkit-background-clip:text; color: transparent;">about your project!</span>
                       </h1>
                       <p class="inner-headline__text t-large t-bright loading__item">Have questions? We've got the answers! 
                         Here, you'll find clear and concise information about our services, process, 
@@ -217,14 +384,14 @@
               <div class="row gx-0">
                 <div class="col-12 col-xl-5 mxd-grid-item no-margin">
                   <div class="mxd-block__name">
-                    <h2 class="reveal-type anim-uni-in-up">Welcome to our office</h2>
+                    <h2 class="reveal-type anim-uni-in-up"><span style="background: linear-gradient(90deg,#36CFC9,#5B5BEA); -webkit-background-clip:text; color: transparent;">Welcome</span> to our office</h2>
                   </div>
                 </div>
                 <div class="col-12 col-xl-6 mxd-grid-item no-margin">
                   <div class="mxd-block__content">
                     <div class="mxd-block__paragraph">
                       <p class="t-large t-bright anim-uni-in-up">Inspiring ideas, creative insights, 
-                        and the latest in design and tech. Fueling innovation for your digital journey.</p>
+                        and the latest in design and tech. <span style="background: linear-gradient(90deg,#36CFC9,#5B5BEA); -webkit-background-clip:text; color: transparent;">Fueling innovation for your digital journey.</span></p>
                       <div class="mxd-paragraph__lists">
                         <div class="container-fluid p-0">
                           <div class="row g-0">
@@ -241,10 +408,10 @@
                               </ul>
                               <ul>
                                 <li class="anim-uni-in-up">
-                                  <a href="tel:+12127089400">+1 212-708-9400</a>
+                                  <a class="text-white" href="tel:+971521964423">+971 52 196 4423</a>
                                 </li>
                                 <li class="anim-uni-in-up">
-                                  <a href="#contactForm">azayamarketing@gmail.com</a>
+                                  <a class="text-white" href="#contactForm">azayamarketing@gmail.com</a>
                                 </li>
                               </ul>
                             </div>
@@ -301,7 +468,7 @@
                   </a>
                 </li>
                 <li class="footer-nav__item anim-uni-in-up">
-                  <a href="./about-us.html" class="footer-nav__link btn-anim">
+                  <a href="#!" class="footer-nav__link btn-anim">
                     <span class="btn-caption">About us</span>
                   </a>
                 </li>
@@ -359,7 +526,7 @@
                   c0,0,0-3.1,0-4.1c0-0.4,0.2-1.7,0.2-1.7c0.1-0.6,0.2-1.1,0.6-1.6c0.3-0.4,0.7-0.8,1.1-1.1c0.5-0.3,1-0.5,1.6-0.6
                   c0,0,1.3-0.1,1.8-0.2c1,0,4,0,4,0c0.2,0,0.4-0.2,0.4-0.4C20,9.8,19.8,9.6,19.6,9.6L19.6,9.6z"></path>
               </svg>
-              <a href="tel:+12127089400">+1 212-708-9400</a>
+              <a href="tel:+971521964423">+971 52 196 4423</a>
             </p>
           </div>
           <!-- inner card -->
@@ -390,12 +557,10 @@
               <!-- footer socials -->
               <div class="footer-blocks__socials">
                 <ul class="footer-socials">
-                  <li class="footer-socials__item anim-uni-in-up"><a href="https://dribbble.com/" class="footer-socials__link" target="_blank">Dribbble</a></li>
-                  <li class="footer-socials__item anim-uni-in-up"><a href="https://www.behance.net/" class="footer-socials__link" target="_blank">Behance</a></li>
+                  <li class="footer-socials__item anim-uni-in-up"><a href="https://dribbble.com/" class="footer-socials__link" target="_blank">Youtube</a></li>
+                  <li class="footer-socials__item anim-uni-in-up"><a href="https://www.behance.net/" class="footer-socials__link" target="_blank">LinkedIn</a></li>
                   <li class="footer-socials__item anim-uni-in-up"><a href="https://www.instagram.com/" class="footer-socials__link" target="_blank">Instagram</a></li>
-                  <li class="footer-socials__item anim-uni-in-up"><a href="https://github.com/" class="footer-socials__link" target="_blank">Github</a></li>
-                  <li class="footer-socials__item anim-uni-in-up"><a href="https://codepen.io/" class="footer-socials__link" target="_blank">Codepen</a></li>
-                  <li class="footer-socials__item anim-uni-in-up"><a href="https://www.figma.com/community" class="footer-socials__link" target="_blank">Figma Community</a></li>
+                  <li class="footer-socials__item anim-uni-in-up"><a href="https://github.com/" class="footer-socials__link" target="_blank">Facebook</a></li>
                 </ul>
               </div>
             </div>
@@ -404,7 +569,7 @@
               <p class="t-xsmall t-muted">
                 <a class="no-effect fw-bold" href="./index.html" target="_blank">Azaya Marketing</a>
                 <i class="ph-bold ph-copyright"></i>
-                <span id="currentYear" class="fw-bold"></span>
+                <span id="currentYear" class="fw-bold text-white"></span>
               </p>
             </div>
           </div>
@@ -484,9 +649,55 @@
   const form = document.getElementById('contactForm');
   const status = document.getElementById('status');
 
+  // Create popup notification
+  function showNotification(message, type) {
+    // Remove existing notification if any
+    const existingNotif = document.querySelector('.contact-notification');
+    if (existingNotif) {
+      existingNotif.remove();
+    }
+
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `contact-notification ${type}`;
+
+    let icon = '';
+    if (type === 'loading') {
+      icon = '<i class="ph ph-circle-notch"></i>';
+    } else if (type === 'success') {
+      icon = '<i class="ph ph-check-circle"></i>';
+    } else if (type === 'error') {
+      icon = '<i class="ph ph-x-circle"></i>';
+    }
+
+    notification.innerHTML = `
+      <div class="notification-content">
+        ${icon}
+        <span class="notification-message">${message}</span>
+      </div>
+    `;
+
+    document.body.appendChild(notification);
+
+    // Show notification with animation
+    setTimeout(() => notification.classList.add('show'), 100);
+
+    // Auto hide after 4 seconds (except for loading state)
+    if (type !== 'loading') {
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+      }, 4000);
+    }
+
+    return notification;
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    status.textContent = 'Sending...';
+
+    // Show sending notification
+    const loadingNotif = showNotification('Sending your message...', 'loading');
 
     const data = {
       name: form.name.value.trim(),
@@ -502,15 +713,24 @@
       });
 
       const result = await res.json();
+
+      // Remove loading notification
+      loadingNotif.remove();
+
       if (result.success) {
-        status.textContent = 'Message sent. Thank you!';
+        showNotification('Message sent successfully! We\'ll get back to you soon.', 'success');
         form.reset();
+        status.textContent = '';
       } else {
-        status.textContent = 'Could not send message. Try again later.';
+        showNotification(result.message || 'Could not send message. Please try again later.', 'error');
+        status.textContent = '';
       }
     } catch (err) {
       console.error(err);
-      status.textContent = 'Error sending message.';
+      // Remove loading notification
+      loadingNotif.remove();
+      showNotification('Network error. Please check your connection and try again.', 'error');
+      status.textContent = '';
     }
   });
 </script>
