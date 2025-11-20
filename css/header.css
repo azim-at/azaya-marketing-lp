@@ -60,7 +60,6 @@ body {
 
 .mxd-header__logo img {
   max-height: 55px;
-  width: auto;
   transition: all 0.3s ease;
 }
 

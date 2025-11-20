@@ -328,7 +328,6 @@ body {
   position: relative;
   width: 100%;
   min-width: 360px;
-  overflow-x: hidden!important;
   font: normal 400 var(--_size) / 1.6 var(--_font-default);
   text-rendering: optimizeLegibility;
    background: radial-gradient(circle at -30% -10%, 
@@ -3889,8 +3888,15 @@ form textarea:required:valid {
 }
 
 .mxd-logo img {
-   width: 160px
+   width: 200px
 }
+
+@media screen and (max-width: 768px) {
+  .mxd-logo img {
+   width: 150px
+}
+}
+
 .mxd-section-title {
   display: -webkit-box;
   display: -moz-box;
@@ -5095,7 +5101,7 @@ form textarea:required:valid {
   justify-content: flex-end;
   min-height: 4.6rem;
   margin-top: 3rem;
-  padding: 0 3rem;
+  padding: 0 1rem;
   z-index: 2;
   pointer-events: none;
 }
