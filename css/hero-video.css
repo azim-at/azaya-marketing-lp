@@ -4,6 +4,14 @@
    ======================================== */
 
 /* ========================================
+   GLOBAL FIXES
+   ======================================== */
+/* Fix horizontal scroll due to nav bar and other elements */
+html, body {
+  max-width: 100vw !important;
+}
+
+/* ========================================
    VIDEO CONTAINER & SECTION
    ======================================== */
 .hero-video-section {
@@ -16,16 +24,22 @@
 /* Background Video - Optimized */
 .hero-bg-video {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: 100vw;
-  height: 100vh;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  object-position: center center;
   z-index: 0;
   opacity: 1;
+}
+
+/* Mobile-specific video adjustment to prevent zoom */
+@media (max-width: 768px) {
+  .hero-bg-video {
+    object-fit: contain;
+    background: #000;
+  }
 }
 
 /* Subtle gradient overlay only at edges for text readability */
@@ -205,17 +219,6 @@ form .btn[type="submit"]:hover::before {
 
 /* Tablet and below */
 @media (max-width: 1024px) {
-  .hero-bg-video {
-    width: auto;
-    height: 100vh;
-    min-width: 100%;
-    object-position: center center;
-  }
-
-  .hero-video-section {
-    height: 100vh;
-  }
-
   .mxd-header__logo img {
     max-height: 48px;
   }
@@ -227,20 +230,6 @@ form .btn[type="submit"]:hover::before {
 
 /* Tablet Portrait */
 @media (max-width: 768px) {
-  .hero-bg-video {
-    width: auto;
-    height: 100vh;
-    min-width: 100%;
-    min-height: 100%;
-    object-position: center center;
-    object-fit: cover;
-  }
-
-  .hero-video-section {
-    height: 100vh;
-    max-height: 100vh;
-  }
-
   .hero-video-section::before {
     background: linear-gradient(
       180deg,
@@ -271,20 +260,6 @@ form .btn[type="submit"]:hover::before {
 
 /* Mobile devices */
 @media (max-width: 480px) {
-  .hero-bg-video {
-    width: auto;
-    height: 100vh;
-    min-width: 100vw;
-    min-height: 100vh;
-    object-position: center center;
-    object-fit: cover;
-  }
-
-  .hero-video-section {
-    height: 100vh;
-    max-height: 100vh;
-  }
-
   .hero-video-section::before {
     background: linear-gradient(
       180deg,
@@ -310,26 +285,6 @@ form .btn[type="submit"]:hover::before {
 
   .mxd-header.sticky .mxd-header__logo img {
     max-height: 38px;
-  }
-}
-
-/* Portrait orientation - video optimization */
-@media (orientation: portrait) {
-  .hero-bg-video {
-    width: 100%;
-    min-height: 100%;
-  }
-}
-
-/* Landscape orientation - video optimization */
-@media (orientation: landscape) and (max-height: 600px) {
-  .hero-video-section {
-    height: 100vh;
-  }
-
-  .hero-bg-video {
-    min-width: 100%;
-    height: auto;
   }
 }
 
