@@ -1,0 +1,460 @@
+/* ========================================
+   HERO SECTION VIDEO STYLES
+   Background Video for Hero Section
+   ======================================== */
+
+/* ========================================
+   VIDEO CONTAINER & SECTION
+   ======================================== */
+.hero-video-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Background Video - Optimized */
+.hero-bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+  opacity: 1;
+}
+
+/* Subtle gradient overlay only at edges for text readability */
+.hero-video-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.15) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ========================================
+   HERO SECTION POSITIONING
+   ======================================== */
+#hero-section {
+  position: relative;
+  overflow: hidden;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Ensure content stays above video */
+.hero-video-section .mxd-hero-03__wrap,
+.hero-video-section .mxd-hero-03__top,
+.hero-video-section .mxd-hero-03__headline {
+  position: relative;
+  z-index: 10;
+}
+
+/* Particles with lower z-index than text but above video */
+.hero-particle {
+  z-index: 3;
+}
+
+/* ========================================
+   HEADER STYLES FOR VIDEO BACKGROUND
+   ======================================== */
+/* Removed custom positioning to use default from main.min.css */
+/* This ensures header works identically to contact.html */
+
+
+/* Sticky header enhancement */
+.mxd-header.sticky {
+  background: rgba(10, 10, 15, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(54, 207, 201, 0.1);
+}
+
+/* Header Logo Optimization */
+.mxd-header__logo {
+  transition: transform 0.3s ease;
+}
+
+.mxd-header__logo:hover {
+  transform: scale(1.05);
+}
+
+.mxd-header__logo img {
+  max-height: 60px;
+  width: auto;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 4px 12px rgba(54, 207, 201, 0.3));
+}
+
+.mxd-header.sticky .mxd-header__logo img {
+  max-height: 50px;
+  filter: drop-shadow(0 2px 8px rgba(54, 207, 201, 0.2));
+}
+
+/* Header Controls */
+.mxd-header__controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Enhanced CTA Button - Universal for all Book a call buttons */
+.mxd-header__controls .btn,
+.btn-accent,
+.btn[href*="contact"],
+a[href*="contact"].btn,
+.mxd-manifest__controls .btn,
+.mxd-btngroup .btn,
+.mxd-promo__controls .btn {
+  position: relative !important;
+  overflow: hidden !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.mxd-header__controls .btn::before,
+.btn-accent::before,
+.btn[href*="contact"]::before,
+a[href*="contact"].btn::before,
+.mxd-manifest__controls .btn::before,
+.mxd-btngroup .btn::before,
+.mxd-promo__controls .btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #36CFC9, #5B5BEA) !important;
+  transition: width 0.6s ease, height 0.6s ease;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.mxd-header__controls .btn:hover,
+.btn-accent:hover,
+.btn[href*="contact"]:hover,
+a[href*="contact"].btn:hover,
+.mxd-manifest__controls .btn:hover,
+.mxd-btngroup .btn:hover,
+.mxd-promo__controls .btn:hover {
+  box-shadow: 0 4px 20px rgba(54, 207, 201, 0.4) !important;
+  transform: translateY(-2px) !important;
+  border-color: transparent !important;
+}
+
+.mxd-header__controls .btn:hover::before,
+.btn-accent:hover::before,
+.btn[href*="contact"]:hover::before,
+a[href*="contact"].btn:hover::before,
+.mxd-manifest__controls .btn:hover::before,
+.mxd-btngroup .btn:hover::before,
+.mxd-promo__controls .btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Ensure button content stays above the gradient */
+.btn-caption,
+.btn i {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hamburger Menu Enhancement */
+.mxd-nav__hamburger {
+  transition: all 0.3s ease;
+}
+
+.mxd-nav__hamburger:hover {
+  transform: scale(1.1);
+}
+
+.hamburger__line {
+  background: white;
+  box-shadow: 0 0 10px rgba(54, 207, 201, 0.3);
+}
+
+/* ========================================
+   RESPONSIVE VIDEO
+   ======================================== */
+
+/* Tablet and below */
+@media (max-width: 1024px) {
+  .hero-bg-video {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-video-section {
+    height: 90vh;
+  }
+
+  .mxd-header__logo img {
+    max-height: 48px;
+  }
+
+  .mxd-header.sticky .mxd-header__logo img {
+    max-height: 40px;
+  }
+}
+
+/* Tablet Portrait */
+@media (max-width: 768px) {
+  .hero-bg-video {
+    min-width: 100%;
+    width: auto;
+    height: 100%;
+  }
+
+  .hero-video-section {
+    height: 80vh;
+  }
+
+  .hero-video-section::before {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      transparent 30%,
+      transparent 70%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
+  }
+
+
+  .mxd-header__logo img {
+    max-height: 48px;
+  }
+
+  .mxd-header.sticky {
+    padding: 1rem 2rem;
+  }
+
+  .mxd-header.sticky .mxd-header__logo img {
+    max-height: 42px;
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 480px) {
+  .hero-bg-video {
+    min-width: 100%;
+    min-height: 100%;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-video-section {
+    height: 70vh;
+  }
+
+  .hero-video-section::before {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.25) 0%,
+      transparent 30%,
+      transparent 70%,
+      rgba(0, 0, 0, 0.25) 100%
+    );
+  }
+
+
+  .mxd-header__logo img {
+    max-height: 42px;
+  }
+
+  .mxd-header.sticky {
+    padding: 0.75rem 1.5rem;
+  }
+
+  .mxd-header.sticky .mxd-header__logo img {
+    max-height: 38px;
+  }
+}
+
+/* Portrait orientation - video optimization */
+@media (orientation: portrait) {
+  .hero-bg-video {
+    width: 100%;
+    min-height: 100%;
+  }
+}
+
+/* Landscape orientation - video optimization */
+@media (orientation: landscape) and (max-height: 600px) {
+  .hero-video-section {
+    height: 100vh;
+  }
+
+  .hero-bg-video {
+    min-width: 100%;
+    height: auto;
+  }
+}
+
+/* ========================================
+   PERFORMANCE OPTIMIZATIONS
+   ======================================== */
+
+/* Disable video on very slow connections */
+@media (prefers-reduced-data: reduce) {
+  .hero-video {
+    display: none;
+  }
+
+  .hero-video-container {
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1a40 100%);
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    animation: none;
+  }
+}
+
+/* ========================================
+   VIDEO STATES
+   ======================================== */
+
+/* Loading state */
+.hero-video:not([src]) {
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1a40 100%);
+}
+
+/* Fallback when video fails to load */
+.hero-video-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1a40 100%);
+  z-index: 0;
+}
+
+/* ========================================
+   ALTERNATIVE STYLES
+   ======================================== */
+
+/* Option 1: Video with animated gradient overlay */
+.hero-video-overlay.animated {
+  background: linear-gradient(
+    135deg,
+    rgba(157, 78, 221, 0.3) 0%,
+    rgba(10, 14, 39, 0.8) 50%,
+    rgba(0, 240, 255, 0.3) 100%
+  );
+  background-size: 200% 200%;
+  animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Option 2: Subtle vignette effect */
+.hero-video-overlay.vignette::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+}
+
+/* Option 3: Bottom fade for smooth transition */
+.hero-video-overlay.bottom-fade::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(
+    to top,
+    rgba(10, 14, 39, 1) 0%,
+    transparent 100%
+  );
+}
+
+/* ========================================
+   VIDEO CONTROLS (Optional)
+   ======================================== */
+
+/* Play/Pause button (if needed) */
+.video-control-btn {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.video-control-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(0, 240, 255, 0.5);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.video-control-btn i {
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+/* Hide control on mobile if desired */
+@media (max-width: 767px) {
+  .video-control-btn {
+    width: 40px;
+    height: 40px;
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .video-control-btn i {
+    font-size: 1rem;
+  }
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+@media print {
+  .hero-video,
+  .hero-video-container,
+  .video-control-btn {
+    display: none !important;
+  }
+}

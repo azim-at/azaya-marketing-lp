@@ -1,0 +1,119 @@
+/* FAQ Header with Expand All Button */
+.faq-header-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.faq-expand-all-btn {
+  background: linear-gradient(135deg, #36CFC9, #5B5BEA);
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-shadow: 0 4px 15px rgba(54, 207, 201, 0.3);
+  flex-shrink: 0;
+}
+
+.faq-expand-all-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(54, 207, 201, 0.5);
+}
+
+.faq-expand-all-btn:active {
+  transform: scale(0.95);
+}
+
+.faq-expand-icon {
+  font-size: 22px;
+  color: white;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Rotate icon when expanded */
+.faq-expand-all-btn.expanded .faq-expand-icon {
+  transform: rotate(45deg);
+}
+
+/* Smooth FAQ expand/collapse animations */
+.mxd-accordion__item {
+  transition: all 0.3s ease;
+}
+
+.faq-hidden {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-visible {
+  max-height: 1000px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Pulse animation for the expand button */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+.faq-expand-all-btn::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #36CFC9, #5B5BEA);
+  opacity: 0;
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.faq-expand-all-btn:hover::before {
+  animation: pulse-ring 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .faq-header-wrapper {
+    gap: 1rem;
+  }
+
+  .faq-expand-all-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .faq-expand-icon {
+    font-size: 18px;
+  }
+}
+
+/* Enhanced accordion animations */
+.mxd-accordion__content {
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s ease,
+              padding 0.3s ease;
+}
+
+.mxd-accordion__arrow i {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mxd-accordion__item.active .mxd-accordion__arrow i {
+  transform: rotate(45deg);
+}

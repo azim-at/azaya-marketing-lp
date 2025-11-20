@@ -21,6 +21,8 @@
     <link rel="stylesheet" type="text/css" href="css/plugins.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.min.css">
     <link rel="stylesheet" type="text/css" href="css/hero-animations.css">
+    <link rel="stylesheet" type="text/css" href="css/hero-video.css">
+    <link rel="stylesheet" type="text/css" href="css/faq-animations.css">
     <!-- Template Styles End -->
 
 
@@ -49,7 +51,7 @@
 
 
     <!-- Menu & Menu Hamburger Start -->
-    <nav class="mxd-nav__wrap" data-lenis-prevent="">
+     <nav class="mxd-nav__wrap" data-lenis-prevent="">
 
       <!-- Hamburger Start -->
       <div class="mxd-nav__contain loading__fade">
@@ -111,10 +113,17 @@
                         </svg>
                       </div>
                     </li>
-                    <li class="main-menu__item">
-                      <a class="main-menu__link btn btn-anim" href="./contact.html">
-                        <span class="btn-caption">Contact</span>
-                      </a>
+                       <li class="main-menu__item">
+                      <div class="main-menu__toggle">
+                        <span class="main-menu__link btn btn-anim">
+                           <a class="main-menu__link btn btn-anim" href="./contact.html">
+                          <span class="btn-caption">Contact</span>
+                          </a>
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" version="1.1" viewBox="0 0 20 20">
+                          <path d="M19.6,9.6h-3.9c-.4,0-1.8-.2-1.8-.2-.6,0-1.1-.2-1.6-.6-.5-.3-.9-.8-1.2-1.2-.3-.4-.4-.9-.5-1.4,0,0,0-1.1-.2-1.5V.4c0-.2-.2-.4-.4-.4s-.4.2-.4.4v4.4c0,.4-.2,1.5-.2,1.5,0,.5-.2,1-.5,1.4-.3.5-.7.9-1.2,1.2s-1,.5-1.6.6c0,0-1.2,0-1.7.2H.4c-.2,0-.4.2-.4.4s.2.4.4.4h4.1c.4,0,1.7.2,1.7.2.6,0,1.1.2,1.6.6.4.3.8.7,1.1,1.1.3.5.5,1,.6,1.6,0,0,0,1.3.2,1.7v4.1c0,.2.2.4.4.4s.4-.2.4-.4v-4.1c0-.4.2-1.7.2-1.7,0-.6.2-1.1.6-1.6.3-.4.7-.8,1.1-1.1.5-.3,1-.5,1.6-.6,0,0,1.3,0,1.8-.2h3.9c.2,0,.4-.2.4-.4s-.2-.4-.4-.4h0Z"/>
+                        </svg>
+                      </div>
                     </li>
                   </ul>
                 </nav>
@@ -142,7 +151,7 @@
       </div>
       <!-- header controls -->
       <div class="mxd-header__controls loading__fade">
-        <a href="./contact.html" class="btn btn-anim btn-default btn-mobile-icon btn-outline slide-right-up" href="#!">
+        <a href="./contact.html" class="btn btn-anim btn-default btn-mobile-icon btn-outline slide-right-up">
           <span class="btn-caption">Book a call</span>
           <i class="ph-bold ph-arrow-up-right"></i>
         </a>
@@ -163,33 +172,14 @@
         <div class="hero-particle hero-particle-5" data-speed="0.3"></div>
         <div class="hero-particle hero-particle-6" data-speed="0.55"></div>
 
-        <div class="mxd-hero-03">
-          <div class="mxd-hero-03__wrap loading-wrap">
-            <!-- top part -->
-            <div class="mxd-hero-03__top">
-              <!-- headline -->
-              <div class="mxd-hero-03__headline">
-                <p class="hero-03-headline__caption loading__item text-center fs-1"><span style="background: linear-gradient(90deg,#36CFC9,#5B5BEA); -webkit-background-clip:text; color: transparent;">Turn Bold Ideas Into Measurable Growth 
-</span></p>
-                <h1 class="hero-03-headline__title loading__item">
-                   <p class="heading-title text-center">Strategy. Creative. Performance. </p>
-                </h1>
-                 <div class="mxd-manifest__controls anim-uni-in-up">
-                        <div class="mxd-btngroup centered">
-                          <a class="btn btn-anim btn-default btn-accent slide-right-up" href="./contact.html">
-                            <span class="btn-caption">Book a call</span>
-                            <i class="ph-bold ph-arrow-up-right"></i>
-                          </a>
-                        </div>
-                      </div>
-              </div>
-              
-            </div>
-            <!-- bottom part -->
-             
-         
-          </div>
-        </div>
+    <div class="mxd-hero-03 hero-video-section">
+  <!-- Background Video -->
+  <video class="hero-bg-video" autoplay loop muted playsinline>
+    <source src="./video/video.mp4" type="video/mp4" />
+  </video>
+
+</div>
+
          
       </div>
       <!-- Hero Section End -->
@@ -511,7 +501,7 @@ customers — their goals, motivations, and challenges — to shape stories that
 impression.</p>
                       <div class="mxd-manifest__controls anim-uni-in-up">
                         <div class="mxd-btngroup centered">
-                          <a class="btn btn-anim btn-default btn-accent slide-right-up" href="./contact.html">
+                          <a class="btn btn-anim btn-default btn-additional slide-right-up mt-5" href="./contact.html" style="border: 1px solid">
                             <span class="btn-caption">Book a call</span>
                             <i class="ph-bold ph-arrow-up-right"></i>
                           </a>
@@ -1412,21 +1402,35 @@ impression.</p>
                 <!-- Inner Headline Content Start -->
                 <div class="col-12 col-xl-12 mxd-grid-item no-margin">
                    <div class="mxd-block">
-            <div class="mxd-section-title">
-              <div class="container-fluid p-0">
-                  <div class="col-12 col-xl-6 mxd-grid-item no-margin">
-                    <div class="mxd-section-title__hrtitle">
-                      <h2 class="reveal-type"><span style="background: linear-gradient(90deg,#36CFC9,#5B5BEA); -webkit-background-clip:text; color: transparent;">Frequently asked</span> questions?</h2>
+                       <!-- Block - Section Title Start -->
+                    <div class="mxd-block">
+                      <div class="mxd-section-title">
+                        <div class="container-fluid p-0">
+                          <div class="row g-0">
+                            <div class="col-12 col-xl-6 mxd-grid-item no-margin">
+                              <div class="mxd-section-title__hrtitle">
+                                <h2 class="reveal-type"><span style="background: linear-gradient(90deg,#36CFC9,#5B5BEA); -webkit-background-clip:text; color: transparent;">Frequently asked</span> questions?</h2>
+                              </div>
+                            </div>
+                            <div class="col-12 col-xl-3 mxd-grid-item no-margin"> 
+                            </div>
+                            <div class="col-12 col-xl-3 mxd-grid-item no-margin">
+                              <div class="mxd-section-title__hrcontrols anim-uni-in-up">
+                                <button class="faq-expand-all-btn" id="faqExpandAllBtn" onclick="toggleAllFAQs()" aria-label="Expand all FAQs">
+                                  <i class="ph-bold ph-plus faq-expand-icon"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-              </div>
-            </div>
-          </div>
+                   </div>
 
                   <div class="mxd-block__content">
                     <div class="mxd-accordion loading__fade">
                       <!-- accordion single item -->
-                      <div class="mxd-accordion__item">
+                      <div class="mxd-accordion__item faq-hidden">
                         <div class="mxd-accordion__divider anim-uni-in-up"></div>
                         <div class="mxd-accordion__title anim-uni-in-up">
                           <h6>What services do you offer?</h6>
@@ -1444,7 +1448,7 @@ impression.</p>
                         <div class="mxd-accordion__divider anim-uni-in-up"></div>
                       </div>
                       <!-- accordion single item -->
-                      <div class="mxd-accordion__item">
+                      <div class="mxd-accordion__item faq-hidden">
                         <div class="mxd-accordion__divider anim-uni-in-up"></div>
                         <div class="mxd-accordion__title anim-uni-in-up">
                           <h6>How long does a project take?</h6>
@@ -1461,7 +1465,7 @@ impression.</p>
                         <div class="mxd-accordion__divider anim-uni-in-up"></div>
                       </div>
                       <!-- accordion single item -->
-                      <div class="mxd-accordion__item">
+                      <div class="mxd-accordion__item faq-hidden">
                         <div class="mxd-accordion__divider anim-uni-in-up"></div>
                         <div class="mxd-accordion__title anim-uni-in-up">
                           <h6>Do you work with businesses of all sizes?</h6>
@@ -1477,7 +1481,7 @@ impression.</p>
                         <div class="mxd-accordion__divider anim-uni-in-up"></div>
                       </div>
                       <!-- accordion single item -->
-                      <div class="mxd-accordion__item">
+                      <div class="mxd-accordion__item faq-hidden">
                         <div class="mxd-accordion__divider anim-uni-in-up"></div>
                         <div class="mxd-accordion__title anim-uni-in-up">
                           <h6>Can you redesign my existing website?</h6>
@@ -1542,16 +1546,6 @@ impression.</p>
                         </div>
                         <div class="mxd-accordion__divider anim-uni-in-up"></div>
                       </div>
-                    </div>
-
-                    <!-- Show More Button -->
-                    <div class="faq-show-more-wrapper" style="text-align: center; margin-top: 3rem;">
-                      <button class="btn btn-default faq-show-more-btn" id="faqShowMoreBtn" onclick="toggleFAQs()">
-                        <span class="btn__content">
-                          <span class="show-more-text text-white">Show More FAQs</span>
-                          <span class="show-less-text text-white" style="display: none;">Show Less</span>
-                        </span>
-                      </button>
                     </div>
                   </div>
 
@@ -1959,6 +1953,66 @@ impression.</p>
       } else {
         showMoreText.style.display = 'none';
         showLessText.style.display = 'inline';
+      }
+    }
+
+    // Toggle All FAQs from header button
+    function toggleAllFAQs() {
+      const expandAllBtn = document.getElementById('faqExpandAllBtn');
+      const allFAQs = document.querySelectorAll('.mxd-accordion__item');
+      const isExpanded = expandAllBtn.classList.contains('expanded');
+
+      // Toggle button state
+      expandAllBtn.classList.toggle('expanded');
+
+      allFAQs.forEach((faq, index) => {
+        const content = faq.querySelector('.mxd-accordion__content');
+        const arrow = faq.querySelector('.mxd-accordion__arrow i');
+
+        if (isExpanded) {
+          // Collapse all FAQs with stagger
+          setTimeout(() => {
+            faq.classList.remove('active');
+            if (content) {
+              content.style.maxHeight = null;
+              content.style.opacity = '0';
+            }
+            if (arrow) {
+              arrow.style.transform = 'rotate(0deg)';
+            }
+            // Also hide hidden FAQs
+            if (faq.classList.contains('faq-hidden')) {
+              faq.classList.remove('faq-visible');
+            }
+          }, index * 50);
+        } else {
+          // Expand all FAQs with stagger
+          setTimeout(() => {
+            faq.classList.add('active');
+            if (content) {
+              content.style.maxHeight = content.scrollHeight + 'px';
+              content.style.opacity = '1';
+            }
+            if (arrow) {
+              arrow.style.transform = 'rotate(45deg)';
+            }
+            // Also show hidden FAQs
+            if (faq.classList.contains('faq-hidden')) {
+              faq.classList.add('faq-visible');
+            }
+          }, index * 50);
+        }
+      });
+
+      // Update the show more/less button if exists
+      const showMoreBtn = document.getElementById('faqShowMoreBtn');
+      if (showMoreBtn && !isExpanded) {
+        const showMoreText = document.querySelector('.show-more-text');
+        const showLessText = document.querySelector('.show-less-text');
+        if (showMoreText && showLessText) {
+          showMoreText.style.display = 'none';
+          showLessText.style.display = 'inline';
+        }
       }
     }
   </script>
