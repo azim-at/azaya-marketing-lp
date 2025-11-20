@@ -680,6 +680,7 @@
     document.getElementById("currentYear").textContent = new Date().getFullYear();
   </script>
 
+  <script src="./js/config.js"></script>
   <script>
   const form = document.getElementById('contactForm');
   const status = document.getElementById('status');
@@ -731,23 +732,36 @@
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Show sending notification
-    const loadingNotif = showNotification('Sending your message...', 'loading');
-
     const data = {
       name: form.name.value.trim(),
       email: form.email.value.trim(),
       message: form.message.value.trim(),
     };
 
-    try {
-      const res = await fetch('https://azaya-marketing-lp-backend.onrender.com/send', { // change to your deployed URL later
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+    // Client-side validation
+    if (data.name.length < 2) {
+      showNotification('Please enter a valid name (at least 2 characters).', 'error');
+      return;
+    }
 
-      const result = await res.json();
+    if (data.message.length < 10) {
+      showNotification('Please enter a more detailed message (at least 10 characters).', 'error');
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.email)) {
+      showNotification('Please enter a valid email address.', 'error');
+      return;
+    }
+
+    // Show sending notification
+    const loadingNotif = showNotification('Sending your message...', 'loading');
+
+    try {
+      // Use API config to automatically switch between local and production
+      const result = await window.API.contact.send(data);
 
       // Remove loading notification
       loadingNotif.remove();
@@ -764,7 +778,10 @@
       console.error(err);
       // Remove loading notification
       loadingNotif.remove();
-      showNotification('Network error. Please check your connection and try again.', 'error');
+
+      // Show more user-friendly error message
+      const errorMessage = err.message || 'Network error. Please check your connection and try again.';
+      showNotification(errorMessage, 'error');
       status.textContent = '';
     }
   });
