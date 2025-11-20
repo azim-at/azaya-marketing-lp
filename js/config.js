@@ -22,9 +22,9 @@ const API_CONFIG = {
   get baseURL() {
     // You can override this by setting a custom environment
     // Uncomment the line below to force production even in localhost
-    // return this.production;
+    return this.production;
 
-    return isLocalhost ? this.development : this.production;
+    // return isLocalhost ? this.development : this.production;
   }
 };
 

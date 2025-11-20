@@ -1,5 +1,5 @@
 // admin-dashboard.js
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'https://azaya-marketing-lp-backend.onrender.com/api';
 let currentEditId = null;
 let uploadedImageData = null;
 let featuredImageData = null;

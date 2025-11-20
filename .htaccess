@@ -1,0 +1,25 @@
+# Enable rewrite engine
+RewriteEngine On
+
+# Redirect www to non-www (optional)
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# Redirect all 404 errors to index.html
+ErrorDocument 404 /index.html
+
+# Handle requests for files and directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirect to index.html for single page application behavior
+RewriteRule ^(.*)$ /index.html [L]
+
+# Alternative: Redirect root directory variations to index.html
+# RewriteRule ^$ /index.html [L]
+
+# Security: Disable directory browsing
+Options -Indexes
+
+# Set default charset
+AddDefaultCharset UTF-8
