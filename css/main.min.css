@@ -514,7 +514,7 @@ html.lenis body {
   padding-bottom: 13rem;
 }
 .mxd-section.padding-grid-pre-mtext {
-  padding-bottom: 11.3rem;
+  padding-bottom: 7rem;
 }
 .mxd-section.padding-pinned-img-pre-mtext {
   padding-bottom: 5.4rem;
@@ -588,7 +588,7 @@ html.lenis body {
     padding-bottom: 14.3rem;
   }
   .mxd-section.padding-grid-pre-mtext {
-    padding-bottom: 10.4rem;
+    padding-bottom: 7rem;
   }
   .mxd-section.padding-pinned-img-pre-mtext {
     padding-bottom: 10rem;
@@ -667,7 +667,7 @@ html.lenis body {
     padding-bottom: 10rem;
   }
   .mxd-section.padding-grid-pre-mtext {
-    padding-bottom: 10.4rem;
+    padding-bottom: 7rem;
   }
   .mxd-section.padding-pinned-img-pre-mtext {
     padding-bottom: 4.3rem;
@@ -734,7 +734,7 @@ html.lenis body {
     padding-bottom: 11rem;
   }
   .mxd-section.padding-grid-pre-mtext {
-    padding-bottom: 14.4rem;
+    padding-bottom: 7rem;
   }
   .mxd-section.padding-pinned-img-pre-mtext {
     padding-bottom: 5.3rem;
@@ -17959,20 +17959,20 @@ form textarea:required:valid {
     -moz-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    height: 600px;
-    max-width: 460px;
+    height: 100px;
+    max-width: 500px;
     padding: 4rem;
   }
 }
 @media only screen and (min-width: 1400px) {
   .mxd-testimonials-card {
-    height: 640px;
+    height: 100px;
     max-width: 500px;
   }
 }
 @media only screen and (min-width: 1600px) {
   .mxd-testimonials-card {
-    height: 700px;
+    height: 100px;
     max-width: 630px;
   }
 }
@@ -18217,23 +18217,7 @@ form textarea:required:valid {
     right: 0;
     width: 6rem;
     height: 100%;
-    background: -webkit-gradient(
-      linear,
-      left top,
-      right top,
-      from(rgba(var(--base-rgb), 0)),
-      to(rgba(var(--base-rgb), 1))
-    );
-    background: -moz-linear-gradient(
-      left,
-      rgba(var(--base-rgb), 0) 0,
-      rgba(var(--base-rgb), 1) 100%
-    );
-    background: linear-gradient(
-      to right,
-      rgba(var(--base-rgb), 0) 0,
-      rgba(var(--base-rgb), 1) 100%
-    );
+
     z-index: 1;
   }
 }
