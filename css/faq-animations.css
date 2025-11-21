@@ -105,15 +105,25 @@
 
 /* Enhanced accordion animations */
 .mxd-accordion__content {
-  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.3s ease,
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.4s ease,
               padding 0.3s ease;
+}
+
+/* When accordion is active/open */
+.mxd-accordion__title.accordion-active + .mxd-accordion__content {
+  max-height: 1000px !important;
+  opacity: 1 !important;
 }
 
 .mxd-accordion__arrow i {
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.mxd-accordion__item.active .mxd-accordion__arrow i {
+.mxd-accordion__item.active .mxd-accordion__arrow i,
+.accordion-rotate i {
   transform: rotate(45deg);
 }

@@ -1941,13 +1941,17 @@ impression.</p>
       allFAQs.forEach((faq, index) => {
         const content = faq.querySelector('.mxd-accordion__content');
         const arrow = faq.querySelector('.mxd-accordion__arrow i');
+        const title = faq.querySelector('.mxd-accordion__title');
 
         if (isExpanded) {
           // Collapse all FAQs with stagger
           setTimeout(() => {
             faq.classList.remove('active');
+            if (title) {
+              title.classList.remove('accordion-active');
+            }
             if (content) {
-              content.style.maxHeight = null;
+              content.style.maxHeight = '0';
               content.style.opacity = '0';
             }
             if (arrow) {
@@ -1962,6 +1966,9 @@ impression.</p>
           // Expand all FAQs with stagger
           setTimeout(() => {
             faq.classList.add('active');
+            if (title) {
+              title.classList.add('accordion-active');
+            }
             if (content) {
               content.style.maxHeight = content.scrollHeight + 'px';
               content.style.opacity = '1';
@@ -1988,6 +1995,46 @@ impression.</p>
         }
       }
     }
+
+    // Fix accordion click behavior to work with CSS animations
+    document.addEventListener('DOMContentLoaded', function() {
+      // Override the jQuery accordion behavior
+      $('.mxd-accordion__title').off('click').on('click', function(e) {
+        e.preventDefault();
+        const $title = $(this);
+        const $content = $title.next('.mxd-accordion__content');
+        const $arrow = $title.find('.mxd-accordion__arrow');
+        const isActive = $title.hasClass('accordion-active');
+
+        // Close other accordions
+        $('.mxd-accordion__title').not($title).each(function() {
+          $(this).removeClass('accordion-active');
+          const $otherContent = $(this).next('.mxd-accordion__content');
+          $otherContent.css({
+            'max-height': '0',
+            'opacity': '0'
+          });
+          $(this).find('.mxd-accordion__arrow').removeClass('accordion-rotate');
+        });
+
+        // Toggle current accordion
+        if (!isActive) {
+          $title.addClass('accordion-active');
+          $arrow.addClass('accordion-rotate');
+          $content.css({
+            'max-height': $content[0].scrollHeight + 'px',
+            'opacity': '1'
+          });
+        } else {
+          $title.removeClass('accordion-active');
+          $arrow.removeClass('accordion-rotate');
+          $content.css({
+            'max-height': '0',
+            'opacity': '0'
+          });
+        }
+      });
+    });
   </script>
 
   </body>
