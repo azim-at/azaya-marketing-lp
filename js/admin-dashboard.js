@@ -1,5 +1,5 @@
 // admin-dashboard.js
-const API_BASE_URL = 'https://azaya-marketing-lp-backend.onrender.com/api';
+const API_BASE_URL = 'http://localhost:5000';
 let currentEditId = null;
 let uploadedImageData = null;
 let featuredImageData = null;
@@ -273,6 +273,7 @@ function switchPanel(panel) {
     // Hide all panels
     document.getElementById('listPanel').style.display = 'none';
     document.getElementById('addPanel').style.display = 'none';
+    document.getElementById('usersPanel').style.display = 'none';
     document.getElementById('commentsPanel').style.display = 'none';
 
     if (panel === 'list') {
@@ -284,9 +285,13 @@ function switchPanel(panel) {
         resetForm();
         document.getElementById('addPanel').style.display = 'block';
         navLinks[1].classList.add('active');
+    } else if (panel === 'users') {
+        document.getElementById('usersPanel').style.display = 'block';
+        navLinks[2].classList.add('active');
+        loadUsers();
     } else if (panel === 'comments') {
         document.getElementById('commentsPanel').style.display = 'block';
-        navLinks[2].classList.add('active');
+        navLinks[3].classList.add('active');
         loadComments();
         loadCommentStats();
     }
@@ -380,7 +385,7 @@ async function loadBlogs() {
     `;
 
     try {
-        let url = `${API_BASE_URL}/blogs`;
+        let url = `${API_BASE_URL}/api/blogs`;
 
         // Add authentication header to get all blogs
         const response = await fetch(url, {
@@ -488,7 +493,7 @@ async function loadBlogs() {
 
 async function editBlog(id) {
     try {
-        const response = await fetch(`${API_BASE_URL}/blogs/${id}`, {
+        const response = await fetch(`${API_BASE_URL}/api/blogs/${id}`, {
             headers: getAuthHeaders()
         });
 
@@ -566,7 +571,7 @@ async function deleteBlog(id, title) {
     }
 
     try {
-        const response = await fetch(`${API_BASE_URL}/blogs/${id}`, {
+        const response = await fetch(`${API_BASE_URL}/api/blogs/${id}`, {
             method: 'DELETE',
             headers: getAuthHeaders()
         });
@@ -673,7 +678,7 @@ document.getElementById("blogForm").addEventListener("submit", async (e) => {
     };
 
     try {
-        const url = isEdit ? `${API_BASE_URL}/blogs/${blogId}` : `${API_BASE_URL}/blogs`;
+        const url = isEdit ? `${API_BASE_URL}/api/blogs/${blogId}` : `${API_BASE_URL}/api/blogs`;
         const method = isEdit ? 'PUT' : 'POST';
 
         const response = await fetch(url, {
@@ -716,27 +721,28 @@ let allComments = [];
 // Load comment statistics
 async function loadCommentStats() {
     try {
-        const response = await fetch(`${API_BASE_URL}/comments/admin/stats`, {
+        const response = await fetch(`${API_BASE_URL}/api/comments/admin/stats`, {
             headers: getAuthHeaders()
         });
 
         if (!response.ok) {
+            if (response.status === 401) {
+                alert('Session expired. Please login again.');
+                logout();
+                return;
+            }
             throw new Error('Failed to fetch comment stats');
         }
 
         const data = await response.json();
         const stats = data.stats;
 
-        // Update stats display
-        document.getElementById('commentStats').textContent =
-            `Total: ${stats.total} | Pending: ${stats.pending} | Approved: ${stats.approved} | Rejected: ${stats.rejected}`;
+        // Update stats display - only show total (no approval system)
+        document.getElementById('commentStats').textContent = `Total Comments: ${stats.total}`;
 
-        // Update pending badge in nav
+        // Hide pending badge (no approval system)
         const pendingBadge = document.getElementById('pendingCommentsCount');
-        if (stats.pending > 0) {
-            pendingBadge.textContent = stats.pending;
-            pendingBadge.style.display = 'inline';
-        } else {
+        if (pendingBadge) {
             pendingBadge.style.display = 'none';
         }
     } catch (error) {
@@ -745,8 +751,7 @@ async function loadCommentStats() {
 }
 
 // Load all comments
-async function loadComments(filter = 'all') {
-    currentCommentFilter = filter;
+async function loadComments(blogId = null) {
     const container = document.getElementById('commentsListContainer');
 
     container.innerHTML = `
@@ -758,12 +763,17 @@ async function loadComments(filter = 'all') {
     `;
 
     try {
-        const queryParam = filter !== 'all' ? `?status=${filter}` : '';
-        const response = await fetch(`${API_BASE_URL}/comments/admin/all${queryParam}`, {
+        const queryParam = blogId ? `?blogId=${blogId}` : '';
+        const response = await fetch(`${API_BASE_URL}/api/comments/admin/all${queryParam}`, {
             headers: getAuthHeaders()
         });
 
         if (!response.ok) {
+            if (response.status === 401) {
+                alert('Session expired. Please login again.');
+                logout();
+                return;
+            }
             throw new Error('Failed to fetch comments');
         }
 
@@ -791,18 +801,13 @@ function displayComments(comments) {
             <div class="empty-state">
                 <i class="bi bi-chat-dots"></i>
                 <h4>No comments found</h4>
-                <p>There are no comments matching this filter.</p>
+                <p>There are no comments yet.</p>
             </div>
         `;
         return;
     }
 
     container.innerHTML = comments.map(comment => {
-        const statusClass = comment.status === 'approved' ? 'success' :
-                           comment.status === 'rejected' ? 'danger' : 'warning';
-        const statusIcon = comment.status === 'approved' ? 'check-circle' :
-                          comment.status === 'rejected' ? 'x-circle' : 'clock';
-
         const submittedDate = new Date(comment.submittedAt).toLocaleString('en-US', {
             year: 'numeric',
             month: 'short',
@@ -810,16 +815,6 @@ function displayComments(comments) {
             hour: '2-digit',
             minute: '2-digit'
         });
-
-        const approvedDate = comment.approvedAt
-            ? new Date(comment.approvedAt).toLocaleString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            })
-            : null;
 
         return `
             <div class="card mb-3">
@@ -831,14 +826,11 @@ function displayComments(comments) {
                                 <i class="bi bi-envelope me-1"></i>${escapeHtml(comment.email)}
                             </small>
                         </div>
-                        <span class="badge bg-${statusClass}">
-                            <i class="bi bi-${statusIcon} me-1"></i>${comment.status}
-                        </span>
                     </div>
 
                     <div class="mb-2">
                         <strong style="color:#c89f40;">
-                            <i class="bi bi-file-text me-1"></i>${escapeHtml(comment.blogTitle)}
+                            <i class="bi bi-file-text me-1"></i>${escapeHtml(comment.blogTitle || 'Blog Post')}
                         </strong>
                     </div>
 
@@ -849,23 +841,11 @@ function displayComments(comments) {
                     <div class="d-flex justify-content-between align-items-center">
                         <small class="text-muted">
                             <i class="bi bi-calendar me-1"></i>Submitted: ${submittedDate}
-                            ${approvedDate ? `<br><i class="bi bi-check-circle me-1"></i>Approved: ${approvedDate}` : ''}
+                            ${comment.ipAddress ? `<br><i class="bi bi-geo-alt me-1"></i>IP: ${comment.ipAddress}` : ''}
                         </small>
-                        <div class="btn-group btn-group-sm">
-                            ${comment.status !== 'approved' ? `
-                                <button class="btn btn-success" onclick="approveComment('${comment._id}')" title="Approve">
-                                    <i class="bi bi-check-circle"></i> Approve
-                                </button>
-                            ` : ''}
-                            ${comment.status !== 'rejected' ? `
-                                <button class="btn btn-warning me-2" onclick="rejectComment('${comment._id}')" title="Reject">
-                                    <i class="bi bi-x-circle"></i> Reject
-                                </button>
-                            ` : ''}
-                            <button class="btn btn-danger" onclick="deleteComment('${comment._id}')" title="Delete">
-                                <i class="bi bi-trash"></i> Delete
-                            </button>
-                        </div>
+                        <button class="btn btn-danger btn-sm" onclick="deleteComment('${comment.userId}', '${comment._id}')" title="Delete">
+                            <i class="bi bi-trash me-1"></i>Delete
+                        </button>
                     </div>
                 </div>
             </div>
@@ -880,90 +860,308 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-// Filter comments
-function filterComments(filter) {
-    currentCommentFilter = filter;
-
-    // Update active button
-    const buttons = document.querySelectorAll('#commentsPanel .filter-btn');
-    buttons.forEach(btn => btn.classList.remove('active'));
-    event.target.closest('.filter-btn').classList.add('active');
-
-    loadComments(filter);
-}
-
-// Approve comment
-async function approveComment(commentId) {
-    if (!confirm('Approve this comment?')) {
-        return;
-    }
-
-    try {
-        const response = await fetch(`${API_BASE_URL}/comments/admin/${commentId}/approve`, {
-            method: 'PATCH',
-            headers: getAuthHeaders()
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to approve comment');
-        }
-
-        showAlert('alertComments', 'Comment approved successfully!', 'success');
-        loadComments(currentCommentFilter);
-        loadCommentStats();
-    } catch (error) {
-        console.error('Error approving comment:', error);
-        showAlert('alertComments', 'Failed to approve comment. Please try again.', 'danger');
-    }
-}
-
-// Reject comment
-async function rejectComment(commentId) {
-    if (!confirm('Reject this comment?')) {
-        return;
-    }
-
-    try {
-        const response = await fetch(`${API_BASE_URL}/comments/admin/${commentId}/reject`, {
-            method: 'PATCH',
-            headers: getAuthHeaders()
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to reject comment');
-        }
-
-        showAlert('alertComments', 'Comment rejected successfully!', 'success');
-        loadComments(currentCommentFilter);
-        loadCommentStats();
-    } catch (error) {
-        console.error('Error rejecting comment:', error);
-        showAlert('alertComments', 'Failed to reject comment. Please try again.', 'danger');
-    }
-}
-
 // Delete comment
-async function deleteComment(commentId) {
+async function deleteComment(userId, commentId) {
     if (!confirm('Are you sure you want to permanently delete this comment? This action cannot be undone.')) {
         return;
     }
 
     try {
-        const response = await fetch(`${API_BASE_URL}/comments/admin/${commentId}`, {
+        const response = await fetch(`${API_BASE_URL}/api/comments/admin/${userId}/${commentId}`, {
             method: 'DELETE',
             headers: getAuthHeaders()
         });
 
         if (!response.ok) {
+            if (response.status === 401) {
+                alert('Session expired. Please login again.');
+                logout();
+                return;
+            }
             throw new Error('Failed to delete comment');
         }
 
         showAlert('alertComments', 'Comment deleted successfully!', 'success');
-        loadComments(currentCommentFilter);
+        loadComments();
         loadCommentStats();
     } catch (error) {
         console.error('Error deleting comment:', error);
         showAlert('alertComments', 'Failed to delete comment. Please try again.', 'danger');
+    }
+}
+
+// ========================================
+// USERS MANAGEMENT
+// ========================================
+
+// Load all users
+async function loadUsers(filter = 'all') {
+    const container = document.getElementById('usersListContainer');
+
+    container.innerHTML = `
+        <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading users...</span>
+            </div>
+        </div>
+    `;
+
+    try {
+        // Fetch all users
+        const response = await fetch(`${API_BASE_URL}/api/contact/users/all`, {
+            headers: getAuthHeaders()
+        });
+
+        if (!response.ok) {
+            if (response.status === 401) {
+                alert('Session expired. Please login again.');
+                logout();
+                return;
+            }
+            throw new Error('Failed to fetch users');
+        }
+
+        const data = await response.json();
+        let users = data.users || [];
+
+        // Apply filter
+        if (filter === 'contacts') {
+            users = users.filter(u => u.totalContacts > 0);
+        } else if (filter === 'comments') {
+            users = users.filter(u => u.totalComments > 0);
+        } else if (filter === 'both') {
+            users = users.filter(u => u.totalContacts > 0 && u.totalComments > 0);
+        }
+
+        // Update stats
+        document.getElementById('userStats').textContent =
+            `Total Users: ${users.length}`;
+        document.getElementById('totalUsersCount').textContent = users.length;
+
+        if (users.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="bi bi-people"></i>
+                    <h4>No users found</h4>
+                    <p>No users match this filter.</p>
+                </div>
+            `;
+            return;
+        }
+
+        // Display users
+        container.innerHTML = users.map(user => {
+            const lastInteraction = new Date(user.lastInteraction).toLocaleDateString();
+
+            return `
+                <div class="card mb-3 user-card" onclick="viewUserProfile('${user._id}')">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h5 class="mb-1" style="color:#c89f40;">
+                                    ${escapeHtml(user.name)}${user.lastname ? ' ' + escapeHtml(user.lastname) : ''}
+                                </h5>
+                                <p class="text-muted mb-2">
+                                    <i class="bi bi-envelope me-1"></i>${escapeHtml(user.email)}
+                                    ${user.company ? `<br><i class="bi bi-building me-1"></i>${escapeHtml(user.company)}` : ''}
+                                    ${user.phone ? `<br><i class="bi bi-telephone me-1"></i>${escapeHtml(user.phone)}` : ''}
+                                </p>
+                            </div>
+                            <div class="text-end">
+                                <span class="badge bg-primary">${user.totalContacts} Contacts</span>
+                                <span class="badge bg-success">${user.totalComments} Comments</span>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <small class="text-muted">
+                                <i class="bi bi-clock me-1"></i>Last active: ${lastInteraction}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    } catch (error) {
+        console.error('Error loading users:', error);
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="bi bi-exclamation-triangle text-danger"></i>
+                <h4>Error loading users</h4>
+                <p>${error.message}</p>
+            </div>
+        `;
+    }
+}
+
+// Filter users
+function filterUsers(filter, event) {
+    // Update active button
+    document.querySelectorAll('#usersPanel .filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    if (event && event.target) {
+        event.target.closest('.filter-btn').classList.add('active');
+    }
+
+    loadUsers(filter);
+}
+
+// View user profile modal
+async function viewUserProfile(userId) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/contact/users/${userId}`, {
+            headers: getAuthHeaders()
+        });
+
+        if (!response.ok) throw new Error('Failed to fetch user profile');
+
+        const { user } = await response.json();
+
+        // Create modal content
+        const modalContent = `
+            <div class="modal fade" id="userProfileModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                ${escapeHtml(user.name)}${user.lastname ? ' ' + escapeHtml(user.lastname) : ''}
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- User Info -->
+                            <div class="mb-4">
+                                <h6 style="color:#c89f40;">User Information</h6>
+                                <p><strong>Email:</strong> ${escapeHtml(user.email)}</p>
+                                ${user.phone ? `<p><strong>Phone:</strong> ${escapeHtml(user.phone)}</p>` : ''}
+                                ${user.company ? `<p><strong>Company:</strong> ${escapeHtml(user.company)}</p>` : ''}
+                                <p><strong>Total Contacts:</strong> ${user.totalContacts}</p>
+                                <p><strong>Total Comments:</strong> ${user.totalComments}</p>
+                            </div>
+
+                            <!-- Contact Submissions -->
+                            ${user.contactSubmissions.length > 0 ? `
+                                <div class="mb-4">
+                                    <h6 style="color:#c89f40;">Contact Submissions (${user.contactSubmissions.length})</h6>
+                                    ${user.contactSubmissions.map(sub => `
+                                        <div class="card mb-2">
+                                            <div class="card-body">
+                                                <strong>${escapeHtml(sub.subject)}</strong>
+                                                <p class="mb-1">${escapeHtml(sub.message)}</p>
+                                                <small class="text-muted">
+                                                    ${new Date(sub.submittedAt).toLocaleString()}
+                                                    | Status: ${sub.status}
+                                                </small>
+                                                <div class="mt-2">
+                                                    <button class="btn btn-sm btn-primary"
+                                                        onclick="updateContactStatus('${user._id}', '${sub._id}', 'read')">
+                                                        Mark as Read
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger"
+                                                        onclick="deleteContactSubmission('${user._id}', '${sub._id}')">
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+
+                            <!-- Blog Comments -->
+                            ${user.comments.length > 0 ? `
+                                <div class="mb-4">
+                                    <h6 style="color:#c89f40;">Blog Comments (${user.comments.length})</h6>
+                                    ${user.comments.map(comment => `
+                                        <div class="card mb-2">
+                                            <div class="card-body">
+                                                <strong>${escapeHtml(comment.blogTitle)}</strong>
+                                                <p class="mb-1">${escapeHtml(comment.comment)}</p>
+                                                <small class="text-muted">
+                                                    ${new Date(comment.submittedAt).toLocaleString()}
+                                                </small>
+                                                <div class="mt-2">
+                                                    <button class="btn btn-sm btn-danger"
+                                                        onclick="deleteComment('${user._id}', '${comment._id}')">
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Add modal to page and show
+        document.body.insertAdjacentHTML('beforeend', modalContent);
+        const modal = new bootstrap.Modal(document.getElementById('userProfileModal'));
+        modal.show();
+
+        // Remove modal from DOM when closed
+        document.getElementById('userProfileModal').addEventListener('hidden.bs.modal', function () {
+            this.remove();
+        });
+    } catch (error) {
+        console.error('Error loading user profile:', error);
+        alert('Failed to load user profile');
+    }
+}
+
+// Update contact submission status
+async function updateContactStatus(userId, submissionId, status) {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/contact/${userId}/${submissionId}/status`,
+            {
+                method: 'PATCH',
+                headers: getAuthHeaders(),
+                body: JSON.stringify({ status })
+            }
+        );
+
+        if (!response.ok) throw new Error('Failed to update status');
+
+        showAlert('alertUsers', 'Status updated successfully!', 'success');
+
+        // Close modal and reload
+        bootstrap.Modal.getInstance(document.getElementById('userProfileModal')).hide();
+        loadUsers();
+    } catch (error) {
+        console.error('Error updating contact status:', error);
+        alert('Failed to update status');
+    }
+}
+
+// Delete contact submission
+async function deleteContactSubmission(userId, submissionId) {
+    if (!confirm('Are you sure you want to delete this contact submission?')) {
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/contact/${userId}/${submissionId}`,
+            {
+                method: 'DELETE',
+                headers: getAuthHeaders()
+            }
+        );
+
+        if (!response.ok) throw new Error('Failed to delete');
+
+        showAlert('alertUsers', 'Contact submission deleted successfully!', 'success');
+
+        // Close modal and reload
+        bootstrap.Modal.getInstance(document.getElementById('userProfileModal')).hide();
+        loadUsers();
+    } catch (error) {
+        console.error('Error deleting contact:', error);
+        alert('Failed to delete contact submission');
     }
 }
 

@@ -22,7 +22,7 @@ const API_CONFIG = {
   get baseURL() {
     // You can override this by setting a custom environment
     // Uncomment the line below to force production even in localhost
-    return this.production;
+    return this.development;
 
     // return isLocalhost ? this.development : this.production;
   }
@@ -32,7 +32,7 @@ const API_CONFIG = {
 const API_ENDPOINTS = {
   // Contact Form
   contact: {
-    send: '/send'
+    send: '/api/contact'
   },
 
   // Authentication
@@ -62,10 +62,7 @@ const API_ENDPOINTS = {
     admin: {
       all: '/api/comments/admin/all',
       stats: '/api/comments/admin/stats',
-      approve: (id) => `/api/comments/admin/${id}/approve`,
-      reject: (id) => `/api/comments/admin/${id}/reject`,
-      delete: (id) => `/api/comments/admin/${id}`,
-      bulkAction: '/api/comments/admin/bulk-action'
+      delete: (userId, commentId) => `/api/comments/admin/${userId}/${commentId}`
     }
   }
 };
@@ -118,7 +115,7 @@ async function apiRequest(endpoint, options = {}) {
 
 /**
  * Send contact form
- * @param {Object} formData - Contact form data {name, email, message}
+ * @param {Object} formData - Contact form data {name, lastname, email, phone, company, subject, message}
  * @returns {Promise} Response
  */
 async function sendContactForm(formData) {
@@ -176,7 +173,7 @@ async function searchBlogs(query) {
 
 /**
  * Submit comment
- * @param {Object} commentData - Comment data
+ * @param {Object} commentData - Comment data {blogId, name, email, comment}
  * @returns {Promise} Created comment
  */
 async function submitComment(commentData) {

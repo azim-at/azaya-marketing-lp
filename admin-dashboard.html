@@ -382,6 +382,17 @@
             color: var(--border-color);
         }
 
+        /* User Cards */
+        .user-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .user-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .admin-header {
@@ -456,6 +467,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="switchPanel('add'); return false;">
                             <i class="bi bi-plus-circle me-2 fs-6"></i>Add New Blog
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="switchPanel('users'); return false;">
+                            <i class="bi bi-people me-2"></i>Users
+                            <span id="totalUsersCount" class="badge bg-primary ms-1">0</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -676,6 +693,46 @@
                     </div>
                 </div>
 
+                <!-- Users Panel -->
+                <div id="usersPanel" style="display: none;">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">All Users</h5>
+                            <div>
+                                <span id="userStats">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="alertUsers"></div>
+
+                            <!-- Filter Buttons -->
+                            <div class="filter-buttons">
+                                <button class="filter-btn active" onclick="filterUsers('all', event)">
+                                    <i class="bi bi-grid-3x3-gap me-1"></i>All Users
+                                </button>
+                                <button class="filter-btn" onclick="filterUsers('contacts', event)">
+                                    <i class="bi bi-envelope me-1"></i>With Contacts
+                                </button>
+                                <button class="filter-btn" onclick="filterUsers('comments', event)">
+                                    <i class="bi bi-chat me-1"></i>With Comments
+                                </button>
+                                <button class="filter-btn" onclick="filterUsers('both', event)">
+                                    <i class="bi bi-star me-1"></i>Both
+                                </button>
+                            </div>
+
+                            <!-- Users List -->
+                            <div id="usersListContainer">
+                                <div class="text-center py-5">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Loading users...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Comments Panel -->
                 <div id="commentsPanel" style="display: none;">
                     <div class="card">
@@ -687,23 +744,6 @@
                         </div>
                         <div class="card-body">
                             <div id="alertComments"></div>
-
-                            <!-- Filter Buttons -->
-                            <div class="filter-buttons">
-                                <button class="filter-btn active" onclick="filterComments('all')">
-                                    <i class="bi bi-grid-3x3-gap me-1"></i>All
-                                </button>
-                                <button class="filter-btn" onclick="filterComments('pending')">
-                                    <i class="bi bi-clock me-1"></i>Pending
-                                </button>
-                                <button class="filter-btn" onclick="filterComments('approved')">
-                                    <i class="bi bi-check-circle me-1"></i>Approved
-                                </button>
-                                <button class="filter-btn" onclick="filterComments('rejected')">
-                                    <i class="bi bi-x-circle me-1"></i>Rejected
-                                </button>
-                            </div>
-
                             <!-- Comments List -->
                             <div id="commentsListContainer">
                                 <div class="text-center py-5">
